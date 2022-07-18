@@ -1,0 +1,71 @@
+import de.itemis.mps.gradle.BuildLanguages
+
+buildscript {
+    repositories {
+        maven { url = uri("https://projects.itemis.de/nexus/content/repositories/mbeddr") }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("de.itemis.mps:mps-gradle-plugin:1.5.269.964f94a")
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+val api_gen_version: String by project
+val rest_access_version: String by project
+val mps_version: String by project
+
+val mps: Configuration by configurations.creating
+val buildDependencies: Configuration by configurations.creating
+val mpsDependencies: Configuration by configurations.creating
+
+dependencies {
+    buildDependencies("org.apache.ant:ant-junit:1.10.6")
+    mps("com.jetbrains:mps:$mps_version")
+    mpsDependencies("org.modelix.mps.api-gen:mps-plugin:$api_gen_version")
+    mpsDependencies("org.modelix.mps-rest-model-access:mps-plugin:$rest_access_version")
+}
+
+val mpsDir = file("$buildDir/mps")
+val artifactsDir = file("$buildDir/artifacts")
+
+val extractMps by tasks.registering(Copy::class) {
+    from({ mps.resolve().map { zipTree(it) } })
+    into(mpsDir)
+}
+
+val extractMpsDependencies by tasks.registering(Copy::class) {
+    from({ mpsDependencies.resolve().map { zipTree(it) } })
+    into(artifactsDir)
+}
+
+fun antVar(name: String, value: String)  = "-D$name=$value"
+
+ext["itemis.mps.gradle.ant.defaultScriptArgs"] =
+    listOf(
+        antVar("mps_home", mpsDir.absolutePath),
+        antVar("artifacts_home", artifactsDir.absolutePath),
+        antVar("mps.generator.skipUnmodifiedModels", "true")
+    )
+ext["itemis.mps.gradle.ant.defaultScriptClasspath"] = buildDependencies.fileCollection { true }
+
+val setup by tasks.registering {
+    group = "setup"
+    description = "Download and extract MPS and the projects MPS dependencies."
+    dependsOn(extractMps)
+    dependsOn(extractMpsDependencies)
+}
+
+val buildLanguages by tasks.registering(BuildLanguages::class) {
+    group = "build"
+    description = "Build all languages in the MPS project"
+    script = "$projectDir/build.xml"
+    inputs.file(file("$projectDir/build.xml"))
+    inputs.files(fileTree("$projectDir/solutions").include("**/*.mps", "**/*.msd")).withPropertyName("mps-solution")
+    inputs.files(fileTree("$projectDir/languages").include("**/*.mps", "**/*.msd")).withPropertyName("mps-languages")
+    outputs.dir("$projectDir/solutions/University.Schedule.api/source_gen")
+    dependsOn(setup)
+}
