@@ -14,3 +14,11 @@ test_gen
 test_gen.caches
 TEST-*.xml
 junit*.properties
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+.DS_Store
