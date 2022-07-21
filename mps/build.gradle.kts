@@ -31,6 +31,7 @@ dependencies {
 
 val mpsDir = file("$buildDir/mps")
 val artifactsDir = file("$buildDir/artifacts")
+val dependenciesDir = file("$buildDir/dependencies")
 
 val extractMps by tasks.registering(Copy::class) {
     from({ mps.resolve().map { zipTree(it) } })
@@ -39,7 +40,7 @@ val extractMps by tasks.registering(Copy::class) {
 
 val extractMpsDependencies by tasks.registering(Copy::class) {
     from({ mpsDependencies.resolve().map { zipTree(it) } })
-    into(artifactsDir)
+    into(dependenciesDir)
 }
 
 fun antVar(name: String, value: String)  = "-D$name=$value"
@@ -48,7 +49,9 @@ ext["itemis.mps.gradle.ant.defaultScriptArgs"] =
     listOf(
         antVar("mps_home", mpsDir.absolutePath),
         antVar("artifacts_home", artifactsDir.absolutePath),
-        antVar("mps.generator.skipUnmodifiedModels", "true")
+        antVar("mps.generator.skipUnmodifiedModels", "true"),
+        antVar("sample.home", projectDir.absolutePath),
+        antVar("dependencies.home", dependenciesDir.absolutePath)
     )
 ext["itemis.mps.gradle.ant.defaultScriptClasspath"] = buildDependencies.fileCollection { true }
 
@@ -66,6 +69,17 @@ val buildLanguages by tasks.registering(BuildLanguages::class) {
     inputs.file(file("$projectDir/build.xml"))
     inputs.files(fileTree("$projectDir/solutions").include("**/*.mps", "**/*.msd")).withPropertyName("mps-solution")
     inputs.files(fileTree("$projectDir/languages").include("**/*.mps", "**/*.msd")).withPropertyName("mps-languages")
-    outputs.dir("$projectDir/solutions/University.Schedule.api/source_gen")
+    outputs.dir("$projectDir/languages/University.Schedule/source_gen")
     dependsOn(setup)
+}
+
+
+val genApi by tasks.registering(BuildLanguages::class) {
+    group = "build"
+    description = "Generate the API classes"
+    script = "$projectDir/build-gen-api.xml"
+    inputs.file(file("$projectDir/build-gen-api.xml"))
+    inputs.files(fileTree("$projectDir/solutions").include("**/*.mps", "**/*.msd")).withPropertyName("mps-solution")
+    outputs.dir("$projectDir/solutions/University.Schedule.api/source_gen")
+    dependsOn(buildLanguages)
 }

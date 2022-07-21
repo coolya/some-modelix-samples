@@ -31,4 +31,3 @@ sourceSets {
     }
 }
 
-tasks.getByName("compileJava").dependsOn(":mps:buildLanguages")
