@@ -23,7 +23,7 @@ val buildDependencies: Configuration by configurations.creating
 val mpsDependencies: Configuration by configurations.creating
 
 dependencies {
-    buildDependencies("org.apache.ant:ant-junit:1.10.6")
+    buildDependencies("org.apache.ant:ant-junit:1.10.12")
     mps("com.jetbrains:mps:$mps_version")
     mpsDependencies("org.modelix.mps.api-gen:mps-plugin:$api_gen_version")
     mpsDependencies("org.modelix.mps-rest-model-access:mps-plugin:$rest_access_version")
