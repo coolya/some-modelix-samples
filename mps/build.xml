@@ -3,10 +3,11 @@
   <property name="build.dir" location="build" />
   <property name="build.tmp" location="${build.dir}/tmp/modelix-example" />
   <property name="build.layout" location="${build.dir}/artifacts/modelix-example" />
-  <property name="mps_home" location="${basedir}" />
-  <property name="dependencies" location="${basedir}/build/dependencies" />
+  <property name="mps_home" location="" />
+  <property name="sample.home" location="${basedir}" />
+  <property name="dependencies.home" location="${basedir}/build/dependencies" />
   <property name="artifacts.mps" location="${mps_home}" />
-  <property name="artifacts.org.modelix.mps.api-gen" location="${dependencies}" />
+  <property name="artifacts.org.modelix.mps.api-gen" location="${dependencies.home}" />
   <property file="${artifacts.mps}/build.properties" prefix="import.mps" />
   <property file="${artifacts.org.modelix.mps.api-gen}/build.properties" prefix="import.org.modelix.mps.api-gen" />
   <property name="mps.build.number" value="${import.mps.mps.build.number}" />
@@ -97,7 +98,7 @@
     <jar destfile="${build.layout}/University.Schedule.jar" duplicate="preserve">
       <fileset dir="${build.tmp}/java/out/University.Schedule" />
       <fileset dir="${basedir}/languages/University.Schedule" includes="icons/**, resources/**" />
-      <fileset dir="${mps_home}/languages/University.Schedule/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
+      <fileset dir="${sample.home}/languages/University.Schedule/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
       <fileset dir="${build.tmp}/default/University.Schedule.jar" />
     </jar>
     <mkdir dir="${build.tmp}/default/University.Schedule-generator.jar" />
@@ -141,67 +142,31 @@
     </echoxml>
     <jar destfile="${build.layout}/University.Schedule-generator.jar" duplicate="preserve">
       <fileset dir="${build.tmp}/java/out/University.Schedule.generator" />
-      <fileset dir="${mps_home}/languages/University.Schedule/generator/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
+      <fileset dir="${sample.home}/languages/University.Schedule/generator/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
       <fileset dir="${build.tmp}/default/University.Schedule-generator.jar" />
     </jar>
     <copyModels todir="${build.tmp}/customProcessors/copyModels/languages-University.Schedule-models">
-      <fileset dir="${mps_home}/languages/University.Schedule/models" includes="**/*.mps, **/*.mpsr, **/.model" />
+      <fileset dir="${sample.home}/languages/University.Schedule/models" includes="**/*.mps, **/*.mpsr, **/.model" />
     </copyModels>
     <copyModels todir="${build.tmp}/customProcessors/copyModels/languages-University.Schedule-generator-templates">
-      <fileset dir="${mps_home}/languages/University.Schedule/generator/templates" includes="**/*.mps, **/*.mpsr, **/.model" />
+      <fileset dir="${sample.home}/languages/University.Schedule/generator/templates" includes="**/*.mps, **/*.mpsr, **/.model" />
     </copyModels>
     <jar destfile="${build.layout}/University.Schedule-src.jar" duplicate="preserve">
-      <fileset dir="${mps_home}/languages/University.Schedule/generator/source_gen">
+      <fileset dir="${sample.home}/languages/University.Schedule/generator/source_gen">
         <exclude name="**/trace.info" />
         <exclude name="**/exports" />
         <exclude name="**/checkpoints" />
         <exclude name="**/*.mps" />
       </fileset>
-      <fileset dir="${mps_home}/languages/University.Schedule/source_gen">
+      <fileset dir="${sample.home}/languages/University.Schedule/source_gen">
         <exclude name="**/trace.info" />
         <exclude name="**/exports" />
         <exclude name="**/checkpoints" />
         <exclude name="**/*.mps" />
       </fileset>
-      <zipfileset file="${basedir}/languages/University.Schedule/University.Schedule.mpl" prefix="module" />
+      <zipfileset file="${sample.home}/languages/University.Schedule/University.Schedule.mpl" prefix="module" />
       <zipfileset dir="${build.tmp}/customProcessors/copyModels/languages-University.Schedule-models" prefix="module/models" />
       <zipfileset dir="${build.tmp}/customProcessors/copyModels/languages-University.Schedule-generator-templates" prefix="module/generator/templates" />
-    </jar>
-    <mkdir dir="${build.tmp}/default/University.Schedule.api.jar" />
-    <mkdir dir="${build.tmp}/default/University.Schedule.api.jar/META-INF" />
-    <echoxml file="${build.tmp}/default/University.Schedule.api.jar/META-INF/module.xml">
-      <module namespace="University.Schedule.api" type="solution" uuid="08d2eb60-9d5d-41c4-b815-4abbc32078c1">
-        <dependencies>
-          <module ref="3f233e7f-b8a6-46d2-a57f-795d56775243(Annotations)" kind="rt" />
-          <module ref="8c3a8817-b86c-4c60-b0d7-3dbfef91ef99(org.modelix.mps.apigen.runtime.stubs)" kind="rt" />
-        </dependencies>
-        <uses>
-          <language id="l:96533389-8d4c-46f2-b150-8d89155f7fca:University.Schedule" />
-          <language id="l:a10f7b95-bc3f-4a13-a29d-1610dbeea4c1:org.modelix.mps.apigen" />
-        </uses>
-        <classpath>
-          <entry path="." />
-        </classpath>
-        <sources jar="University.Schedule.api-src.jar" descriptor="University.Schedule.api.msd" />
-      </module>
-    </echoxml>
-    <jar destfile="${build.layout}/University.Schedule.api.jar" duplicate="preserve">
-      <fileset dir="${build.tmp}/java/out/University.Schedule.api" />
-      <fileset dir="${mps_home}/solutions/University.Schedule.api/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
-      <fileset dir="${build.tmp}/default/University.Schedule.api.jar" />
-    </jar>
-    <copyModels todir="${build.tmp}/customProcessors/copyModels/solutions-University.Schedule.api-models">
-      <fileset dir="${mps_home}/solutions/University.Schedule.api/models" includes="**/*.mps, **/*.mpsr, **/.model" />
-    </copyModels>
-    <jar destfile="${build.layout}/University.Schedule.api-src.jar" duplicate="preserve">
-      <fileset dir="${mps_home}/solutions/University.Schedule.api/source_gen">
-        <exclude name="**/trace.info" />
-        <exclude name="**/exports" />
-        <exclude name="**/checkpoints" />
-        <exclude name="**/*.mps" />
-      </fileset>
-      <zipfileset file="${basedir}/solutions/University.Schedule.api/University.Schedule.api.msd" prefix="module" />
-      <zipfileset dir="${build.tmp}/customProcessors/copyModels/solutions-University.Schedule.api-models" prefix="module/models" />
     </jar>
     <echo file="${build.layout}/build.properties">mps.build.number=${mps.build.number}${line.separator}mps.date=${mps.date}${line.separator}mps.build.vcs.number=${mps.build.vcs.number}${line.separator}mps.teamcity.buildConfName=${mps.teamcity.buildConfName}${line.separator}mps.idea.platform.build.number=${mps.idea.platform.build.number}${line.separator}mps.mps.build.counter=${mps.mps.build.counter}${line.separator}mpsBootstrapCore.version.major=${mpsBootstrapCore.version.major}${line.separator}mpsBootstrapCore.version.minor=${mpsBootstrapCore.version.minor}${line.separator}mpsBootstrapCore.version.bugfixNr=${mpsBootstrapCore.version.bugfixNr}${line.separator}mpsBootstrapCore.version.eap=${mpsBootstrapCore.version.eap}${line.separator}mpsBootstrapCore.version=${mpsBootstrapCore.version}${line.separator}de.itemis.mps.extensions.versionNumber=${de.itemis.mps.extensions.versionNumber}</echo>
   </target>
@@ -217,7 +182,7 @@
     <delete dir="${build.layout}" />
   </target>
   
-  <target name="compileJava" depends="java.compile.University.Schedule.api, java.compile.University.Schedule, java.compile.University.Schedule.generator" />
+  <target name="compileJava" depends="java.compile.University.Schedule, java.compile.University.Schedule.generator" />
   
   <target name="processResources" />
   
@@ -230,11 +195,6 @@
   <target name="generate" depends="declare-mps-tasks, fetchDependencies">
     <echo message="generating" />
     <generate strictMode="true" parallelMode="true" parallelThreads="8" useInplaceTransform="false" hideWarnings="false" createStaticRefs="true" fork="true" skipUnmodifiedModels="${mps.generator.skipUnmodifiedModels}" logLevel="${mps.ant.log}">
-      <plugin path="${artifacts.mps}/lib/mps-workbench.jar" />
-      <plugin path="${artifacts.mps}/plugins/mps-build" />
-      <plugin path="${artifacts.mps}/plugins/mps-core" />
-      <plugin path="${artifacts.mps}/plugins/mps-httpsupport" />
-      <plugin path="${artifacts.org.modelix.mps.api-gen}/org.modelix.mps.api-gen" />
       <library file="${artifacts.mps}/languages/baseLanguage/closures.runtime.jar" />
       <library file="${artifacts.mps}/languages/baseLanguage/collections.runtime.jar" />
       <library file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.blTypes.jar" />
@@ -346,17 +306,15 @@
       <library file="${artifacts.mps}/languages/util/jetbrains.mps.refactoring.jar" />
       <library file="${artifacts.mps}/languages/util/jetbrains.mps.runtime.jar" />
       <chunk>
-        <module file="${basedir}/languages/University.Schedule/University.Schedule.mpl" />
-      </chunk>
-      <chunk>
-        <module file="${basedir}/solutions/University.Schedule.api/University.Schedule.api.msd" />
+        <module file="${sample.home}/languages/University.Schedule/University.Schedule.mpl" />
       </chunk>
       <jvmargs>
         <arg value="-ea" />
         <arg value="-Xmx512m" />
       </jvmargs>
       <macro name="mps_home" path="${mps_home}" />
-      <macro name="dependencies" path="${dependencies}" />
+      <macro name="sample.home" path="${sample.home}" />
+      <macro name="dependencies.home" path="${dependencies.home}" />
     </generate>
   </target>
   
@@ -366,31 +324,13 @@
   
   <target name="makeDependents" />
   
-  <target name="java.compile.University.Schedule.api" depends="fetchDependencies">
-    <mkdir dir="${mps_home}/solutions/University.Schedule.api/source_gen" />
-    <mkdir dir="${build.tmp}/java/out/University.Schedule.api" />
-    <javac destdir="${build.tmp}/java/out/University.Schedule.api" fork="true" encoding="utf8" includeantruntime="false" debug="true">
-      <compilerarg value="-Xlint:none" />
-      <src>
-        <path location="${mps_home}/solutions/University.Schedule.api/source_gen" />
-      </src>
-      <classpath>
-        <fileset file="${artifacts.mps}/lib/mps-annotations.jar" />
-        <fileset file="${artifacts.mps}/lib/annotations.jar" />
-        <fileset file="${artifacts.org.modelix.mps.api-gen}/org.modelix.mps.api-gen/languages/org.modelix.mps.api-gen/org.modelix.mps.apigen.runtime.stubs.jar" />
-        <fileset dir="${artifacts.org.modelix.mps.api-gen}/org.modelix.mps.api-gen/lib" includes="model-api-jvm.jar" />
-        <fileset dir="${artifacts.org.modelix.mps.api-gen}/org.modelix.mps.api-gen/lib" includes="runtime.jar" />
-      </classpath>
-    </javac>
-  </target>
-  
   <target name="java.compile.University.Schedule" depends="fetchDependencies">
-    <mkdir dir="${mps_home}/languages/University.Schedule/source_gen" />
+    <mkdir dir="${sample.home}/languages/University.Schedule/source_gen" />
     <mkdir dir="${build.tmp}/java/out/University.Schedule" />
     <javac destdir="${build.tmp}/java/out/University.Schedule" fork="true" encoding="utf8" includeantruntime="false" debug="true">
       <compilerarg value="-Xlint:none" />
       <src>
-        <path location="${mps_home}/languages/University.Schedule/source_gen" />
+        <path location="${sample.home}/languages/University.Schedule/source_gen" />
       </src>
       <classpath>
         <fileset file="${artifacts.mps}/lib/mps-core.jar" />
@@ -435,12 +375,12 @@
   </target>
   
   <target name="java.compile.University.Schedule.generator" depends="java.compile.University.Schedule, fetchDependencies">
-    <mkdir dir="${mps_home}/languages/University.Schedule/generator/source_gen" />
+    <mkdir dir="${sample.home}/languages/University.Schedule/generator/source_gen" />
     <mkdir dir="${build.tmp}/java/out/University.Schedule.generator" />
     <javac destdir="${build.tmp}/java/out/University.Schedule.generator" fork="true" encoding="utf8" includeantruntime="false" debug="true">
       <compilerarg value="-Xlint:none" />
       <src>
-        <path location="${mps_home}/languages/University.Schedule/generator/source_gen" />
+        <path location="${sample.home}/languages/University.Schedule/generator/source_gen" />
       </src>
       <classpath>
         <fileset file="${artifacts.mps}/lib/mps-core.jar" />
@@ -484,8 +424,7 @@
   </target>
   
   <target name="cleanSources">
-    <delete dir="${mps_home}/languages/University.Schedule/source_gen" />
-    <delete dir="${mps_home}/languages/University.Schedule/generator/source_gen" />
-    <delete dir="${mps_home}/solutions/University.Schedule.api/source_gen" />
+    <delete dir="${sample.home}/languages/University.Schedule/source_gen" />
+    <delete dir="${sample.home}/languages/University.Schedule/generator/source_gen" />
   </target>
 </project>

@@ -3,7 +3,6 @@
   <persistence version="9" />
   <languages>
     <use id="a10f7b95-bc3f-4a13-a29d-1610dbeea4c1" name="org.modelix.mps.apigen" version="0" />
-    <use id="96533389-8d4c-46f2-b150-8d89155f7fca" name="University.Schedule" version="0" />
   </languages>
   <imports />
   <registry>
