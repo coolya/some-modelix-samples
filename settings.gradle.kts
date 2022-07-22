@@ -8,9 +8,8 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-rootProject.name = "modelix-sample"
+rootProject.name = "some-modelix-samples"
 
 include("dashboard")
 include("mps")
 include("mps:solutions:University.Schedule.api")
-//includeBuild("../mps-rest-model-access")
