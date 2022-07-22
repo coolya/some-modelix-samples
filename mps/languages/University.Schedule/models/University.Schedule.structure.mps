@@ -45,7 +45,7 @@
   <node concept="1TIwiD" id="3_cs9tOsUh0">
     <property role="EcuMT" value="4128798754188010560" />
     <property role="TrG5h" value="Lecture" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3_cs9tOt5VW" role="1TKVEi">
       <property role="IQ2ns" value="4128798754188058364" />
       <property role="20kJfa" value="room" />
@@ -77,7 +77,7 @@
     <property role="EcuMT" value="4128798754188010568" />
     <property role="TrG5h" value="Schedule" />
     <property role="R5$K7" value="true" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3_cs9tOsUhi" role="1TKVEi">
       <property role="IQ2ns" value="4128798754188010578" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -94,7 +94,7 @@
   <node concept="1TIwiD" id="3_cs9tOsUha">
     <property role="EcuMT" value="4128798754188010570" />
     <property role="TrG5h" value="DateAndTime" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyi" id="3_cs9tOsUhb" role="1TKVEl">
       <property role="IQ2nx" value="4128798754188010571" />
       <property role="TrG5h" value="date" />
@@ -109,7 +109,7 @@
   <node concept="1TIwiD" id="3_cs9tOsUhk">
     <property role="EcuMT" value="4128798754188010580" />
     <property role="TrG5h" value="Room" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyi" id="3_cs9tOsUhn" role="1TKVEl">
       <property role="IQ2nx" value="4128798754188010583" />
       <property role="TrG5h" value="maxPlaces" />
@@ -128,7 +128,7 @@
     <property role="EcuMT" value="4128798754188010588" />
     <property role="TrG5h" value="Rooms" />
     <property role="19KtqR" value="true" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3_cs9tOsUht" role="1TKVEi">
       <property role="IQ2ns" value="4128798754188010589" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -141,7 +141,7 @@
     <property role="EcuMT" value="4128798754188057192" />
     <property role="TrG5h" value="Courses" />
     <property role="19KtqR" value="true" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3_cs9tOt5DD" role="1TKVEi">
       <property role="IQ2ns" value="4128798754188057193" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -154,6 +154,71 @@
     <property role="EcuMT" value="4128798754188059567" />
     <property role="TrG5h" value="OneOff" />
     <ref role="1TJDcQ" node="3_cs9tOsUh8" resolve="Schedule" />
+  </node>
+  <node concept="1TIwiD" id="1rwgWV86q61">
+    <property role="EcuMT" value="1648392019017048449" />
+    <property role="TrG5h" value="Student" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyi" id="1rwgWV86q62" role="1TKVEl">
+      <property role="IQ2nx" value="1648392019017048450" />
+      <property role="TrG5h" value="name" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+    <node concept="1TJgyi" id="1rwgWV86q66" role="1TKVEl">
+      <property role="IQ2nx" value="1648392019017048454" />
+      <property role="TrG5h" value="semester" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+    <node concept="1TJgyj" id="1rwgWV86q64" role="1TKVEi">
+      <property role="IQ2ns" value="1648392019017048452" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="born" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="3_cs9tOsUha" resolve="DateAndTime" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1rwgWV86q69">
+    <property role="EcuMT" value="1648392019017048457" />
+    <property role="TrG5h" value="Students" />
+    <property role="19KtqR" value="true" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="1rwgWV86q6a" role="1TKVEi">
+      <property role="IQ2ns" value="1648392019017048458" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="students" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="1rwgWV86q61" resolve="Student" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1rwgWV86q6c">
+    <property role="EcuMT" value="1648392019017048460" />
+    <property role="TrG5h" value="LectureAssignments" />
+    <property role="19KtqR" value="true" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="1rwgWV86q6i" role="1TKVEi">
+      <property role="IQ2ns" value="1648392019017048466" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="lectures" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="1rwgWV86q6f" resolve="Assignment" />
+    </node>
+    <node concept="1TJgyj" id="1rwgWV86q6d" role="1TKVEi">
+      <property role="IQ2ns" value="1648392019017048461" />
+      <property role="20kJfa" value="student" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="1rwgWV86q61" resolve="Student" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="1rwgWV86q6f">
+    <property role="EcuMT" value="1648392019017048463" />
+    <property role="TrG5h" value="Assignment" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="1rwgWV86q6g" role="1TKVEi">
+      <property role="IQ2ns" value="1648392019017048464" />
+      <property role="20kJfa" value="lecture" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="3_cs9tOsUh0" resolve="Lecture" />
+    </node>
   </node>
 </model>
 

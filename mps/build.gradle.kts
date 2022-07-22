@@ -83,3 +83,7 @@ val genApi by tasks.registering(BuildLanguages::class) {
     outputs.dir("$projectDir/solutions/University.Schedule.api/source_gen")
     dependsOn(buildLanguages)
 }
+
+val build by tasks.registering {
+    dependsOn(buildLanguages)
+}
