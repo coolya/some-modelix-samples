@@ -1,11 +1,14 @@
 package org.modelix.sample.dashboard
 
 import MPSRemoteClient
+import ReferenceSerializer
 import University.Schedule.api.gen.University_Schedule
 import University.Schedule.api.gen.jetbrains_mps_lang_core
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import org.modelix.model.api.INodeReference
 import org.modelix.model.lazy.IConceptReferenceSerializer
+import org.modelix.model.lazy.INodeReferenceSerializer
 import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.slf4j.LoggerFactory
 
@@ -19,14 +22,21 @@ suspend fun main() {
     val client = MPSRemoteClient(host, port.toInt())
     val modelsToLoad = client.getViewModels().filter { models.contains(it.name) }
 
-    if(models.size != modelsToLoad.size) {
+    if (models.size != modelsToLoad.size) {
         logger.error("Not all models available!")
-        logger.error("""Missing models: ${models.filterNot { modelsToLoad.map { it.name }.contains(it) }.joinToString()}""")
+        logger.error(
+            """Missing models: ${
+                models.filterNot { modelsToLoad.map { it.name }.contains(it) }.joinToString()
+            }"""
+        )
         return
     }
 
+    val loadRoots = suspend { modelsToLoad.map { it.modelId }.let { client.loadModelAreas(it) }.map { it.getRoot() } }
+    val resolve = { ref: INodeReference -> client.resolveReference(ref) }
+    INodeReferenceSerializer.register(ReferenceSerializer.Companion)
     embeddedServer(Netty, port = 8080) {
-
+        configureRouting(loadRoots, resolve)
     }.start(wait = true)
 }
 

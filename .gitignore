@@ -8,6 +8,7 @@ build.properties
 classes_gen
 source_gen
 source_gen.caches
+!mps/solutions/University.Schedule.api/source_gen
 
 # generated test code and test results
 test_gen
@@ -22,3 +23,5 @@ junit*.properties
 build
 
 .DS_Store
+/dashboard/src/main/resources/styles/styles.css
+/dashboard/node_modules/

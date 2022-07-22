@@ -13,3 +13,4 @@ rootProject.name = "modelix-sample"
 include("dashboard")
 include("mps")
 include("mps:solutions:University.Schedule.api")
+//includeBuild("../mps-rest-model-access")
