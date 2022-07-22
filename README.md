@@ -1,1 +1,1 @@
-# modelix-sample
+# Some modelix samples
