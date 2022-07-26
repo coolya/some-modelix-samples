@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: org.modelix.samples.some
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [ annotation-api, app-name, gradle, http-client, jackson-databind, java, java-application, jetty-server, junit, logback, micronaut-build, readme, security, security-annotations, serialization-jackson, serialization-jsonp, shade, yaml ]
