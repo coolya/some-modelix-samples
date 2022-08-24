@@ -53,7 +53,9 @@ Once the initial build has completes feel free to edit the project with the code
 ## The Language 
 
 The language used in all examples is the same. The language itself is fairly small. It describes a very simplified lecture 
-schedule. The main concepts of the language are:
+schedule. The language intentionally doesn't use expressions, creating editors for expressions by hand is very cumbersome and 
+at the time where these samples were created modelix has no support for generating these editors for you.
+The main concepts of the language are:
 
 - [Room](http://127.0.0.1:63320/node?ref=r%3Adfa26643-4653-44bc-9dfe-5a6581bcd381%28University.Schedule.structure%29%2F4128798754188010580): 
   where lecture are held. Each room has a maximum capacity of students, a name and some additional properties.

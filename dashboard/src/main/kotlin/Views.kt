@@ -1,5 +1,6 @@
 package org.modelix.sample.dashboard
 
+import University.Schedule.structure.Courses
 import University.Schedule.structure.Lecture
 import University.Schedule.structure.Room
 import kotlinx.html.*
@@ -53,9 +54,42 @@ fun HTML.landingPage(allRooms: List<Room>, allLectures: List<Lecture>) {
     }
 }
 
-fun HTML.room(room: Room) {
+
+
+fun HTML.room(room: Room, lectures: List<Lecture>) {
     body {
-        h1 { +"its a room"}
+        table {
+            thead {
+                tr {
+                    th {
+                      scope = ThScope.col
+                      +room.safeName
+                    }
+                }
+                tr {
+                    th {
+                        scope = ThScope.col
+                        +"Time"
+                    }
+                    th {
+                        scope = ThScope.col
+                        +"Lecture"
+                    }
+                }
+            }
+            tbody {
+                lectures.filter { it.references.room == room }.forEach { lecture ->
+                    tr {
+                        td {
+                            lecture.children.schedule.readable()
+                        }
+                        td {
+                            +lecture.safeName
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

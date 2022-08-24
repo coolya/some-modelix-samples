@@ -41,6 +41,8 @@ fun Application.configureRouting(loadRoots: suspend () -> List<INode>, resolve: 
             call.respond(HttpStatusCode.BadRequest, "missing room ref")
             return@get
         }
+
+        val roots = loadRoots()
         val roomRef = INodeReferenceSerializer.deserialize(roomRefString.decodeURLPart())
         val iNode = resolve(roomRef)
 
@@ -56,8 +58,12 @@ fun Application.configureRouting(loadRoots: suspend () -> List<INode>, resolve: 
             return@get
         }
 
+        val allLectures = roots.flatMap { (it.allChildren.map { MPSLanguageRegistry.getInstance<BaseConcept>(it) }) }
+            .filterIsInstance<Courses>()
+            .flatMap { it.children.lectures }
+
         call.respondHtml {
-            room(instance)
+            room(instance, allLectures)
         }
     }
 
@@ -67,6 +73,7 @@ fun Application.configureRouting(loadRoots: suspend () -> List<INode>, resolve: 
             call.respond(HttpStatusCode.BadRequest, "missing lecture ref")
             return@get
         }
+
         val lectureRef = INodeReferenceSerializer.deserialize(lectureRefStr.decodeURLPart())
         val iNode = resolve(lectureRef)
 

@@ -6,6 +6,8 @@ import University.Schedule.api.gen.University_Schedule
 import University.Schedule.api.gen.jetbrains_mps_lang_core
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import loadModelSafe
+import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
 import org.modelix.model.lazy.IConceptReferenceSerializer
 import org.modelix.model.lazy.INodeReferenceSerializer
@@ -33,7 +35,14 @@ suspend fun main() {
     }
 
     val loadRoots = suspend { modelsToLoad.map { it.modelId }.let { client.loadModelAreas(it) }.map { it.getRoot() } }
-    val resolve = { ref: INodeReference -> client.resolveReference(ref) }
+    val resolve: suspend (INodeReference) -> INode? =  {  ref: INodeReference ->
+        // The name "loadModelSafe" is kinda misleading. What this function is doing, is to run the closure that is passed
+        // that is passed to it and catch any ModelNotLoadedException during the execution and load the missing model.
+        // That way we don't need to load the model, where the reference is pointing to, explicitly.
+        client.loadModelSafe {
+            client.resolveReference(ref)
+        }
+    }
     INodeReferenceSerializer.register(ReferenceSerializer.Companion)
     embeddedServer(Netty, port = 8080) {
         configureRouting(loadRoots, resolve)
