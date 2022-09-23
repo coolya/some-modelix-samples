@@ -2,12 +2,12 @@ import de.itemis.mps.gradle.BuildLanguages
 
 buildscript {
     repositories {
-        maven { url = uri("https://projects.itemis.de/nexus/content/repositories/mbeddr") }
+        maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
         mavenCentral()
     }
 
     dependencies {
-        classpath("de.itemis.mps:mps-gradle-plugin:1.5.269.964f94a")
+        classpath("de.itemis.mps:mps-gradle-plugin:1.7.288.4ea765f")
     }
 }
 repositories {
@@ -17,6 +17,7 @@ repositories {
 val api_gen_version: String by project
 val rest_access_version: String by project
 val mps_version: String by project
+val mpsExtensions_version: String by project
 
 val mps: Configuration by configurations.creating
 val buildDependencies: Configuration by configurations.creating
@@ -25,6 +26,7 @@ val mpsDependencies: Configuration by configurations.creating
 dependencies {
     buildDependencies("org.apache.ant:ant-junit:1.10.12")
     mps("com.jetbrains:mps:$mps_version")
+    mpsDependencies("de.itemis.mps:extensions:$mpsExtensions_version")
     mpsDependencies("org.modelix.mps.api-gen:mps-plugin:$api_gen_version")
     mpsDependencies("org.modelix.mps-rest-model-access:mps-plugin:$rest_access_version")
 }
