@@ -39,14 +39,14 @@ public class BasePlaceholder extends ChildAttribute {
         newChild = getINode().addNewChild("content", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @Nullable
     public IPlaceholderContent getContent() {
       Iterator<INode> iterator = getINode().getChildren("content").iterator();
       if (iterator.hasNext()) {
         INode child = iterator.next();
-        return MPSLanguageRegistry.Companion.getInstance(child);
+        return MPSLanguageRegistry.INSTANCE.getInstance(child);
       }
       return null;
     }

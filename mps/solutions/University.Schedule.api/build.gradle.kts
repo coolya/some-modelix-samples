@@ -8,6 +8,7 @@ val model_api_version: String by project
 
 
 repositories {
+    maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
     maven {
         url = uri("https://maven.pkg.github.com/modelix/api-gen")
         credentials {
@@ -15,7 +16,6 @@ repositories {
             password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
         }
     }
-        maven(url = "https://projects.itemis.de/nexus/content/repositories/mbeddr")
     mavenCentral()
 }
 

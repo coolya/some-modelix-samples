@@ -59,7 +59,7 @@ public class BaseConcept extends AbstractNode {
       INode newChild;
       newChild = getINode().addNewChild("smodelAttribute", ((int) StreamSupport.stream(getINode().getChildren("smodelAttribute").spliterator(), false).count()), concept);
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @NotNull
     public List<? extends Attribute> getSmodelAttribute() {
@@ -68,7 +68,7 @@ public class BaseConcept extends AbstractNode {
       return stream.<Attribute>map(new Function<INode, Attribute>() {
         @Override
         public Attribute apply(INode node) {
-          return MPSLanguageRegistry.Companion.getInstance(node);
+          return MPSLanguageRegistry.INSTANCE.getInstance(node);
         }
       }).collect(Collectors.toList());
     }

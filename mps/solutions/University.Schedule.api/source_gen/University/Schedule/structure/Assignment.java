@@ -38,7 +38,7 @@ public class Assignment extends BaseConcept {
     }
     @NotNull
     public Lecture getLecture() {
-      return MPSLanguageRegistry.Companion.getInstance(getINode().getReferenceTarget("lecture"));
+      return MPSLanguageRegistry.INSTANCE.getInstance(getINode().getReferenceTarget("lecture"));
     }
     @NotNull
     public Lecture setLecture(@NotNull Lecture value) {

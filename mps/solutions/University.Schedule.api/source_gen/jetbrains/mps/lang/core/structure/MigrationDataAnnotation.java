@@ -32,7 +32,7 @@ public class MigrationDataAnnotation extends NodeAttribute implements MigrationA
     @NotNull
     public BaseConcept getDataNode() {
       INode child = getINode().getChildren("dataNode").iterator().next();
-      return MPSLanguageRegistry.Companion.getInstance(child);
+      return MPSLanguageRegistry.INSTANCE.getInstance(child);
     }
     public <T extends BaseConcept> T createDataNode(AbstractConcept<T> concept) {
       INode newChild;
@@ -42,7 +42,7 @@ public class MigrationDataAnnotation extends NodeAttribute implements MigrationA
         newChild = getINode().addNewChild("dataNode", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     public BaseConcept setDataNode(@NotNull BaseConcept value) {
       INode storageNode = getINode();

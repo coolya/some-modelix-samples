@@ -39,14 +39,14 @@ public class TypeAnnotated extends BaseConcept {
         newChild = getINode().addNewChild("annotation", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @Nullable
     public BaseConcept getAnnotation() {
       Iterator<INode> iterator = getINode().getChildren("annotation").iterator();
       if (iterator.hasNext()) {
         INode child = iterator.next();
-        return MPSLanguageRegistry.Companion.getInstance(child);
+        return MPSLanguageRegistry.INSTANCE.getInstance(child);
       }
       return null;
     }

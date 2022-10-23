@@ -8,6 +8,8 @@ plugins {
 
 version = "0.1"
 group = "org.modelix.samples.some"
+rest_access_version = project.properties["rest_access_version"]
+
 
 repositories {
     mavenCentral()
@@ -22,8 +24,8 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jsonp")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
-    implementation("org.modelix.mps-rest-model-access:model-client:1.2")
-    implementation("org.modelix.mps-rest-model-access:model-api:1.0")
+    implementation("org.modelix.mps-json-bulk-model-access:model-client:$rest_access_version")
+    implementation("org.modelix.mps-json-bulk-model-access:model-api:$rest_access_version")
     implementation(project(":mps:solutions:University.Schedule.api"))
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")

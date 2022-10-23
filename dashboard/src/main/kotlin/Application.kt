@@ -9,7 +9,6 @@ import io.ktor.server.netty.*
 import loadModelSafe
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
-import org.modelix.model.lazy.IConceptReferenceSerializer
 import org.modelix.model.lazy.INodeReferenceSerializer
 import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.slf4j.LoggerFactory
@@ -52,5 +51,4 @@ suspend fun main() {
 fun registerLanguages() {
     MPSLanguageRegistry.register(jetbrains_mps_lang_core.INSTANCE)
     MPSLanguageRegistry.register(University_Schedule.INSTANCE)
-    IConceptReferenceSerializer.register(MPSLanguageRegistry())
 }

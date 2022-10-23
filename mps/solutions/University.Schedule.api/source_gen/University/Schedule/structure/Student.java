@@ -61,7 +61,7 @@ public class Student extends BaseConcept {
     @NotNull
     public DateAndTime getBorn() {
       INode child = getINode().getChildren("born").iterator().next();
-      return MPSLanguageRegistry.Companion.getInstance(child);
+      return MPSLanguageRegistry.INSTANCE.getInstance(child);
     }
     public <T extends DateAndTime> T createBorn(AbstractConcept<T> concept) {
       INode newChild;
@@ -71,7 +71,7 @@ public class Student extends BaseConcept {
         newChild = getINode().addNewChild("born", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     public DateAndTime setBorn(@NotNull DateAndTime value) {
       INode storageNode = getINode();

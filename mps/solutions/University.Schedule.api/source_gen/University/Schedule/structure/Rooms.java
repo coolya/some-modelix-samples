@@ -38,7 +38,7 @@ public class Rooms extends BaseConcept {
       INode newChild;
       newChild = getINode().addNewChild("rooms", ((int) StreamSupport.stream(getINode().getChildren("rooms").spliterator(), false).count()), concept);
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @NotNull
     public List<? extends Room> getRooms() {
@@ -47,7 +47,7 @@ public class Rooms extends BaseConcept {
       return stream.<Room>map(new Function<INode, Room>() {
         @Override
         public Room apply(INode node) {
-          return MPSLanguageRegistry.Companion.getInstance(node);
+          return MPSLanguageRegistry.INSTANCE.getInstance(node);
         }
       }).collect(Collectors.toList());
     }

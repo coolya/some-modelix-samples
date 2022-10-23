@@ -38,7 +38,7 @@ public class Students extends BaseConcept {
       INode newChild;
       newChild = getINode().addNewChild("students", ((int) StreamSupport.stream(getINode().getChildren("students").spliterator(), false).count()), concept);
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @NotNull
     public List<? extends Student> getStudents() {
@@ -47,7 +47,7 @@ public class Students extends BaseConcept {
       return stream.<Student>map(new Function<INode, Student>() {
         @Override
         public Student apply(INode node) {
-          return MPSLanguageRegistry.Companion.getInstance(node);
+          return MPSLanguageRegistry.INSTANCE.getInstance(node);
         }
       }).collect(Collectors.toList());
     }

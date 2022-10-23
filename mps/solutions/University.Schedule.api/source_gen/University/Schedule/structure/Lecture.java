@@ -62,7 +62,7 @@ public class Lecture extends BaseConcept implements INamedConcept {
     @NotNull
     public Schedule getSchedule() {
       INode child = getINode().getChildren("schedule").iterator().next();
-      return MPSLanguageRegistry.Companion.getInstance(child);
+      return MPSLanguageRegistry.INSTANCE.getInstance(child);
     }
     public <T extends Schedule> T createSchedule(AbstractConcept<T> concept) {
       INode newChild;
@@ -72,7 +72,7 @@ public class Lecture extends BaseConcept implements INamedConcept {
         newChild = getINode().addNewChild("schedule", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     public Schedule setSchedule(@NotNull Schedule value) {
       INode storageNode = getINode();
@@ -94,7 +94,7 @@ public class Lecture extends BaseConcept implements INamedConcept {
     }
     @NotNull
     public Room getRoom() {
-      return MPSLanguageRegistry.Companion.getInstance(getINode().getReferenceTarget("room"));
+      return MPSLanguageRegistry.INSTANCE.getInstance(getINode().getReferenceTarget("room"));
     }
     @NotNull
     public Room setRoom(@NotNull Room value) {

@@ -17,13 +17,17 @@ plugins {
 subprojects {
     repositories {
         mavenCentral()
+
+        maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
+
         maven {
-            url = uri("https://maven.pkg.github.com/modelix/mps-rest-model-access")
-            credentials {
-                username = project.findProperty("gpr.user")?.toString() ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
-            }
+             url = uri("https://maven.pkg.github.com/modelix/mps-json-bulk-model-access")
+             credentials {
+                 username = project.findProperty("gpr.user")?.toString() ?: System.getenv("USERNAME")
+                 password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
+             }
         }
+
         maven {
             url = uri("https://maven.pkg.github.com/modelix/api-gen")
             credentials {
@@ -31,7 +35,5 @@ subprojects {
                 password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
             }
         }
-        maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
-
     }
 }

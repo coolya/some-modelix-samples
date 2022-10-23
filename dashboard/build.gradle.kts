@@ -5,6 +5,7 @@ plugins {
 }
 
 val ktor_version : String by project
+val rest_access_version: String by project
 
 dependencies {
     implementation(project(":mps:solutions:University.Schedule.api"))
@@ -13,8 +14,8 @@ dependencies {
     implementation("io.ktor:ktor-html-builder:$ktor_version")
     implementation("ch.qos.logback:logback-classic:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-    implementation("org.modelix.mps-rest-model-access:model-client:1.3")
-    implementation("org.modelix.mps-rest-model-access:model-api:1.0")
+    implementation("org.modelix.mps-json-bulk-model-access:model-client:$rest_access_version")
+    implementation("org.modelix.mps-json-bulk-model-access:model-api:$rest_access_version")
 }
 
 node {

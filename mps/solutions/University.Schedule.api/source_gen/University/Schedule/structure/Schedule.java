@@ -33,7 +33,7 @@ public class Schedule extends BaseConcept {
     @NotNull
     public DateAndTime getAt() {
       INode child = getINode().getChildren("at").iterator().next();
-      return MPSLanguageRegistry.Companion.getInstance(child);
+      return MPSLanguageRegistry.INSTANCE.getInstance(child);
     }
     public <T extends DateAndTime> T createAt(AbstractConcept<T> concept) {
       INode newChild;
@@ -43,7 +43,7 @@ public class Schedule extends BaseConcept {
         newChild = getINode().addNewChild("at", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     public DateAndTime setAt(@NotNull DateAndTime value) {
       INode storageNode = getINode();

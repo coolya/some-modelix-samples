@@ -32,7 +32,7 @@ public class BaseCommentAttribute extends ChildAttribute implements ISkipConstra
     @NotNull
     public BaseConcept getCommentedNode() {
       INode child = getINode().getChildren("commentedNode").iterator().next();
-      return MPSLanguageRegistry.Companion.getInstance(child);
+      return MPSLanguageRegistry.INSTANCE.getInstance(child);
     }
     public <T extends BaseConcept> T createCommentedNode(AbstractConcept<T> concept) {
       INode newChild;
@@ -42,7 +42,7 @@ public class BaseCommentAttribute extends ChildAttribute implements ISkipConstra
         newChild = getINode().addNewChild("commentedNode", 0, concept);
       }
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     public BaseConcept setCommentedNode(@NotNull BaseConcept value) {
       INode storageNode = getINode();

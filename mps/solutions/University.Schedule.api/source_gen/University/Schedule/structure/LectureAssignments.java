@@ -38,7 +38,7 @@ public class LectureAssignments extends BaseConcept {
       INode newChild;
       newChild = getINode().addNewChild("lectures", ((int) StreamSupport.stream(getINode().getChildren("lectures").spliterator(), false).count()), concept);
 
-      return MPSLanguageRegistry.Companion.getInstance(newChild);
+      return MPSLanguageRegistry.INSTANCE.getInstance(newChild);
     }
     @NotNull
     public List<? extends Assignment> getLectures() {
@@ -47,7 +47,7 @@ public class LectureAssignments extends BaseConcept {
       return stream.<Assignment>map(new Function<INode, Assignment>() {
         @Override
         public Assignment apply(INode node) {
-          return MPSLanguageRegistry.Companion.getInstance(node);
+          return MPSLanguageRegistry.INSTANCE.getInstance(node);
         }
       }).collect(Collectors.toList());
     }
@@ -61,7 +61,7 @@ public class LectureAssignments extends BaseConcept {
     }
     @NotNull
     public Student getStudent() {
-      return MPSLanguageRegistry.Companion.getInstance(getINode().getReferenceTarget("student"));
+      return MPSLanguageRegistry.INSTANCE.getInstance(getINode().getReferenceTarget("student"));
     }
     @NotNull
     public Student setStudent(@NotNull Student value) {

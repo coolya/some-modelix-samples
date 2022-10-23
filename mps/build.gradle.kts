@@ -28,7 +28,7 @@ dependencies {
     mps("com.jetbrains:mps:$mps_version")
     mpsDependencies("de.itemis.mps:extensions:$mpsExtensions_version")
     mpsDependencies("org.modelix.mps.api-gen:mps-plugin:$api_gen_version")
-    mpsDependencies("org.modelix.mps-rest-model-access:mps-plugin:$rest_access_version")
+    mpsDependencies("org.modelix.mps-json-bulk-model-access:mps-plugin:$rest_access_version")
 }
 
 val mpsDir = file("$buildDir/mps")
