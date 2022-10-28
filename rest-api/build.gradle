@@ -24,6 +24,7 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jsonp")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
+    implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-client:$rest_access_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-api:$rest_access_version")
     implementation(project(":mps:solutions:University.Schedule.api"))

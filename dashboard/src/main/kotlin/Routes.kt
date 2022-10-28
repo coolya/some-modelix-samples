@@ -4,12 +4,12 @@ import University.Schedule.structure.Courses
 import University.Schedule.structure.Lecture
 import University.Schedule.structure.Room
 import University.Schedule.structure.Rooms
-import io.ktor.application.*
-import io.ktor.html.*
+import io.ktor.server.application.*
+import io.ktor.server.html.*
 import io.ktor.http.*
-import io.ktor.http.content.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.http.content.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import jetbrains.mps.lang.core.structure.BaseConcept
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference

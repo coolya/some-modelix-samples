@@ -5,7 +5,7 @@ plugins {
 
 val api_gen_version: String by project
 val model_api_version: String by project
-
+val rest_access_version: String by project
 
 repositories {
     maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
@@ -20,7 +20,11 @@ repositories {
 }
 
 dependencies {
-    api("org.modelix.mps.api-gen:runtime:$api_gen_version")
+    implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
+    implementation("org.modelix:model-api:1.3.2")
+    implementation("org.modelix.mps-json-bulk-model-access:model-client:$rest_access_version")
+    implementation("org.modelix.mps-json-bulk-model-access:model-api:$rest_access_version")
+    implementation("org.modelix:model-api-jvm:$model_api_version")
 }
 
 sourceSets {
