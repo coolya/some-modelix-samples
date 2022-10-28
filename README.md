@@ -305,10 +305,10 @@ Once your MPS project is opened you can run the dashboard:
 
 Once you see a log message like:
 ```
-11:12:41.672 [ktor-cio-dispatcher-worker-1] INFO ktor.application - Responding at http://0.0.0.0:8080
+11:12:41.672 [ktor-cio-dispatcher-worker-1] INFO ktor.application - Responding at http://0.0.0.0:8090
 ```
 
-Your dashboard is ready you can point your browser to http://localhost:8080 to view the dashboard.
+Your dashboard is ready you can point your browser to http://localhost:8090 to view the dashboard.
 
 ### Details on the Dashboard Application
 

@@ -43,7 +43,7 @@ suspend fun main() {
         }
     }
     INodeReferenceSerializer.register(ReferenceSerializer.Companion)
-    embeddedServer(Netty, port = 8080) {
+    embeddedServer(Netty, port = 8090) {
         configureRouting(loadRoots, resolve)
     }.start(wait = true)
 }
