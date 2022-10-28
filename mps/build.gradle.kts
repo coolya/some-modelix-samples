@@ -1,5 +1,9 @@
 import de.itemis.mps.gradle.BuildLanguages
 
+plugins {
+    java
+}
+
 buildscript {
     repositories {
         maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
@@ -86,6 +90,4 @@ val genApi by tasks.registering(BuildLanguages::class) {
     dependsOn(buildLanguages)
 }
 
-val build by tasks.registering {
-    dependsOn(buildLanguages)
-}
+tasks.getByName("build").dependsOn(buildLanguages)
