@@ -5,7 +5,7 @@ plugins {
 }
 
 val ktor_version : String by project
-val rest_access_version: String by project
+val json_bulk_access_version: String by project
 val api_gen_version: String by project
 
 dependencies {
@@ -15,8 +15,8 @@ dependencies {
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
     implementation("ch.qos.logback:logback-classic:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-    implementation("org.modelix.mps-json-bulk-model-access:model-client:$rest_access_version")
-    implementation("org.modelix.mps-json-bulk-model-access:model-api:$rest_access_version")
+    implementation("org.modelix.mps-json-bulk-model-access:model-client:$json_bulk_access_version")
+    implementation("org.modelix.mps-json-bulk-model-access:model-api:$json_bulk_access_version")
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
 }
 
