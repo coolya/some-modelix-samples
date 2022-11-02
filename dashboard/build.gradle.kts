@@ -13,7 +13,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:1.4.0")
+    implementation("ch.qos.logback:logback-classic:1.4.4")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation("org.modelix.mps-json-bulk-model-access:model-client:$json_bulk_access_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-api:$json_bulk_access_version")
