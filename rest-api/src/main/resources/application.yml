@@ -1,3 +1,6 @@
 micronaut:
   application:
     name: restApi
+
+  server:
+    port: 8091

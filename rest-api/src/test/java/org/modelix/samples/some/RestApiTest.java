@@ -14,9 +14,9 @@ class RestApiTest {
 	EmbeddedApplication<?> application;
 
 	// TODO: broke with version 2.0
-//	@Test
-//	void testItWorks() {
-//		Assertions.assertTrue(application.isRunning());
-//	}
+	@Test
+	void testItWorks() {
+		Assertions.assertTrue(application.isRunning());
+	}
 
 }
