@@ -5,7 +5,7 @@
 This repository contains a couple of examples that show various aspects of the modelix platform.
 Not all features of modelix are shown here so this is not a complete demo of everything modelix can do.
 The primary focus of the examples is to show how you can use modelix to work with language and models defined in
-MPS outside of MPS using JVM (Java/Kotlin) or web frameworks/tools. 
+MPS outside of MPS using JVM (Java/Kotlin) or web frameworks/tools.
 
 None of the examples try to reuse editors defined in MPS, if your
 goal is to reuse MPS editors as is then modelix itself ships with a projector integration to achieve this.
@@ -16,7 +16,7 @@ and make you think and envision your own use-cases.
 
 ## Repository Structure
 
-The repository is a single gradle project to make building everything at once easy. The examples are organized by the 
+The repository is a single gradle project to make building everything at once easy. The examples are organized by the
 technology they use into the various sub-folders:
 
 | ID    | Components/Technologies                               | Description                                                                                                                        | Status | Folder                                                           |
@@ -33,9 +33,9 @@ technology they use into the various sub-folders:
 ## Getting Started
 
 To get started with the project we need to set up the gradle project. At the moment most modelix artifacts are stored on
-the [itemis nexus](https://artifacts.itemis.cloud/#browse/browse:maven-mps:org%2Fmodelix) with no access restriction. 
+the [itemis nexus](https://artifacts.itemis.cloud/#browse/browse:maven-mps:org%2Fmodelix) with no access restriction.
 
-Some are also stored on GitHub packages. To access GitHub packaged you need to specify your credentials. First of all 
+Some are also stored on GitHub packages. To access GitHub packaged you need to specify your credentials. First of all
 you will need to generate a [personal access token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages)
 with access to GitHub Packages. The project assumes that your username is available as the variable `gpr.user` and the
 token as `gpr.key`. The easiest way to configure the credentials is copy the example below, paste it into the [`gradle.properties`](gradle.properties)
