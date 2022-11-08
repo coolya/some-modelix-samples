@@ -6,6 +6,7 @@ import University.Schedule.api.gen.jetbrains_mps_lang_core
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 import io.ktor.server.engine.*
 import io.ktor.server.locations.*
 import io.ktor.server.netty.*
@@ -16,6 +17,7 @@ import io.ktor.server.routing.*
 import loadModelSafe
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
+import org.modelix.model.lazy.INodeReferenceSerializer
 import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.modelix.sample.restapijsonbulk.models.apis.DefaultApi
 import org.slf4j.LoggerFactory
@@ -49,7 +51,7 @@ suspend fun main() {
             client.resolveReference(ref)
         }
     }
-
+    INodeReferenceSerializer.register(ReferenceSerializer.Companion)
 
 
     embeddedServer(Netty, port = 8090) {
@@ -64,6 +66,7 @@ suspend fun main() {
         }
     }.start(wait = true)
 }
+
 fun registerLanguages() {
     MPSLanguageRegistry.register(jetbrains_mps_lang_core.INSTANCE)
     MPSLanguageRegistry.register(University_Schedule.INSTANCE)

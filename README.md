@@ -7,8 +7,8 @@ Not all features of modelix are shown here so this is not a complete demo of eve
 The primary focus of the examples is to show how you can use modelix to work with language and models defined in
 MPS outside of MPS using JVM (Java/Kotlin) or web frameworks/tools.
 
-None of the examples try to reuse editors defined in MPS, if your
-goal is to reuse MPS editors as is then modelix itself ships with a projector integration to achieve this.
+None of the examples try to reuse editors defined in MPS.
+If your goal is to reuse MPS editors as is then modelix itself ships with a projector integration to achieve this.
 
 While all the examples use the same language defined in MPS they are not meant as one complete example
 but rather as individual parts. The purpose of the examples is to give inspiration of what is possible with modelix

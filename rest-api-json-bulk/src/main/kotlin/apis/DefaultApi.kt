@@ -20,10 +20,6 @@ import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import jetbrains.mps.lang.core.structure.BaseConcept
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.addJsonArray
-import kotlinx.serialization.json.addJsonObject
-import kotlinx.serialization.json.buildJsonArray
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
 import org.modelix.model.lazy.INodeReferenceSerializer
@@ -41,34 +37,36 @@ fun Route.DefaultApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INo
 
     get<Paths.getLectures> {
         val roots = loadRoots()
-        val allLectures = roots.flatMap { (it.allChildren.map { MPSLanguageRegistry.getInstance<BaseConcept>(it) }) }
-                .filterIsInstance<Courses>()
+        val allLectures = roots.flatMap {
+            (it.allChildren.map { MPSLanguageRegistry.getInstance<BaseConcept>(it) })
+        }.filterIsInstance<Courses>()
                 .flatMap { it.children.lectures }
 
         val roomList = LectureList(lectures = allLectures.map {
-            Lecture(name = it.properties.name ?:"",
-                    description = it.properties.description?:"",
+            Lecture(name = it.properties.name ?: "",
+                    description = it.properties.description ?: "",
                     lectureRef = INodeReferenceSerializer.serialize(it.iNode.reference),
                     room = INodeReferenceSerializer.serialize(it.references.room.iNode.reference),
-                    maxParticipants = it.properties.maxParticipants?:0)
+                    maxParticipants = it.properties.maxParticipants ?: 0)
         })
         call.respond(roomList)
     }
 
     get<Paths.getLecturesLectureRef> {
-        val exampleContentType = "application/json"
-        val exampleContentString = """{
-          "name" : "name",
-          "description" : "description",
-          "lectureRef" : "lectureRef",
-          "room" : "room",
-          "maxParticipants" : "maxParticipants"
-        }"""
-        
-        when (exampleContentType) {
-            "application/json" -> call.respond(gson.fromJson(exampleContentString, empty::class.java))
-            "application/xml" -> call.respondText(exampleContentString, ContentType.Text.Xml)
-            else -> call.respondText(exampleContentString)
+        try {
+            val lectureRef = INodeReferenceSerializer.deserialize(call.parameters["lectureRef"]!!.decodeURLPart())
+            val iNode = resolve(lectureRef)!!
+            val instance = MPSLanguageRegistry.getInstance<University.Schedule.structure.Lecture>(iNode)!!
+            val lecture = Lecture(name = instance.properties.name!!,
+                    maxParticipants = instance.properties.maxParticipants!!,
+                    lectureRef = INodeReferenceSerializer.serialize(instance.iNode.reference),
+                    room = INodeReferenceSerializer.serialize(instance.references.room.reference),
+                    description = instance.properties.description!!
+            )
+            call.respond(lecture)
+        } catch (e: RuntimeException) {
+            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
+            return@get
         }
     }
 
@@ -78,30 +76,34 @@ fun Route.DefaultApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INo
                 .filterIsInstance<Rooms>()
                 .flatMap { it.children.rooms }
 
+        allRooms.forEach { logger.info("room: " + it.iNode + " " + it.iNode.reference.toString()) }
+
+
         val roomList = RoomList(rooms = allRooms.map {
             Room(
-                name = it.properties.name ?:"",
-                maxPlaces = it.properties.maxPlaces?:0,
-                roomRef = INodeReferenceSerializer.serialize(it.iNode.reference),
-                hasRemoteEquipment = it.properties.hasRemoteEquipment)
+                    name = it.properties.name ?: "",
+                    maxPlaces = it.properties.maxPlaces ?: 0,
+                    roomRef = INodeReferenceSerializer.serialize(it.iNode.reference),
+                    hasRemoteEquipment = it.properties.hasRemoteEquipment)
         })
         call.respond(roomList)
     }
 
 
     get<Paths.getRoomsRoomID> {
-        val exampleContentType = "application/json"
-        val exampleContentString = """{
-          "maxPlaces" : 0,
-          "roomRef" : "roomRef",
-          "name" : "name",
-          "hasRemoteEquipment" : false
-        }"""
-        
-        when (exampleContentType) {
-            "application/json" -> call.respond(gson.fromJson(exampleContentString, empty::class.java))
-            "application/xml" -> call.respondText(exampleContentString, ContentType.Text.Xml)
-            else -> call.respondText(exampleContentString)
+        try {
+            val roomRef = INodeReferenceSerializer.deserialize(call.parameters["roomRef"]!!.decodeURLPart())
+            val iNode = resolve(roomRef)!!
+            val instance = MPSLanguageRegistry.getInstance<University.Schedule.structure.Room>(iNode)!!
+            val room = Room(name = instance.properties.name!!,
+                    roomRef = INodeReferenceSerializer.serialize(instance.iNode.reference),
+                    maxPlaces = instance.properties.maxPlaces!!,
+                    hasRemoteEquipment = instance.properties.hasRemoteEquipment
+            )
+            call.respond(room)
+        } catch (e: RuntimeException) {
+            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
+            return@get
         }
     }
 
