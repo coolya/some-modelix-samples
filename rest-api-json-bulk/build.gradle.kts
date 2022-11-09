@@ -3,7 +3,6 @@ plugins {
     kotlin("jvm")
 }
 
-
 val ktor_version : String by project
 val json_bulk_access_version: String by project
 val api_gen_version: String by project
@@ -29,24 +28,3 @@ dependencies {
 application {
     mainClass.set("org.modelix.sample.restapijsonbulk.ApplicationKt")
 }
-//mainClassName = "org.openapitools.server.AppMainKt"
-
-
-//apply(plugin = "com.github.johnrengelman.shadow")
-//
-//sourceCompatibility = 1.8
-//
-//compileKotlin {
-//    kotlinOptions.jvmTarget = "1.8"
-//}
-//
-//compileTestKotlin {
-//    kotlinOptions.jvmTarget = "1.8"
-//}
-//
-//shadowJar {
-//    baseName = "kotlin-server"
-//    classifier = null
-//    version = null
-//}
-
