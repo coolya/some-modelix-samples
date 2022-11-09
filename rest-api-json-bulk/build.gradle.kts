@@ -27,7 +27,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.modelix.sample.restapijsonbulk.AppMainKt")
+    mainClass.set("org.modelix.sample.restapijsonbulk.ApplicationKt")
 }
 //mainClassName = "org.openapitools.server.AppMainKt"
 
