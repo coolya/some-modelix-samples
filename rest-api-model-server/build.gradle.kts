@@ -1,0 +1,83 @@
+plugins {
+    kotlin("jvm")
+    kotlin("plugin.allopen") version "1.7.20"
+    id("io.quarkus")
+    id("org.openapi.generator") version "6.2.1"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+val quarkusPlatformGroupId: String by project
+val quarkusPlatformArtifactId: String by project
+val quarkusPlatformVersion: String by project
+
+dependencies {
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation("io.quarkus:quarkus-resteasy-reactive")
+    implementation("io.quarkus:quarkus-kotlin")
+    implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
+    implementation("io.quarkus:quarkus-smallrye-openapi")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("io.quarkus:quarkus-arc")
+    testImplementation("io.quarkus:quarkus-junit5")
+    testImplementation("io.rest-assured:rest-assured")
+}
+
+group = "org.modelix.sample"
+version = "1.0.0-SNAPSHOT"
+
+val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
+
+openApiGenerate {
+    generatorName.set("kotlin-server")
+    inputSpec.set(openApiFile.toString())
+    outputDir.set("$buildDir/openapi-generator")
+    apiPackage.set("$group")
+    modelPackage.set("$group")
+    configOptions.set(
+        mapOf(
+            "library" to "jaxrs-spec",
+            "interfaceOnly" to "true",
+        )
+    )
+}
+
+// Provide the OpenAPI definition declared up-front to the Swagger UI served by Quarkus.
+// Cf. https://quarkus.io/guides/openapi-swaggerui#loading-openapi-schema-from-static-files
+tasks.register<Copy>("installOpenAPISchema") {
+    from(openApiFile)
+    into(layout.buildDirectory.dir("classes/kotlin/main/META-INF"))
+}
+
+// Ensure that the OpenAPI generator runs before starting to compile
+tasks.named("processResources") {
+    dependsOn("openApiGenerate")
+    dependsOn("installOpenAPISchema")
+}
+tasks.named("compileKotlin") {
+    dependsOn("openApiGenerate")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+java.sourceSets.getByName("main").java.srcDir(file("$buildDir/openapi-generator/src/main/kotlin"))
+
+tasks.withType<Test> {
+    systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
+}
+allOpen {
+    annotation("javax.ws.rs.Path")
+    annotation("javax.enterprise.context.ApplicationScoped")
+    annotation("io.quarkus.test.junit.QuarkusTest")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions.javaParameters = true
+}
