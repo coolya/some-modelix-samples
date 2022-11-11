@@ -1,0 +1,30 @@
+<div *ngIf="lecture">
+    <h2>Lecture Details</h2>
+
+    <dl class="property-list">
+        <dt class="property-list__key">Lecture name</dt>
+        <dd class="property-list__value">{{lecture.name}}</dd>
+    </dl>
+
+    <dl class="property-list">
+        <dt class="property-list__key">Lecture reference</dt>
+        <dd class="property-list__value">
+            <div class="code">{{lecture.lectureRef}}</div>
+        </dd>
+    </dl>
+
+    <dl class="property-list">
+        <dt class="property-list__key">Max participants</dt>
+        <dd class="property-list__value">{{lecture.maxParticipants}}</dd>
+    </dl>
+
+    <dl class="property-list">
+        <dt class="property-list__key">Is in Room</dt>
+        <dd class="property-list__value,code"><a routerLink="/room-detail/{{lecture.room}}">
+            <span class="badge">{{lecture.room}}</span> {{lecture.room}}
+        </a></dd>
+    </dl>
+
+    <br>
+    <button type="button" (click)="goBack()">Go back</button>
+</div>
