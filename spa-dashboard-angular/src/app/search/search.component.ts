@@ -17,8 +17,6 @@ import {LectureService} from "../lectures/lecture.service";
     styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-    // rooms!: Observable<Room[]>;
-    // lectures!: Observable<Lecture[]>;
     rooms: Room[] = [];
     lectures: Lecture[] = [];
 

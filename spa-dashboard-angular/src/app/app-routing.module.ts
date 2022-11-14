@@ -14,10 +14,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'search', component: SearchComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'room-detail/:id', component: RoomDetailComponent },
+  { path: 'rooms/:id', component: RoomDetailComponent },
   { path: 'rooms', component: RoomsComponent },
   { path: 'lectures', component: LecturesComponent },
-  { path: 'lecture-detail/:id', component: LectureDetailComponent }
+  { path: 'lectures/:id', component: LectureDetailComponent }
 ];
 
 @NgModule({

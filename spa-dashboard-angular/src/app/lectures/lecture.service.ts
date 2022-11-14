@@ -57,21 +57,6 @@ export class LectureService {
     );
   }
 
-  // /** GET lectures whose name contains search term */
-  // searchLectures(term: string): Observable<Lecture[]> {
-  //   if (!term.trim()) {
-  //     // if not search term, return empty lecturex array.
-  //     return of([]);
-  //   }
-  //
-  //   return this.http.get<Lecture[]>(`${this.apiURL}/?name=${term}`).pipe(
-  //     tap(x => x.length ?
-  //        this.log(`found lectures matching "${term}"`) :
-  //        this.log(`no lectures matching "${term}"`)),
-  //     catchError(this.handleError<Lecture[]>('searchLectures', []))
-  //   );
-  // }
-
   /**
    * Handle Http operation that failed.
    * Let the app continue.

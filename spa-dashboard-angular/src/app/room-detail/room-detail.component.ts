@@ -32,11 +32,4 @@ export class RoomDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-    // save(): void {
-  //   if (this.room) {
-  //     this.roomService.updateHero(this.room)
-  //       .subscribe(() => this.goBack());
-  //   }
-  // }
 }
