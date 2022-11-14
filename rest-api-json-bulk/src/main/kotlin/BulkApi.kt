@@ -68,7 +68,6 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             call.respond(lecture)
         } catch (e: RuntimeException) {
             call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
-            return@get
         }
     }
 
@@ -101,7 +100,6 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             call.respond(room)
         } catch (e: RuntimeException) {
             call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
-            return@get
         }
     }
 
