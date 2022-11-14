@@ -19,10 +19,9 @@ suspend fun main() {
     val port = config.getInt("mps.json-bulk-model-access.port")
     val models = config.getStringList("mps.json-bulk-model-access.models")
 
-
     // initialize the object which handles the connection to the
     // mps-json-bulk-access plugin running in our MPS instance
-    BulkAccessWrapper.initialize(host, port.toInt(),models)
+    BulkAccessWrapper.initialize(host, port, models)
 
     // start the embedded server to serve the API
     embeddedServer(Netty, port = config.getInt("ktor.deployment.port")) {
