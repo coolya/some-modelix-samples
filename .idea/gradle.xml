@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/rest-api" />
             <option value="$PROJECT_DIR$/spa-dashboard-angular" />
             <option value="$PROJECT_DIR$/rest-api-json-bulk" />
+            <option value="$PROJECT_DIR$/rest-api-model-server" />
           </set>
         </option>
       </GradleProjectSettings>

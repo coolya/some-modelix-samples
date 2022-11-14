@@ -13,6 +13,8 @@ repositories {
 val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
+val ktor_version: String by project
+val api_gen_version: String by project
 
 dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
@@ -20,14 +22,17 @@ dependencies {
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
     implementation("io.quarkus:quarkus-smallrye-openapi")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
+    implementation("org.modelix:model-client:1.3.2")
+    implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
+    implementation(project(":mps:solutions:University.Schedule.api"))
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }
 
-group = "org.modelix.sample"
-version = "1.0.0-SNAPSHOT"
+val group: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
