@@ -20,7 +20,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoomList'
-      operationId: get-rooms
+      operationId: listRooms
   /lectures:
     get:
       summary: Provides access to all known lectures
@@ -32,7 +32,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LectureList'
-      operationId: get-lectures
+      operationId: listLectures
   '/rooms/{roomRef}':
     parameters:
       - $ref: '#/components/parameters/roomRef'
@@ -46,7 +46,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Room'
-      operationId: get-rooms-roomID
+      operationId: getRoomByRef
   '/lectures/{lectureRef}':
     parameters:
       - $ref: '#/components/parameters/lectureRef'
@@ -60,7 +60,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Lecture'
-      operationId: get-lectures-lectureRef
+      operationId: getLectureByRef
       description: ''
 components:
   schemas:
