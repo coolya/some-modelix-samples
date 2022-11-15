@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Observable, Subject} from 'rxjs';
-
-import {
-    debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 
 import {RoomService} from '../rooms/room.service';
-import {Lecture, Room, RoomList} from "../Container";
+import {Lecture, Room} from "../Container";
 import {LectureService} from "../lectures/lecture.service";
 
 @Component({
@@ -21,6 +17,7 @@ export class SearchComponent implements OnInit {
     lectures: Lecture[] = [];
 
     filterBy!: string;
+
     filteredRooms: Room[] = [];
     filteredLectures: Lecture[] = [];
 
@@ -30,7 +27,6 @@ export class SearchComponent implements OnInit {
                 private lectureService: LectureService) {
     }
 
-    // Push a search term into the observable stream.
     search(term: string): void {
         this.searchTerms.next(term);
     }
@@ -47,33 +43,6 @@ export class SearchComponent implements OnInit {
                 this.filteredLectures = [...this.lectures]
             }
         );
-
-        // this.rooms = this.searchTerms.pipe(
-        //   // wait 300ms after each keystroke before considering the term
-        //   debounceTime(300),
-        //
-        //   // ignore new term if same as previous term
-        //   distinctUntilChanged(),
-        //
-        //   // switch to new search observable each time the term changes
-        //   switchMap((term: string) =>
-        //       this.roomService.searchRooms(term)),
-        // );
-        // this.lectures = this.searchTerms.pipe(
-        //   // wait 300ms after each keystroke before considering the term
-        //   debounceTime(300),
-        //
-        //   // ignore new term if same as previous term
-        //   distinctUntilChanged(),
-        //
-        //   // switch to new search observable each time the term changes
-        // //   switchMap((term: string) =>
-        // //       this.lectureService.searchLectures(term)),
-        //     // );
-        //
-        //       switchMap((term: string) =>
-        //     this.lectureService.searchLectures(term)),
-        // );
     }
 
     filter() {

@@ -1,7 +1,7 @@
 <h2>Top Rooms</h2>
 <div class="entry-menu">
     <a *ngFor="let room of rooms"
-       routerLink="/room-detail/{{room.roomRef}}">
+       routerLink="/rooms/{{room.roomRef}}">
         {{room.name}}
     </a>
 </div>
@@ -10,7 +10,7 @@
 
 <div class="entry-menu">
     <a *ngFor="let lecture of lectures"
-       routerLink="/lecture-detail/{{lecture.lectureRef}}">
+       routerLink="/lectures/{{lecture.lectureRef}}">
         {{lecture.name}}
     </a>
 </div>

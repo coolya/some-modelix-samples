@@ -1,58 +1,32 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
-import {Room, RoomList} from '../Container';
+import {Room, RoomList, URLLibrary} from '../Container';
 import {MessageService} from '../message.service';
 
 
 @Injectable({providedIn: 'root'})
 export class RoomService {
 
-    private apiURL = 'http://localhost:4010/rooms';  // URL to web api
-
     constructor(
         private http: HttpClient,
         private messageService: MessageService) {
     }
 
-    /** GET rooms from the server */
-    getRooms(): Observable<Room[]> {
-        return this.http.get<Room[]>(this.apiURL)
-            .pipe(
-                tap(_ => this.log('fetched rooms')),
-                catchError(this.handleError<Room[]>('getRooms', []))
-            );
-    }
-
     getRoomList(): Observable<RoomList> {
-        return this.http.get<RoomList>("http://localhost:4010/rooms")
+        return this.http.get<RoomList>(URLLibrary.API_URL_ROOMS)
             .pipe(
                 tap(_ => this.log('fetched rooms')),
                 catchError(this.handleError<RoomList>('getRoomList', new RoomList()))
             );
     }
 
-    /** GET room by id. Return `undefined` when id not found */
-    getRoom404<Data>(roomRef: string): Observable<Room> {
-        const url = `${this.apiURL}/?roomRef=${roomRef}`;
-        return this.http.get<Room[]>(url)
-            .pipe(
-                map(rooms => rooms[0]), // returns a {0|1} element array
-                tap(h => {
-                    const outcome = h ? 'fetched' : 'did not find';
-                    this.log(`${outcome} room roomRef=${roomRef}`);
-                }),
-                catchError(this.handleError<Room>(`getRoom roomRef=${roomRef}`))
-            );
-    }
-
     /** GET room by id. Will 404 if id not found */
     getRoom(roomRef: string): Observable<Room> {
-        const url = `${this.apiURL}/${roomRef}`;
-
+        const url = `${URLLibrary.API_URL_ROOMS}/${roomRef}`;
         return this.http.get<Room>(url).pipe(
             tap(_ => this.log(`fetched room roomRef=${roomRef}`)),
             catchError(this.handleError<Room>(`getRoom roomRef=${roomRef}`))

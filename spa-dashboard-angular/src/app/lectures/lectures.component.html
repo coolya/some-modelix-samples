@@ -2,7 +2,7 @@
 
 <ul class="lectures">
     <li *ngFor="let lecture of lectures">
-        <a routerLink="/lecture-detail/{{lecture.lectureRef}}">
+        <a routerLink="/lectures/{{lecture.lectureRef}}">
             <span class="badge">{{lecture.lectureRef}}</span> {{lecture.name}}
         </a>
     </li>

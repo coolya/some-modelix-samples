@@ -1,7 +1,8 @@
 <div id="search-component">
     <label for="search-box">Room and Leccture Search</label>
 
-    <input #searchBox id="search-box"  type="text" [(ngModel)]="filterBy" placeholder="Filter Rooms and Lectures ..." (keyup)="filter()">
+    <input #searchBox id="search-box" type="text" [(ngModel)]="filterBy" placeholder="Filter Rooms and Lectures ..."
+           (keyup)="filter()">
 
     <div class="flex-container">
 
@@ -10,7 +11,7 @@
             <h3>Rooms</h3>
             <ul class="search-result">
                 <li *ngFor="let room of filteredRooms">
-                    <a routerLink="/room-detail/{{room.roomRef}}">
+                    <a routerLink="/rooms/{{room.roomRef}}">
                         {{room.name}}
                     </a>
                 </li>
@@ -21,7 +22,7 @@
             <h3>Lectures</h3>
             <ul class="search-result">
                 <li *ngFor="let lecture of filteredLectures">
-                    <a routerLink="/room-detail/{{lecture.lectureRef}}">
+                    <a routerLink="/lectures/{{lecture.lectureRef}}">
                         {{lecture.name}}
                     </a>
                 </li>

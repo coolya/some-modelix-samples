@@ -1,28 +1,11 @@
 <h2>Known Rooms</h2>
 
-<!--<div>-->
-<!--  <label for="new-hero">Hero name: </label>-->
-<!--  <input id="new-hero" #heroName />-->
-
-  <!-- (click) passes input value to add() and then clears the input -->
-<!--  <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">-->
-<!--    Add hero-->
-<!--  </button>-->
-<!--</div>-->
-
 <ul class="rooms">
-<!--  <li *ngFor="let room of rooms">-->
-<!--    <a routerLink="/detail/{{room.id}}">-->
-<!--      <span class="badge">{{room.id}}</span> {{room.name}}-->
-<!--    </a>-->
-<!--    <button type="button" class="delete" title="delete hero"-->
-<!--      (click)="delete(room)">x</button>-->
-<!--  </li>-->
 
-  <li *ngFor="let room of rooms">
-    <a routerLink="/room-detail/{{room.roomRef}}">
-      <span class="badge">{{room.roomRef}}<br></span>{{room.name}}
-    </a>
-  </li>
+    <li *ngFor="let room of rooms">
+        <a routerLink="/rooms/{{room.roomRef}}">
+            <span class="badge">{{room.roomRef}}<br></span>{{room.name}}
+        </a>
+    </li>
 
 </ul>
