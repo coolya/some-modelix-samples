@@ -36,6 +36,8 @@ val group: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
+// We let the Gradle OpenAPI generator plugin build data classes and API interfaces based on the provided
+// OpenAPI specification. That way, the code in this example is force to stay in sync with the API specification.
 openApiGenerate {
     generatorName.set("kotlin-server")
     inputSpec.set(openApiFile.toString())
