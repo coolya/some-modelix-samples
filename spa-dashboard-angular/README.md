@@ -20,12 +20,14 @@ You can build this subproject individually from the parent folder via  all examp
 
 Before you can start the application, you need to start one of the available openAPI implementations.
 Thus, you can either start the [rest-api-json-bulk](../rest-api-json-bulk)) implementation, or alternatively you can start the [rest-api-model-server](../rest-api-model-server) implementation.
-Check the READMEs of these projects on how to run them.
+Check the README of the corresponding project on how to start them.
+
+**Note**: Make sure you have the correct ports defined [in the API URLs](src/app/Container.ts). This app expects `8080` by default.
 
 ### 3. Run the angular app
 
 Next run this single page application via:
 ```
-./gradlew spa-dashboard-angular:run
+./gradlew spa-dashboard-angular:npmRun
 ```
 You can then go to `http://localhost:4200` to see a dashboard with the courses model content.
