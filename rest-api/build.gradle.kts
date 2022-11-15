@@ -2,18 +2,14 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.kapt")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.4.1"
+    id("io.micronaut.application") version "3.6.3"
 
 }
 
-version = "0.1"
-group = "org.modelix.samples.some"
-json_bulk_access_version = project.properties["json_bulk_access_version"]
+//group = "org.modelix.samples.some"
+val json_bulk_access_version: String by project
+val api_gen_version: String by project
 
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
@@ -37,12 +33,15 @@ dependencies {
 application {
     mainClass.set("org.modelix.samples.some.Application")
 }
+
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
     targetCompatibility = JavaVersion.toVersion("11")
 }
+graalvmNative {
+    toolchainDetection.set(false)
+}
 
-graalvmNative.toolchainDetection = false
 micronaut {
     runtime("jetty")
     testRuntime("junit5")

@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: University.Schedule.api
+  version: '1.0'
+  license:
+    name: The Unlicense
+    url: 'https://raw.githubusercontent.com/modelix/modelix-samples/main/LICENSE'
+servers:
+  - url: 'http://localhost:8080'
+    description: localDev
+paths:
+  /rooms:
+    get:
+      summary: Provides access to all known rooms
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomList'
+      operationId: listRooms
+  /lectures:
+    get:
+      summary: Provides access to all known lectures
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LectureList'
+      operationId: listLectures
+  '/rooms/{roomRef}':
+    parameters:
+      - $ref: '#/components/parameters/roomRef'
+    get:
+      summary: Provides access to a single room
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+      operationId: getRoomByRef
+  '/lectures/{lectureRef}':
+    parameters:
+      - $ref: '#/components/parameters/lectureRef'
+    get:
+      summary: Provides access to a single lecture
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecture'
+      operationId: getLectureByRef
+      description: ''
+components:
+  schemas:
+    Room:
+      title: Room
+      type: object
+      properties:
+        roomRef:
+          $ref: '#/components/schemas/RoomRef'
+        name:
+          type: string
+        maxPlaces:
+          type: integer
+          minimum: 0
+          format: int32
+        hasRemoteEquipment:
+          type: boolean
+          default: false
+      required:
+        - roomRef
+        - name
+        - maxPlaces
+    Lecture:
+      title: Lecture
+      type: object
+      properties:
+        lectureRef:
+          $ref: '#/components/schemas/LectureRef'
+        name:
+          type: string
+        description:
+          type: string
+        maxParticipants:
+          type: integer
+        room:
+          $ref: '#/components/schemas/RoomRef'
+      required:
+        - lectureRef
+        - name
+        - description
+        - maxParticipants
+        - room
+    RoomRef:
+      title: RoomRef
+      type: string
+      description: The primary ID of a room. Values are opaque pointers that must not be interpreted.
+    LectureRef:
+      title: LectureRef
+      type: string
+      description: The primary ID of a lecture. Values are opaque pointers that must not be interpreted.
+    RoomList:
+      title: RoomList
+      type: object
+      properties:
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+    LectureList:
+      title: LectureList
+      type: object
+      properties:
+        lectures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lecture'
+  parameters:
+    roomRef:
+      name: roomRef
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/RoomRef'
+    lectureRef:
+      name: lectureRef
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/LectureRef'

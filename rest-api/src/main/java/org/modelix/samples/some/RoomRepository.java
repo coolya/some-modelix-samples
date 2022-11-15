@@ -46,8 +46,7 @@ public class RoomRepository {
 		return areas.stream()
 				.map(IArea::getRoot)
 				.flatMap(x -> StreamSupport.stream(x.getAllChildren().spliterator(), false))
-//		        TODO: fix this - commented as getInstance broke with 2.0
-// 				.map(MPSLanguageRegistry.Companion::<BaseConcept>getInstance)
+ 				.map(MPSLanguageRegistry.INSTANCE::<BaseConcept>getInstance)
 				.filter(x -> x instanceof Rooms)
 				.map(x -> (Rooms)x)
 				.flatMap(x -> x.getChildren().getRooms().stream())
@@ -61,10 +60,10 @@ public class RoomRepository {
 			return Optional.empty();
 		}
 //		TODO: fix this - commented as getInstance broke with 2.0
-//		var bc = MPSLanguageRegistry.Companion.<BaseConcept>getInstance(iNode);
-//		if(bc instanceof Room) {
-//			return Optional.of(((Room) bc));
-//		}
+		var bc = MPSLanguageRegistry.INSTANCE.<BaseConcept>getInstance(iNode);
+		if(bc instanceof Room) {
+			return Optional.of(((Room) bc));
+		}
 		return Optional.empty();
 	}
 }
