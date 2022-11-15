@@ -7,7 +7,7 @@ export class Room {
     roomRef!: string
     name!: string
     maxPlaces!: number
-    hasRemoteEquipment!: boolean
+    hasRemoteEquipment: boolean = false
 }
 
 export class RoomList {
