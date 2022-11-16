@@ -75,6 +75,24 @@
     <file name="DateAndTimeConcept.java">
       <unit at="17,0,60,0" name="University.Schedule.structure.concepts.DateAndTimeConcept" />
     </file>
+    <file name="DevKit.java">
+      <unit at="14,0,22,0" name="org.modelix.model.repositoryconcepts.structure.DevKit$Properties" />
+      <unit at="22,0,30,0" name="org.modelix.model.repositoryconcepts.structure.DevKit$Children" />
+      <unit at="30,0,40,0" name="org.modelix.model.repositoryconcepts.structure.DevKit$References" />
+      <unit at="12,0,60,0" name="org.modelix.model.repositoryconcepts.structure.DevKit" />
+    </file>
+    <file name="DevKitConcept.java">
+      <unit at="16,0,57,0" name="org.modelix.model.repositoryconcepts.structure.concepts.DevKitConcept" />
+    </file>
+    <file name="DevkitDependency.java">
+      <unit at="14,0,22,0" name="org.modelix.model.repositoryconcepts.structure.DevkitDependency$Properties" />
+      <unit at="22,0,30,0" name="org.modelix.model.repositoryconcepts.structure.DevkitDependency$Children" />
+      <unit at="30,0,40,0" name="org.modelix.model.repositoryconcepts.structure.DevkitDependency$References" />
+      <unit at="12,0,60,0" name="org.modelix.model.repositoryconcepts.structure.DevkitDependency" />
+    </file>
+    <file name="DevkitDependencyConcept.java">
+      <unit at="16,0,57,0" name="org.modelix.model.repositoryconcepts.structure.concepts.DevkitDependencyConcept" />
+    </file>
     <file name="IAntisuppressErrors.java">
       <unit at="8,0,10,0" name="jetbrains.mps.lang.core.structure.IAntisuppressErrors$Properties" />
       <unit at="14,0,17,0" name="jetbrains.mps.lang.core.structure.IAntisuppressErrors$References" />
@@ -264,6 +282,33 @@
     <file name="InterfacePartConcept.java">
       <unit at="16,0,56,0" name="jetbrains.mps.lang.core.structure.concepts.InterfacePartConcept" />
     </file>
+    <file name="JavaModuleFacet.java">
+      <unit at="50,0,58,0" name="org.modelix.model.repositoryconcepts.structure.JavaModuleFacet$Children" />
+      <unit at="58,0,68,0" name="org.modelix.model.repositoryconcepts.structure.JavaModuleFacet$References" />
+      <unit at="15,0,50,0" name="org.modelix.model.repositoryconcepts.structure.JavaModuleFacet$Properties" />
+      <unit at="13,0,88,0" name="org.modelix.model.repositoryconcepts.structure.JavaModuleFacet" />
+    </file>
+    <file name="JavaModuleFacetConcept.java">
+      <unit at="16,0,59,0" name="org.modelix.model.repositoryconcepts.structure.concepts.JavaModuleFacetConcept" />
+    </file>
+    <file name="Language.java">
+      <unit at="14,0,22,0" name="org.modelix.model.repositoryconcepts.structure.Language$Properties" />
+      <unit at="22,0,30,0" name="org.modelix.model.repositoryconcepts.structure.Language$Children" />
+      <unit at="30,0,40,0" name="org.modelix.model.repositoryconcepts.structure.Language$References" />
+      <unit at="12,0,60,0" name="org.modelix.model.repositoryconcepts.structure.Language" />
+    </file>
+    <file name="LanguageConcept.java">
+      <unit at="16,0,57,0" name="org.modelix.model.repositoryconcepts.structure.concepts.LanguageConcept" />
+    </file>
+    <file name="LanguageDependency.java">
+      <unit at="44,0,52,0" name="org.modelix.model.repositoryconcepts.structure.LanguageDependency$Children" />
+      <unit at="52,0,62,0" name="org.modelix.model.repositoryconcepts.structure.LanguageDependency$References" />
+      <unit at="16,0,44,0" name="org.modelix.model.repositoryconcepts.structure.LanguageDependency$Properties" />
+      <unit at="14,0,82,0" name="org.modelix.model.repositoryconcepts.structure.LanguageDependency" />
+    </file>
+    <file name="LanguageDependencyConcept.java">
+      <unit at="17,0,60,0" name="org.modelix.model.repositoryconcepts.structure.concepts.LanguageDependencyConcept" />
+    </file>
     <file name="Lecture.java">
       <unit at="88,0,107,0" name="University.Schedule.structure.Lecture$References" />
       <unit at="55,0,88,0" name="University.Schedule.structure.Lecture$Children" />
@@ -319,6 +364,67 @@
     <file name="MigrationDataAnnotationConcept.java">
       <unit at="16,0,59,0" name="jetbrains.mps.lang.core.structure.concepts.MigrationDataAnnotationConcept" />
     </file>
+    <file name="Model.java">
+      <unit at="71,41,76,7" name="org.modelix.model.repositoryconcepts.structure.Model$Children$1" />
+      <unit at="82,44,87,7" name="org.modelix.model.repositoryconcepts.structure.Model$Children$2" />
+      <unit at="93,54,98,7" name="org.modelix.model.repositoryconcepts.structure.Model$Children$3" />
+      <unit at="101,0,111,0" name="org.modelix.model.repositoryconcepts.structure.Model$References" />
+      <unit at="24,0,42,0" name="org.modelix.model.repositoryconcepts.structure.Model$Properties" />
+      <unit at="42,0,101,0" name="org.modelix.model.repositoryconcepts.structure.Model$Children" />
+      <unit at="22,0,131,0" name="org.modelix.model.repositoryconcepts.structure.Model" />
+    </file>
+    <file name="ModelConcept.java">
+      <unit at="18,0,64,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModelConcept" />
+    </file>
+    <file name="ModelReference.java">
+      <unit at="16,0,24,0" name="org.modelix.model.repositoryconcepts.structure.ModelReference$Properties" />
+      <unit at="24,0,32,0" name="org.modelix.model.repositoryconcepts.structure.ModelReference$Children" />
+      <unit at="32,0,51,0" name="org.modelix.model.repositoryconcepts.structure.ModelReference$References" />
+      <unit at="14,0,71,0" name="org.modelix.model.repositoryconcepts.structure.ModelReference" />
+    </file>
+    <file name="ModelReferenceConcept.java">
+      <unit at="17,0,59,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModelReferenceConcept" />
+    </file>
+    <file name="Module.java">
+      <unit at="111,41,116,7" name="org.modelix.model.repositoryconcepts.structure.Module$Children$1" />
+      <unit at="122,35,127,7" name="org.modelix.model.repositoryconcepts.structure.Module$Children$2" />
+      <unit at="133,46,138,7" name="org.modelix.model.repositoryconcepts.structure.Module$Children$3" />
+      <unit at="144,48,149,7" name="org.modelix.model.repositoryconcepts.structure.Module$Children$4" />
+      <unit at="152,0,162,0" name="org.modelix.model.repositoryconcepts.structure.Module$References" />
+      <unit at="24,0,76,0" name="org.modelix.model.repositoryconcepts.structure.Module$Properties" />
+      <unit at="76,0,152,0" name="org.modelix.model.repositoryconcepts.structure.Module$Children" />
+      <unit at="22,0,182,0" name="org.modelix.model.repositoryconcepts.structure.Module" />
+    </file>
+    <file name="ModuleConcept.java">
+      <unit at="18,0,67,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModuleConcept" />
+    </file>
+    <file name="ModuleDependency.java">
+      <unit at="105,0,113,0" name="org.modelix.model.repositoryconcepts.structure.ModuleDependency$Children" />
+      <unit at="113,0,123,0" name="org.modelix.model.repositoryconcepts.structure.ModuleDependency$References" />
+      <unit at="16,0,105,0" name="org.modelix.model.repositoryconcepts.structure.ModuleDependency$Properties" />
+      <unit at="14,0,143,0" name="org.modelix.model.repositoryconcepts.structure.ModuleDependency" />
+    </file>
+    <file name="ModuleDependencyConcept.java">
+      <unit at="17,0,64,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModuleDependencyConcept" />
+    </file>
+    <file name="ModuleFacet.java">
+      <unit at="15,0,23,0" name="org.modelix.model.repositoryconcepts.structure.ModuleFacet$Properties" />
+      <unit at="23,0,31,0" name="org.modelix.model.repositoryconcepts.structure.ModuleFacet$Children" />
+      <unit at="31,0,41,0" name="org.modelix.model.repositoryconcepts.structure.ModuleFacet$References" />
+      <unit at="13,0,61,0" name="org.modelix.model.repositoryconcepts.structure.ModuleFacet" />
+    </file>
+    <file name="ModuleFacetConcept.java">
+      <unit at="17,0,58,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModuleFacetConcept" />
+    </file>
+    <file name="ModuleReference.java">
+      <unit at="16,0,24,0" name="org.modelix.model.repositoryconcepts.structure.ModuleReference$Properties" />
+      <unit at="24,0,32,0" name="org.modelix.model.repositoryconcepts.structure.ModuleReference$Children" />
+      <unit at="32,0,51,0" name="org.modelix.model.repositoryconcepts.structure.ModuleReference$References" />
+      <unit at="14,0,71,0" name="org.modelix.model.repositoryconcepts.structure.ModuleReference" />
+    </file>
+    <file name="ModuleReferenceConcept.java">
+      <unit at="17,0,59,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ModuleReferenceConcept" />
+    </file>
     <file name="NodeAttribute.java">
       <unit at="14,0,22,0" name="jetbrains.mps.lang.core.structure.NodeAttribute$Properties" />
       <unit at="22,0,30,0" name="jetbrains.mps.lang.core.structure.NodeAttribute$Children" />
@@ -337,6 +443,26 @@
     <file name="OneOffConcept.java">
       <unit at="16,0,57,0" name="University.Schedule.structure.concepts.OneOffConcept" />
     </file>
+    <file name="Project.java">
+      <unit at="54,36,59,7" name="org.modelix.model.repositoryconcepts.structure.Project$Children$1" />
+      <unit at="65,43,70,7" name="org.modelix.model.repositoryconcepts.structure.Project$Children$2" />
+      <unit at="23,0,31,0" name="org.modelix.model.repositoryconcepts.structure.Project$Properties" />
+      <unit at="73,0,83,0" name="org.modelix.model.repositoryconcepts.structure.Project$References" />
+      <unit at="31,0,73,0" name="org.modelix.model.repositoryconcepts.structure.Project$Children" />
+      <unit at="21,0,103,0" name="org.modelix.model.repositoryconcepts.structure.Project" />
+    </file>
+    <file name="ProjectConcept.java">
+      <unit at="18,0,62,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ProjectConcept" />
+    </file>
+    <file name="ProjectModule.java">
+      <unit at="33,0,41,0" name="org.modelix.model.repositoryconcepts.structure.ProjectModule$Children" />
+      <unit at="41,0,51,0" name="org.modelix.model.repositoryconcepts.structure.ProjectModule$References" />
+      <unit at="15,0,33,0" name="org.modelix.model.repositoryconcepts.structure.ProjectModule$Properties" />
+      <unit at="13,0,71,0" name="org.modelix.model.repositoryconcepts.structure.ProjectModule" />
+    </file>
+    <file name="ProjectModuleConcept.java">
+      <unit at="16,0,58,0" name="org.modelix.model.repositoryconcepts.structure.concepts.ProjectModuleConcept" />
+    </file>
     <file name="PropertyAttribute.java">
       <unit at="60,0,68,0" name="jetbrains.mps.lang.core.structure.PropertyAttribute$Children" />
       <unit at="68,0,78,0" name="jetbrains.mps.lang.core.structure.PropertyAttribute$References" />
@@ -354,6 +480,18 @@
     </file>
     <file name="RecurringConcept.java">
       <unit at="16,0,57,0" name="University.Schedule.structure.concepts.RecurringConcept" />
+    </file>
+    <file name="Repository.java">
+      <unit at="59,36,64,7" name="org.modelix.model.repositoryconcepts.structure.Repository$Children$1" />
+      <unit at="70,37,75,7" name="org.modelix.model.repositoryconcepts.structure.Repository$Children$2" />
+      <unit at="81,36,86,7" name="org.modelix.model.repositoryconcepts.structure.Repository$Children$3" />
+      <unit at="22,0,30,0" name="org.modelix.model.repositoryconcepts.structure.Repository$Properties" />
+      <unit at="89,0,99,0" name="org.modelix.model.repositoryconcepts.structure.Repository$References" />
+      <unit at="30,0,89,0" name="org.modelix.model.repositoryconcepts.structure.Repository$Children" />
+      <unit at="20,0,119,0" name="org.modelix.model.repositoryconcepts.structure.Repository" />
+    </file>
+    <file name="RepositoryConcept.java">
+      <unit at="17,0,61,0" name="org.modelix.model.repositoryconcepts.structure.concepts.RepositoryConcept" />
     </file>
     <file name="ReviewMigration.java">
       <unit at="53,0,61,0" name="jetbrains.mps.lang.core.structure.ReviewMigration$Children" />
@@ -428,6 +566,24 @@
     <file name="SideTransformInfoConcept.java">
       <unit at="16,0,60,0" name="jetbrains.mps.lang.core.structure.concepts.SideTransformInfoConcept" />
     </file>
+    <file name="SingleLanguageDependency.java">
+      <unit at="40,0,48,0" name="org.modelix.model.repositoryconcepts.structure.SingleLanguageDependency$Children" />
+      <unit at="48,0,58,0" name="org.modelix.model.repositoryconcepts.structure.SingleLanguageDependency$References" />
+      <unit at="15,0,40,0" name="org.modelix.model.repositoryconcepts.structure.SingleLanguageDependency$Properties" />
+      <unit at="13,0,78,0" name="org.modelix.model.repositoryconcepts.structure.SingleLanguageDependency" />
+    </file>
+    <file name="SingleLanguageDependencyConcept.java">
+      <unit at="16,0,58,0" name="org.modelix.model.repositoryconcepts.structure.concepts.SingleLanguageDependencyConcept" />
+    </file>
+    <file name="Solution.java">
+      <unit at="14,0,22,0" name="org.modelix.model.repositoryconcepts.structure.Solution$Properties" />
+      <unit at="22,0,30,0" name="org.modelix.model.repositoryconcepts.structure.Solution$Children" />
+      <unit at="30,0,40,0" name="org.modelix.model.repositoryconcepts.structure.Solution$References" />
+      <unit at="12,0,60,0" name="org.modelix.model.repositoryconcepts.structure.Solution" />
+    </file>
+    <file name="SolutionConcept.java">
+      <unit at="16,0,57,0" name="org.modelix.model.repositoryconcepts.structure.concepts.SolutionConcept" />
+    </file>
     <file name="Student.java">
       <unit at="87,0,97,0" name="University.Schedule.structure.Student$References" />
       <unit at="54,0,87,0" name="University.Schedule.structure.Student$Children" />
@@ -472,6 +628,10 @@
     <file name="jetbrains_mps_lang_core.java">
       <unit at="93,27,97,5" name="University.Schedule.api.gen.jetbrains_mps_lang_core$1" />
       <unit at="49,0,100,0" name="University.Schedule.api.gen.jetbrains_mps_lang_core" />
+    </file>
+    <file name="org_modelix_model_repositoryconcepts.java">
+      <unit at="47,27,51,5" name="University.Schedule.api.gen.org_modelix_model_repositoryconcepts$1" />
+      <unit at="26,0,54,0" name="University.Schedule.api.gen.org_modelix_model_repositoryconcepts" />
     </file>
   </root>
 </debug-info>
