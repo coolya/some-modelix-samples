@@ -1,0 +1,17 @@
+<h2>Top Rooms</h2>
+<div class="entry-menu">
+    <a *ngFor="let room of rooms"
+       routerLink="/rooms/{{room.roomRef}}">
+        {{room.name}}
+    </a>
+</div>
+
+<h2>Top Lectures</h2>
+
+<div class="entry-menu">
+    <a *ngFor="let lecture of lectures"
+       routerLink="/lectures/{{lecture.lectureRef}}">
+        {{lecture.name}}
+    </a>
+</div>
+

@@ -17,6 +17,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-gson:$ktor_version")
     implementation("io.ktor:ktor-server-locations:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
 
     testImplementation("junit:junit:4.13.2")
 

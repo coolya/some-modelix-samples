@@ -31,8 +31,17 @@ import org.modelix.sample.restapijsonbulk.models.Room
 import org.modelix.sample.restapijsonbulk.models.RoomList
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.net.URLEncoder
+import java.nio.charset.Charset
 
 val logger: Logger = LoggerFactory.getLogger("BulkApi")
+
+object RouteHelper {
+    @JvmStatic
+    public fun urlEncode(input: String): String {
+        return URLEncoder.encode(input, Charset.defaultCharset())!!
+    }
+}
 
 fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeReference) -> INode?) {
     val gson = Gson()
@@ -47,8 +56,8 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
         val roomList = LectureList(lectures = allLectures.map {
             Lecture(name = it.properties.name!!,
                     description = it.properties.description!!,
-                    lectureRef = INodeReferenceSerializer.serialize(it.iNode.reference),
-                    room = INodeReferenceSerializer.serialize(it.references.room.iNode.reference),
+                    lectureRef = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(it.iNode.reference)),
+                    room = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(it.references.room.iNode.reference)),
                     maxParticipants = it.properties.maxParticipants!!)
         })
         call.respond(roomList)
@@ -61,8 +70,8 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             val instance = MPSLanguageRegistry.getInstance<University.Schedule.structure.Lecture>(iNode)!!
             val lecture = Lecture(name = instance.properties.name!!,
                     maxParticipants = instance.properties.maxParticipants!!,
-                    lectureRef = INodeReferenceSerializer.serialize(instance.iNode.reference),
-                    room = INodeReferenceSerializer.serialize(instance.references.room.reference),
+                    lectureRef = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(instance.iNode.reference)),
+                    room = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(instance.references.room.reference)),
                     description = instance.properties.description!!
             )
             call.respond(lecture)
@@ -80,7 +89,7 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
         val roomList = RoomList(rooms = allRooms.map {
             Room(name = it.properties.name!!,
                     maxPlaces = it.properties.maxPlaces!!,
-                    roomRef = INodeReferenceSerializer.serialize(it.iNode.reference),
+                    roomRef = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(it.iNode.reference)),
                     hasRemoteEquipment = it.properties.hasRemoteEquipment)
         })
         call.respond(roomList)
@@ -93,7 +102,7 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             val iNode = resolve(roomRef)!!
             val instance = MPSLanguageRegistry.getInstance<University.Schedule.structure.Room>(iNode)!!
             val room = Room(name = instance.properties.name!!,
-                    roomRef = INodeReferenceSerializer.serialize(instance.iNode.reference),
+                    roomRef = RouteHelper.urlEncode(INodeReferenceSerializer.serialize(instance.iNode.reference)),
                     maxPlaces = instance.properties.maxPlaces!!,
                     hasRemoteEquipment = instance.properties.hasRemoteEquipment
             )
@@ -102,5 +111,4 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
         }
     }
-
 }

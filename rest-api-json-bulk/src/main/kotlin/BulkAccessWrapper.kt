@@ -15,7 +15,7 @@ object BulkAccessWrapper {
     private lateinit var client: MPSRemoteClient
     private lateinit var modelsToLoad: List<ModelView>
 
-    suspend fun initialize(host: String, port: Int, models: List<String>){
+    suspend fun initialize(host: String, port: Int, models: List<String>) {
         registerLanguages()
 
         client = MPSRemoteClient(host, port)
@@ -40,7 +40,7 @@ object BulkAccessWrapper {
 
     val loadRoots = suspend { modelsToLoad.map { it.modelId }.let { client.loadModelAreas(it) }.map { it.getRoot() } }
 
-    val resolve: suspend (INodeReference) -> INode? =  { ref: INodeReference ->
+    val resolve: suspend (INodeReference) -> INode? = { ref: INodeReference ->
         // The name "loadModelSafe" is kinda misleading. What this function is doing, is to run the closure
         // that is passed to it and catch any ModelNotLoadedException during the execution and load the missing model.
         // That way we don't need to load the model, where the reference is pointing to, explicitly.

@@ -1,0 +1,16 @@
+<h1>{{title}}</h1>
+<nav>
+    <a routerLink="/search">Search</a>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/rooms">Rooms</a>
+    <a routerLink="/lectures">Lectures</a>
+</nav>
+<router-outlet></router-outlet>
+
+<div>
+    <input type="checkbox" id="toggle" class="unfolder"/>
+    <label for="toggle" class="toggle-label"><span class="unfold-icon">&#9654;</span><span class="fold-icon">&#9660;</span> Show messages</label>
+    <div class="fold">
+        <app-messages></app-messages>
+    </div>
+</div>

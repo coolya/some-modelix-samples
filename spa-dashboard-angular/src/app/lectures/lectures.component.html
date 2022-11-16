@@ -1,0 +1,9 @@
+<h2>Known Lectures</h2>
+
+<ul class="lectures">
+    <li *ngFor="let lecture of lectures">
+        <a routerLink="/lectures/{{lecture.lectureRef}}">
+            <span class="badge">{{lecture.lectureRef}}</span> {{lecture.name}}
+        </a>
+    </li>
+</ul>

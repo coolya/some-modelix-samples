@@ -1,0 +1,11 @@
+<h2>Known Rooms</h2>
+
+<ul class="rooms">
+
+    <li *ngFor="let room of rooms">
+        <a routerLink="/rooms/{{room.roomRef}}">
+            <span class="badge">{{room.roomRef}}<br></span>{{room.name}}
+        </a>
+    </li>
+
+</ul>

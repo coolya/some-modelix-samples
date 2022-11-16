@@ -1,0 +1,28 @@
+<div *ngIf="room">
+
+    <h2>Room Details</h2>
+
+    <dl class="property-list">
+        <dt class="property-list__key">Room name</dt>
+        <dd class="property-list__value">{{room.name}}</dd>
+    </dl>
+    <dl class="property-list">
+        <dt class="property-list__key">Room reference</dt>
+        <dd class="property-list__value">
+            <div class="code">{{room.roomRef}}</div>
+        </dd>
+    </dl>
+    <dl class="property-list">
+        <dt class="property-list__key">Max places</dt>
+        <dd class="property-list__value">{{room.maxPlaces}}</dd>
+    </dl>
+    <dl class="property-list">
+        <dt class="property-list__key">Has remote equipment:</dt>
+        <dd class="property-list__value,code">
+            <div class="code">{{room.hasRemoteEquipment}}</div>
+        </dd>
+    </dl>
+
+    <br>
+    <button type="button" (click)="goBack()">Go back</button>
+</div>
