@@ -10,4 +10,4 @@ Consequently, this openAPI provides a contract of the API behaviour for web team
 [^1]: This additional abstraction admittedly does not really provide fancy abstractions for this domain. 
 Its purpose is rather educational for you to understand the option to add an additional layer separating web development from language engineering.
 You do not have to do this.
-Of course one does not necessarily need such an abstraction layer - any dashboard or web app can directly communicate with the API provided by the `model-server` based on a [generated model API](mps/README.md#generated-api).
+Of course one does not necessarily need such an abstraction layer - any dashboard or web app can directly communicate with the API provided by the `model-server` together with the [generated model API](../mps/README.md#generated-api).
