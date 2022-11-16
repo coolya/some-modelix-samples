@@ -1,8 +1,8 @@
-rootProject.name = "some-modelix-samples"
+rootProject.name = "modelix-samples"
 
-include("rest-api-json-bulk")
-include("dashboard")
 include("mps")
 include("mps:solutions:University.Schedule.api")
-include("rest-api")
+
+include("rest-api-json-bulk")
+
 include("spa-dashboard-angular")
