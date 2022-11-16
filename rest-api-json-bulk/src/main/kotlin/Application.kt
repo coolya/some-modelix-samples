@@ -1,6 +1,7 @@
 package org.modelix.sample.restapijsonbulk
 
 import BulkAccessWrapper
+import com.typesafe.config.ConfigFactory
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -8,11 +9,10 @@ import io.ktor.server.locations.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.routing.*
 import org.modelix.sample.restapijsonbulk.models.apis.BulkApi
-import com.typesafe.config.ConfigFactory
-import io.ktor.server.plugins.cors.routing.*
 
 suspend fun main() {
     val config = ConfigFactory.load()
