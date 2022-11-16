@@ -21,9 +21,12 @@ You can build this subproject individually from the parent folder via  all examp
 
 ### 2. Start an openAPI implementation
 
-To run this application you will need a component which provides the corresponding REST API conforming to the openAPI spec.
-Before you can start the application, you need to start one of the available openAPI implementations.
-Thus, you can either start the [rest-api-json-bulk](../rest-api-json-bulk)) implementation, or alternatively you can start the [rest-api-model-server](../rest-api-model-server) implementation.
+To run this application you will need a component which provides an API implementation conforming to the openAPI spec.
+Thus, you need to start one of the available openAPI implementations in this project:
+
+- Either start the [rest-api-json-bulk](../rest-api-json-bulk) implementation,
+- or alternatively you can start the [rest-api-model-server](../rest-api-model-server) implementation.
+
 Check the README of the corresponding project on how to start them.
 
 **Note**: Make sure you have the correct ports defined [in the API URLs](src/app/Container.ts). This app expects `8080` by default.
