@@ -3,29 +3,42 @@
 This project provides a REST API that wraps the functionality of the `mps-json-bulk-model-access` plugin running inside an MPS instance.
 The provided REST api conforms to the API spec in the [openapi.yaml](../actual-rest-api/openapi.yaml).
 
-
 ## Building
 
-You can build this subproject individually from the parent folder via  all examples via gradle:
+You can build this subproject individually from the parent folder via all gradle:
 ```
 ./gradlew rest-api-json-bulk:build
 ```
 
-To start the server which provides the API run
+Before running the API provider you need to open the MPS project in the [mps](../mps) folder. 
+This will automatically set up MPS with the [`mps-json-bulk-access` plugin](https://github.com/modelix/mps-rest-model-access) and expose the models via an HTTP API.
+This API is then accessed from this openAPI abstraction implementation to load the models.
+
+Once your MPS project is opened you can run:
+
 ```
 ./gradlew rest-api-json-bulk:run
 ```
+
+Once you see a log message like:
+```
+[DefaultDispatcher-worker-8] INFO  ktor.application - Responding at http://0.0.0.0:8090
+```
+
+Your openAPI implementation is ready.
+
+
+
 Settings such as ports and hosts are defined in the [application.conf](src/main/resources/application.conf).
 
 
 ## Usage
 
-For simple testing you can `curl` the data provided by the API for example via
-
-
-
-
-
+For simple testing you can `curl` the data provided by the API for example:
+<details>
+<summary>
+Unfold for examples
+</summary>
 
 ```console
 $ curl -s -X GET "http://localhost:8090/rooms" -H  "accept: application/json" | jq
@@ -112,3 +125,7 @@ $ curl -s -X GET "http://localhost:8090/lectures/trash" -H  "accept: application
 }
 
 ```
+</details>
+
+
+Alternatively you can now start the [dashboard](../spa-dashboard-angular) to consume this API endpoint.
