@@ -25,6 +25,3 @@ export class Lecture {
 export class LectureList {
     lectures!: Lecture[];
 }
-
-
-

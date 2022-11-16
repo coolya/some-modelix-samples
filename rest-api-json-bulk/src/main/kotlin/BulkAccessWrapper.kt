@@ -7,6 +7,8 @@ import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.modelix.mps.rest.model.access.api.ModelView
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.net.URLEncoder
+import java.nio.charset.Charset
 
 val logger: Logger = LoggerFactory.getLogger("BulkAccessWrapper")
 
