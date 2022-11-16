@@ -5,11 +5,6 @@ plugins {
     id("org.openapi.generator") version "6.2.1"
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
@@ -32,7 +27,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 }
 
-val group: String by project
+val basePackage = "org.modelix.sample"
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
@@ -42,8 +37,8 @@ openApiGenerate {
     generatorName.set("kotlin-server")
     inputSpec.set(openApiFile.toString())
     outputDir.set("$buildDir/openapi-generator")
-    apiPackage.set("$group")
-    modelPackage.set("$group")
+    apiPackage.set(basePackage)
+    modelPackage.set(basePackage)
     configOptions.set(
         mapOf(
             "library" to "jaxrs-spec",
