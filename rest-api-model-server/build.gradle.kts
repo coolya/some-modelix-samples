@@ -5,14 +5,15 @@ plugins {
     id("org.openapi.generator") version "6.2.1"
 }
 
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
+val quarkus_platform_group_id: String by project
+val quarkus_platform_artifact_id: String by project
+val quarkus_platform_version: String by project
 val ktor_version: String by project
 val api_gen_version: String by project
+val modelix_version: String by project
 
 dependencies {
-    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkus_platform_group_id}:${quarkus_platform_artifact_id}:${quarkus_platform_version}"))
     implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
@@ -20,7 +21,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
-    implementation("org.modelix:model-client:1.3.2")
+    implementation("org.modelix:model-client:$modelix_version")
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
     implementation(project(":mps:solutions:University.Schedule.api"))
     testImplementation("io.quarkus:quarkus-junit5")
