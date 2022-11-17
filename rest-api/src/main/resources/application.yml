@@ -1,6 +1,0 @@
-micronaut:
-  application:
-    name: restApi
-
-  server:
-    port: 8093

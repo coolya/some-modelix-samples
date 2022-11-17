@@ -13,10 +13,9 @@
             <option value="$PROJECT_DIR$/mps" />
             <option value="$PROJECT_DIR$/mps/solutions" />
             <option value="$PROJECT_DIR$/mps/solutions/University.Schedule.api" />
-            <option value="$PROJECT_DIR$/rest-api" />
-            <option value="$PROJECT_DIR$/spa-dashboard-angular" />
             <option value="$PROJECT_DIR$/rest-api-json-bulk" />
             <option value="$PROJECT_DIR$/rest-api-model-server" />
+            <option value="$PROJECT_DIR$/spa-dashboard-angular" />
           </set>
         </option>
       </GradleProjectSettings>
