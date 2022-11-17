@@ -44,9 +44,6 @@ object RouteHelper {
 }
 
 fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeReference) -> INode?) {
-    val gson = Gson()
-    val empty = mutableMapOf<String, Any?>()
-
     get<Paths.getLectures> {
         val roots = loadRoots()
         val allLectures = roots.flatMap {
