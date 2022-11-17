@@ -1,6 +1,7 @@
 # OpenAPI of the Courses domain
 
-This folder contains the [openAPI specification](openapi.yaml) which provides an additional domain-specific abstraction of the courses domain[^1].
+This folder contains the [OpenAPI specification](openapi.yaml) of the REST API implementations serving as examples in this project.
+The described API provides an additional domain-specific abstraction of the courses domain[^1].
 The intention of this abstraction is to provide an example on how the use of `modelix` can be abstracted for eventual consumer apps, such as the [Angular based dashboard](../spa-dashboard-angular/README.md)).
 The development process thus can follow a [API-first approach](https://swagger.io/resources/articles/adopting-an-api-first-approach/).
 Consequently, this openAPI provides a contract of the API behaviour for web teams and a language engineers.
