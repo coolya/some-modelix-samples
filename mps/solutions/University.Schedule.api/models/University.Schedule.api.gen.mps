@@ -28,6 +28,12 @@
         <property role="2V$B1Q" value="University.Schedule" />
       </node>
     </node>
+    <node concept="1jXIN4" id="7jS7ZYbgYyI" role="3e8aej">
+      <node concept="2V$Bhx" id="7jS7ZYbgYyO" role="1jXINV">
+        <property role="2V$B1T" value="0a7577d1-d4e5-431d-98b1-fae38f9aee80" />
+        <property role="2V$B1Q" value="org.modelix.model.repositoryconcepts" />
+      </node>
+    </node>
   </node>
 </model>
 

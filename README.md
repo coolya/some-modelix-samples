@@ -36,8 +36,6 @@ Each sub-folder contains its own `README.md` with component specific documentati
 
 > ⚠️ TBD
 
-
-
 ## Getting Started
 
 To get started with the project we need to set up the gradle project. 
