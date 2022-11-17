@@ -1,4 +1,4 @@
-package org.modelix.sample
+package org.modelix.sample.restapimodelserver
 
 import io.smallrye.config.ConfigMapping
 import io.smallrye.config.WithDefault

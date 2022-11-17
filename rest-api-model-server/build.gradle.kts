@@ -28,7 +28,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 }
 
-val basePackage = "org.modelix.sample"
+val basePackage = "org.modelix.sample.restapimodelserver"
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
@@ -38,6 +38,7 @@ openApiGenerate {
     generatorName.set("kotlin-server")
     inputSpec.set(openApiFile.toString())
     outputDir.set("$buildDir/openapi-generator")
+    packageName.set(basePackage)
     apiPackage.set(basePackage)
     modelPackage.set(basePackage)
     configOptions.set(

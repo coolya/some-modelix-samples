@@ -1,4 +1,4 @@
-package org.modelix.sample
+package org.modelix.sample.restapimodelserver
 
 import University.Schedule.structure.Courses
 import University.Schedule.structure.Rooms

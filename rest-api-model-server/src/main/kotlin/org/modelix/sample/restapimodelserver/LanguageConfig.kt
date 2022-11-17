@@ -1,4 +1,4 @@
-package org.modelix.sample
+package org.modelix.sample.restapimodelserver
 
 import University.Schedule.api.gen.University_Schedule
 import University.Schedule.api.gen.jetbrains_mps_lang_core

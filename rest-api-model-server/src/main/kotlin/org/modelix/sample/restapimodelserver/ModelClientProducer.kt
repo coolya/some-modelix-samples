@@ -1,4 +1,4 @@
-package org.modelix.sample
+package org.modelix.sample.restapimodelserver
 
 import org.modelix.model.client.ReplicatedRepository
 import org.modelix.model.client.RestWebModelClient

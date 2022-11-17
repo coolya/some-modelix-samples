@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/dashboard" />
             <option value="$PROJECT_DIR$/mps" />
             <option value="$PROJECT_DIR$/mps/solutions" />
             <option value="$PROJECT_DIR$/mps/solutions/University.Schedule.api" />
