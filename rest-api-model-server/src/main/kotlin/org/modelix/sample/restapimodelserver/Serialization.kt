@@ -30,3 +30,15 @@ fun University.Schedule.structure.Room.toRest() = Room(
 fun Rooms.toRest() = RoomList(this.children.rooms.map { it.toRest() })
 
 fun Courses.toRest() = LectureList(this.children.lectures.map { it.toRest() })
+
+enum class WhatChanged {
+    ROOM,
+    ROOM_LIST,
+    LECTURE,
+    LECTURE_LIST
+}
+
+data class ChangeNotification(
+    val whatChanged: WhatChanged,
+    val change: Any
+)
