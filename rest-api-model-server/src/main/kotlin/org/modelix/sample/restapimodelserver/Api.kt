@@ -68,29 +68,6 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         }
     }
 
-    /**
-     * A Kotlin extension function to convert a model lecture to its REST representation enforced by the generated
-     * data class [Lecture].
-     */
-    private fun University.Schedule.structure.Lecture.toRest() = Lecture(
-        lectureRef = INodeReferenceSerializer.serialize(this.reference),
-        name = this.properties.name ?: "",
-        description = this.properties.description ?: "",
-        maxParticipants = this.properties.maxParticipants ?: 0,
-        room = INodeReferenceSerializer.serialize(this.references.room.reference),
-    )
-
-    /**
-     * A Kotlin extension function to convert a model room to its REST representation enforced by the generated
-     * data class [Room].
-     */
-    private fun University.Schedule.structure.Room.toRest() = Room(
-        roomRef = INodeReferenceSerializer.serialize(this.reference),
-        name = this.properties.name ?: "",
-        maxPlaces = this.properties.maxPlaces ?: 0,
-        hasRemoteEquipment = this.properties.hasRemoteEquipment ?: false
-    )
-
     override fun getLectureByRef(lectureRef: String): Lecture = executeRead { area ->
         val node = resolveRef(lectureRef, area)
         ensureIsDesiredConcept<LectureConcept>(node, lectureRef)
@@ -106,13 +83,11 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
-        val courses = allModelRoots(area).first { it is Courses }
-        LectureList((courses.children as Courses.Children).lectures.map { it.toRest() })
+        Courses(allModelRoots(area).first { it is Courses }.iNode).toRest()
     }
 
     override fun listRooms(): RoomList = executeRead { area ->
-        val rooms = allModelRoots(area).first { it is Rooms }
-        RoomList((rooms.children as Rooms.Children).rooms.map { it.toRest() })
+        Rooms(allModelRoots(area).first { it is Rooms }.iNode).toRest()
     }
 
 }
