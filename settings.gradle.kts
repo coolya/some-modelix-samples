@@ -20,3 +20,5 @@ include("rest-api-json-bulk")
 include("rest-api-model-server")
 
 include("spa-dashboard-angular")
+
+include("model-server")
