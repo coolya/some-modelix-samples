@@ -5,10 +5,10 @@ import University.Schedule.structure.Rooms
 import org.modelix.model.lazy.INodeReferenceSerializer
 
 /**
- * A Kotlin extension function to convert a model lecture to its REST representation enforced by the generated
+ * A Kotlin extension function to convert a model lecture to its JSON representation enforced by the generated
  * data class [Lecture].
  */
-fun University.Schedule.structure.Lecture.toRest() = Lecture(
+fun University.Schedule.structure.Lecture.toJson() = Lecture(
     lectureRef = INodeReferenceSerializer.serialize(this.reference),
     name = this.properties.name ?: "",
     description = this.properties.description ?: "",
@@ -17,19 +17,19 @@ fun University.Schedule.structure.Lecture.toRest() = Lecture(
 )
 
 /**
- * A Kotlin extension function to convert a model room to its REST representation enforced by the generated
+ * A Kotlin extension function to convert a model room to its JSON representation enforced by the generated
  * data class [Room].
  */
-fun University.Schedule.structure.Room.toRest() = Room(
+fun University.Schedule.structure.Room.toJson() = Room(
     roomRef = INodeReferenceSerializer.serialize(this.reference),
     name = this.properties.name ?: "",
     maxPlaces = this.properties.maxPlaces ?: 0,
     hasRemoteEquipment = this.properties.hasRemoteEquipment ?: false
 )
 
-fun Rooms.toRest() = RoomList(this.children.rooms.map { it.toRest() })
+fun Rooms.toJson() = RoomList(this.children.rooms.map { it.toJson() })
 
-fun Courses.toRest() = LectureList(this.children.lectures.map { it.toRest() })
+fun Courses.toJson() = LectureList(this.children.lectures.map { it.toJson() })
 
 enum class WhatChanged {
     ROOM,

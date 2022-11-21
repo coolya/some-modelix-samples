@@ -72,22 +72,22 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         val node = resolveRef(lectureRef, area)
         ensureIsDesiredConcept<LectureConcept>(node, lectureRef)
 
-        University.Schedule.structure.Lecture(node).toRest()
+        University.Schedule.structure.Lecture(node).toJson()
     }
 
     override fun getRoomByRef(roomRef: String): Room = executeRead { area ->
         val node = resolveRef(roomRef, area)
         ensureIsDesiredConcept<RoomConcept>(node, roomRef)
 
-        University.Schedule.structure.Room(node).toRest()
+        University.Schedule.structure.Room(node).toJson()
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
-        Courses(allModelRoots(area).first { it is Courses }.iNode).toRest()
+        Courses(allModelRoots(area).first { it is Courses }.iNode).toJson()
     }
 
     override fun listRooms(): RoomList = executeRead { area ->
-        Rooms(allModelRoots(area).first { it is Rooms }.iNode).toRest()
+        Rooms(allModelRoots(area).first { it is Rooms }.iNode).toJson()
     }
 
 }

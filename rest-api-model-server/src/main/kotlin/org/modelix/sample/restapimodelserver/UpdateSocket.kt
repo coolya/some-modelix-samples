@@ -71,10 +71,10 @@ class UpdateSocket(private val repo: ReplicatedRepository, private val mapper: O
         val node = PNodeAdapter(nodeId, repo.branch)
         area.executeRead {
             when (node.concept) {
-                is RoomConcept -> broadcast(ChangeNotification(WhatChanged.ROOM, Room(node).toRest()))
-                is RoomsConcept -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, Rooms(node).toRest()))
-                is LectureConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE, Lecture(node).toRest()))
-                is CoursesConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, Courses(node).toRest()))
+                is RoomConcept -> broadcast(ChangeNotification(WhatChanged.ROOM, Room(node).toJson()))
+                is RoomsConcept -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, Rooms(node).toJson()))
+                is LectureConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE, Lecture(node).toJson()))
+                is CoursesConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, Courses(node).toJson()))
                 else -> logger.warn("Could not handle change")
             }
         }
