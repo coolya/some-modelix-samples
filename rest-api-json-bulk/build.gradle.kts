@@ -13,7 +13,7 @@ val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 dependencies {
     implementation(project(":mps:solutions:University.Schedule.api"))
 
-    implementation("ch.qos.logback:logback-classic:1.2.1")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("io.ktor:ktor-server-default-headers:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-auto-head-response:$ktor_version")
