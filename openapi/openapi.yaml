@@ -6,7 +6,7 @@ info:
     name: The Unlicense
     url: 'https://raw.githubusercontent.com/modelix/modelix-samples/main/LICENSE'
 servers:
-  - url: 'http://localhost:8080'
+  - url: 'http://localhost:8090'
     description: localDev
 paths:
   /rooms:
