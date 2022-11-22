@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {Observable, Observer, of, map, merge, Subject} from 'rxjs';
+import {catchError, filter, tap} from 'rxjs/operators';
 
 import {Room, RoomList, URLLibrary} from '../Container';
 import {MessageService} from '../message.service';
@@ -11,9 +11,45 @@ import {MessageService} from '../message.service';
 @Injectable({providedIn: 'root'})
 export class RoomService {
 
+    private updateSubject: Subject<MessageEvent>;
+
     constructor(
         private http: HttpClient,
         private messageService: MessageService) {
+        this.updateSubject = this.connectWebSocket(URLLibrary.API_URL_UPDATES);
+    }
+
+    connectWebSocket(url: string): Subject<MessageEvent> {
+        const ws = new WebSocket(url);
+        const observable =  new Observable((obs: Observer<MessageEvent>) => {
+            ws.onmessage = obs.next.bind(obs);
+            ws.onerror = obs.error.bind(obs);
+            ws.onclose = obs.complete.bind(obs);
+            return ws.close.bind(ws); 
+        });
+
+        const subject: Subject<MessageEvent> = new Subject();
+        observable.subscribe(subject);
+
+        return subject;
+    }
+
+    getRoomUpdates(): Observable<RoomList|Room> {
+        return this.updateSubject.pipe(
+            tap(console.log),
+            map(event => JSON.parse(event.data)),
+            map(data => {
+                if (data.whatChanged === "ROOM_LIST") {
+                    return Object.assign(new RoomList(), data.change);
+                } else if (data.whatChanged === "ROOM") {
+                    return Object.assign(new Room(), data.change);
+                } else {
+                    return null;
+                }
+            }),
+            filter(data => data !== null),
+            tap(console.log),
+        )
     }
 
     getRoomList(): Observable<RoomList> {

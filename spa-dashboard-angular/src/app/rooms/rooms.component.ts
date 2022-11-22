@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {RoomService} from './room.service';
-import {Room} from '../Container';
+import {Room, RoomList} from '../Container';
 
 @Component({
     selector: 'app-rooms',
@@ -15,10 +15,22 @@ export class RoomsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getRooms()
+        this.populateRooms()
+        this.roomService.getRoomUpdates().subscribe(data => {
+            if (data instanceof RoomList) {
+                this.rooms = data.rooms;
+            } else if (data instanceof Room) {
+                for (let index = 0; index < this.rooms.length; index++) {
+                    if (this.rooms[index].roomRef === data.roomRef) {
+                        this.rooms[index] = data;
+                        break;
+                    }
+                }
+            }
+        });
     }
 
-    getRooms(): void {
+    populateRooms(): void {
         this.roomService.getRoomList().subscribe((data) => {
             this.rooms = data.rooms
         })
