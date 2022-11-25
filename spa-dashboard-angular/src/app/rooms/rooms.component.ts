@@ -20,11 +20,12 @@ export class RoomsComponent implements OnInit {
             if (data instanceof RoomList) {
                 this.rooms = data.rooms;
             } else if (data instanceof Room) {
-                for (let index = 0; index < this.rooms.length; index++) {
-                    if (this.rooms[index].roomRef === data.roomRef) {
-                        this.rooms[index] = data;
-                        break;
-                    }
+                const roomIndex = this.rooms.findIndex(item => item.roomRef === data.roomRef)
+                if (roomIndex === -1) {
+                    // We don't know about this room yet
+                    this.rooms.push(data);
+                } else {
+                    this.rooms[roomIndex] = data;
                 }
             }
         });

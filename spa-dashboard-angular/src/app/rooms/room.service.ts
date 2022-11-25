@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Observable, Observer, of, map, merge, Subject} from 'rxjs';
+import {Observable, of, map} from 'rxjs';
 import {catchError, filter, tap} from 'rxjs/operators';
 
 import {Room, RoomList, URLLibrary} from '../Container';
