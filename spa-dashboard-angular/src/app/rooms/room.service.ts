@@ -6,36 +6,21 @@ import {catchError, filter, tap} from 'rxjs/operators';
 
 import {Room, RoomList, URLLibrary} from '../Container';
 import {MessageService} from '../message.service';
+import { UpdateService } from '../update.service';
 
 
 @Injectable({providedIn: 'root'})
 export class RoomService {
 
-    private updateSubject: Subject<MessageEvent>;
-
     constructor(
         private http: HttpClient,
-        private messageService: MessageService) {
-        this.updateSubject = this.connectWebSocket(URLLibrary.API_URL_UPDATES);
+        private messageService: MessageService,
+        private updateService: UpdateService) {
     }
 
-    connectWebSocket(url: string): Subject<MessageEvent> {
-        const ws = new WebSocket(url);
-        const observable =  new Observable((obs: Observer<MessageEvent>) => {
-            ws.onmessage = obs.next.bind(obs);
-            ws.onerror = obs.error.bind(obs);
-            ws.onclose = obs.complete.bind(obs);
-            return ws.close.bind(ws); 
-        });
-
-        const subject: Subject<MessageEvent> = new Subject();
-        observable.subscribe(subject);
-
-        return subject;
-    }
 
     getRoomUpdates(): Observable<RoomList|Room> {
-        return this.updateSubject.pipe(
+        return this.updateService.updateSubject.pipe(
             tap(console.log),
             map(event => JSON.parse(event.data)),
             map(data => {
