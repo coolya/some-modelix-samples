@@ -2,7 +2,7 @@
 
 ## System architecture
 
-[<img src="./images/01-usecase-full.svg" width=35% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
+[<img src="./images/ system-diagram-full.svg" width=35% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
 
 
 The full architecture includes components for multiple use cases.
@@ -58,7 +58,7 @@ It is an angular app that serves the content of a model.
 A user can not edit these models from the browser.
 
 
-[<img src="./images/01-usecase-full.svg" width=35% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)
+[<img src="./images/uc-1-read-only-dashboard.svg" width=35% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)
 
 
 
