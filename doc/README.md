@@ -2,7 +2,7 @@
 
 ## System architecture
 
-[<img src="./images/ system-diagram-full.svg" width=35% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
+[<img src="./images/system-diagram-full.svg" width=100% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
 
 
 The full architecture includes components for multiple use cases.
