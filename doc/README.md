@@ -36,7 +36,7 @@ The dashboard provides access to model knowledge via a browser.
 As it is conforming to the openAPI specification, the dashboard is able to obtain the model content from two sources:
 
 1. TODO
-2. TOO
+2. TODO
 
 
 TODO
@@ -60,7 +60,17 @@ A user can not edit these models from the browser.
 
 [<img src="./images/uc-1-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)
 
+Note:
+  The depicted system architecture shows one way to realize this use case with this repository.
+  Alternatively, one could also obtain the model data from the model server using the `rest-api-model-server`.
 
 
 
-### UC 1: Dashboard view
+### UC 2: Dashboard view and edit
+
+TODO: UC description
+
+[<img src="./uc-2-read-write-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-2-read-write-dashboard.svg)
+
+Note:
+  Unlike UC1, this use case **requires** the usage of a `model-server` and the `rest-api-model-server` because the alternative `rest-api-json-bulk` only provides read access to models.
