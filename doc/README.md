@@ -63,7 +63,9 @@ Note:
 
 #### Start UC 1
 
-To start up the system as described in UC 1, you first have to have built the entire project on the top level folder:
+*Note: All gradle commands assume you are in the top level folder of this repository.*
+
+To start up the system as described in UC 1, you first have to have built the entire project :
 
 ```
 ./gradlew
@@ -71,17 +73,17 @@ To start up the system as described in UC 1, you first have to have built the en
 
 Once done, you need to start all components involved, these are:
 
-1. MPS: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+1. **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
    This includes the `json-bulk-model-access`, `api-gen`, and `modelix-cloud-access`.
 
-2. API layer: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run (it will be a blocking call):
+2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run (it will be a blocking call):
    ```
    $ ./gradlew rest-api-json-bulk:run
    ```
    <details>
    <summary>You can expect output similar to this (unfold to see details)</summary>
-   
+
    ```
    > Task :rest-api-json-bulk:run
    2022-12-07 10:12:38.874 [DefaultDispatcher-worker-11] INFO  ktor.application - Autoreload is disabled because the development mode is off.
@@ -89,16 +91,16 @@ Once done, you need to start all components involved, these are:
    2022-12-07 10:12:39.131 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:8090
    <===========--> 91% EXECUTING [2m 20s]
    > :rest-api-json-bulk:run
-   ```   
+   ```
    </details>
 
-3. The dashboard itself is a node application which can be run via (it will be a blocking call):
+3. **Dashboard**: The dashboard itself is a node application which can be run via (it will be a blocking call):
    ```
    $ ./gradlew spa-dashboard-angular:npmRun
    ```
    <details>
    <summary>You can expect output similar to this (unfold to see details)</summary>
-   
+
    ```
       > Task :spa-dashboard-angular:npmRun
 
@@ -152,3 +154,94 @@ This use case thus covers a scenario where a system/service outside of MPS wants
 
 Note:
   Unlike UC1, this use case **requires** the usage of a `model-server` and the `rest-api-model-server` because the alternative `rest-api-json-bulk` only provides read access to models.
+
+
+#### Start UC 2
+
+*Note: All gradle commands assume you are in the top level folder of this repository.*
+
+To start up the system as described in UC 2, you first have to have built the entire project :
+
+```
+./gradlew
+```
+
+Once done, you need to start all components involved, these are:
+
+1. **modelix model-server**: Model knowledge is supplied by the `model-sever` in this use case.
+   To avoid complicated setups, we simply start the model-server in memory using docker.
+   Remember to stop the container once you are done.
+
+   ```
+   docker run  --rm -p 28101:28101 -d modelix/modelix-model:1.3.2 java -XX:MaxRAMPercentage=85 -Djdbc.url=$jdbc_url -cp "model-server/build/libs/*" org.modelix.model.server.Main -inmemory
+   ```
+
+   You can check that everything went fine via
+
+   ```
+   $ docker ps -a
+   ```
+
+   <details>
+   <summary>You can expect output similar to this (unfold to see details)</summary>
+
+   ```
+   $ docker run  --rm -p 28101:28101 -d modelix/modelix-model:1.3.2 java -XX:MaxRAMPercentage=85 -Djdbc.url=$jdbc_url -cp "model-server/build/libs/*" org.modelix.model.server.Main -inmemory
+   4db556f706530958da6f20eb907d8bb81e2e573068bf305fccf379ed99beb860
+
+
+   $ docker ps -a
+   CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS                     PORTS                                           NAMES
+   4db556f70653   modelix/modelix-model:1.3.2   "java -XX:MaxRAMPerc…"   3 seconds ago   Up 2 seconds               0.0.0.0:28101->28101/tcp, :::28101->28101/tcp   pedantic_euclid
+   ```
+
+   </details>
+
+2. **API layer**: The `rest-api-model-server` provides an abstraction of the model from the previously started `model-server`, simply run (it will be a blocking call):
+
+   ```
+   $ ./gradlew rest-api-model-server:quarkusDev
+   ```
+
+   <details>
+   <summary>You can expect output similar to this (unfold to see details)</summary>
+
+   ```
+    $ ./gradlew rest-api-model-server:quarkusDev
+
+   > Task :rest-api-model-server:quarkusDev
+   Listening for transport dt_socket at address: 5005
+   Press [h] for more options>NG [8s]
+   Tests paused
+   Press [r] to resume testing, [h] for more options>
+   Press [r] to resume testing, [o] Toggle test output, [h] for more options>
+   __  ____  __  _____   ___  __ ____  ______
+    --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+    -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+   --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+   2022-12-07 14:02:16,002 INFO  [io.und.websockets] (Quarkus Main Thread) UT026003: Adding annotated server endpoint class org.modelix.sample.restapimodelserver.UpdateSocket for path /updates
+        2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) rest-api-model-server unspecified on JVM (powered by Quarkus 2.14.0.Final) started in 2.922s. Listening on: http://localhost:8090
+   2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+   2022-12-07 14:02:16,465 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kotlin, resteasy-reactive, resteasy-reactive-jackson, smallrye-context-propagation, smallrye-openapi, swagger-ui, vertx, websockets, websockets-client]
+
+   <============-> 95% EXECUTING [16s]
+   > :rest-api-model-server:quarkusDev
+   ```
+
+   </details>
+
+3. **Collaborative web app**: ⚠  TODO: Not finished yet, still in development ⚠
+   <details>
+   <summary>You can expect output similar to this (unfold to see details)</summary>
+
+   ```
+   TODO
+   ```
+
+   </details>
+
+4. [optional] **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies` (for this use case `modelix-cloud-access` is required).
+   MPS behaves just like the web client and obtains model knowledge from the `model-server`.
+   MPS is thus not required but an optional client to try the collaborative 'real-time' feature.
+
