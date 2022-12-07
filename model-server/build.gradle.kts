@@ -1,8 +1,19 @@
-
-
-val startModelServer by tasks.creating(){
-    exec {
-        commandLine("ls", "-la")
-//        commandLine("docker", "-d", "run", "--rm", "-p", "28101:28101", "-v", " \$(realpath modelserver.dump):/tmp/modelserver.dump:ro", "-d", "modelix/modelix-model:1.3.2", "java", "-XX:MaxRAMPercentage=85", "-Djdbc.url=\$jdbc_url", "-cp", "\"model-server/build/libs/*\"", "org.modelix.model.server.Main", "-inmemory", "-dumpin", "/tmp/modelserver.dump" )
-    }
+plugins {
+    kotlin("jvm")
+    application
 }
+
+val modelix_version: String by project
+
+dependencies {
+    implementation("org.modelix:model-server-fatjar:$modelix_version")
+}
+
+application {
+    mainClass.set("org.modelix.model.server.Main")
+    applicationDefaultJvmArgs = listOf("-XX:MaxRAMPercentage=85")
+
+    // well this would be nice. if it worked...
+    // args = listOf("-inmemory", "-dumpin courses.modelsever.dump")
+}
+
