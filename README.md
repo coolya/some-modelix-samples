@@ -83,7 +83,7 @@ Depending on the chosen use case, only a subset of the components in this reposi
 The full architecture includes components for multiple use cases.
 One does not need all components to realize individual use cases.
 
-[<img src="./images/system-diagram-full.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
+[<img src="/doc/images/system-diagram-full.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
 
 In the following a short overview is given on each component.
 
@@ -173,7 +173,7 @@ In this simple case, a user does not need to edit these models from the browser.
 As a result, the simple openAPI implementation `rest-api-json-bulk` is used.
 
 
-[<img src="./images/uc-1-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)
+[<img src="/doc/images/uc-1-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)
 
 Note:
   The depicted system architecture shows one way to realize this use case with this repository.
@@ -268,7 +268,7 @@ Besides the obvious solution to simply use MPS to edit the model, an alternative
 This use case thus covers a scenario where a system/service outside of MPS wants to consume and modify the content of models defined in MPS in "real-time" (similar to functionalities provided by shared pads or google docs).
 
 
-[<img src="./images/uc-2-read-write-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-2-read-write-dashboard.svg)
+[<img src="/doc/images/uc-2-read-write-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-2-read-write-dashboard.svg)
 
 Note:
   Unlike UC1, this use case **requires** the usage of a `model-server` and the `rest-api-model-server` because the alternative `rest-api-json-bulk` only provides read access to models.
