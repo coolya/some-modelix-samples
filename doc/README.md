@@ -138,8 +138,8 @@ Once done, you need to start all components involved, these are:
    </details>
 
 4. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
-   Note:
-     * Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
+
+   Note: Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
 
 
 
@@ -240,12 +240,12 @@ Once done, you need to start all components involved, these are:
 
    </details>
 
-4. [optional] **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+4. **MPS [optional]**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies` (for this use case `modelix-cloud-access` is required).
    MPS behaves just like the web client and obtains model knowledge from the `model-server`.
    MPS is thus not required but an optional client to try the collaborative 'real-time' feature.
 
 5. Explore the app at [http://localhost:????/](http://localhost:????/)
-   Note:
-     * Changes to the model from any client will automatically synchronize with all other clients, you will **not** have to manually reload the model.
+
+   Note: Changes to the model from any client will automatically synchronize with all other clients, you will **not** have to manually reload the model.
 
