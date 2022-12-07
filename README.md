@@ -287,30 +287,55 @@ To start up the system as described in UC 2, you first have to have built the en
 Once done, you need to start all components involved, these are:
 
 1. **modelix model-server**: Model knowledge is supplied by the `model-sever` in this use case.
-   To avoid complicated setups, we simply start the model-server in memory using docker.
-   Remember to stop the container once you are done.
+   To avoid complicated setups, we simply start the model-server in memory and load the model content from the included dump file, all using gradle:
 
    ```
-   docker run  --rm -p 28101:28101 -d modelix/modelix-model:1.3.2 java -XX:MaxRAMPercentage=85 -Djdbc.url=$jdbc_url -cp "model-server/build/libs/*" org.modelix.model.server.Main -inmemory
-   ```
-
-   You can check that everything went fine via
-
-   ```
-   $ docker ps -a
+   ./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
    ```
 
    <details>
    <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
-   $ docker run  --rm -p 28101:28101 -d modelix/modelix-model:1.3.2 java -XX:MaxRAMPercentage=85 -Djdbc.url=$jdbc_url -cp "model-server/build/libs/*" org.modelix.model.server.Main -inmemory
-   4db556f706530958da6f20eb907d8bb81e2e573068bf305fccf379ed99beb860
+      ./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
 
+   > Task :model-server:run
+   18:33:16,185 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+   18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+   18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml]
+   18:33:16,194 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@f4168b8 - URL [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml] is not of type file
+   18:33:16,269 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+   18:33:16,270 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [console]
+   18:33:16,272 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.modelix] to DEBUG
+   18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[org.modelix]
+   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+   18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[ROOT]
+   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+   18:33:16,283 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@7ff95560 - Registering current configuration as safe fallback point
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
+   18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
+   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
+   Values loaded from /home/nkoester/git/modelix/modelix-sample/model-server/courses.modelserver.dump (73)
+   18:33:16.364 [main] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+   18:33:16.428 [main] INFO  ktor.application - Application started in 0.088 seconds.
+   18:33:16.518 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:28101
+   <===========--> 85% EXECUTING [7s]
+   > :model-server:run
 
-   $ docker ps -a
-   CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS                     PORTS                                           NAMES
-   4db556f70653   modelix/modelix-model:1.3.2   "java -XX:MaxRAMPerc…"   3 seconds ago   Up 2 seconds               0.0.0.0:28101->28101/tcp, :::28101->28101/tcp   pedantic_euclid
    ```
 
    </details>
