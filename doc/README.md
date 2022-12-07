@@ -61,6 +61,83 @@ Note:
   The depicted system architecture shows one way to realize this use case with this repository.
   Alternatively, one could also obtain the model data from the model server using the `rest-api-model-server`.
 
+#### Start UC 1
+
+To start up the system as described in UC 1, you first have to have built the entire project on the top level folder:
+
+```
+./gradlew
+```
+
+Once done, you need to start all components involved, these are:
+
+1. MPS: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
+   This includes the `json-bulk-model-access`, `api-gen`, and `modelix-cloud-access`.
+
+2. API layer: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run (it will be a blocking call):
+   ```
+   $ ./gradlew rest-api-json-bulk:run
+   ```
+   <details>
+   <summary>You can expect output similar to this (unfold to see details)</summary>
+   ```
+   > Task :rest-api-json-bulk:run
+   2022-12-07 10:12:38.874 [DefaultDispatcher-worker-11] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+   2022-12-07 10:12:39.009 [DefaultDispatcher-worker-11] INFO  ktor.application - Application started in 0.14 seconds.
+   2022-12-07 10:12:39.131 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:8090
+   <===========--> 91% EXECUTING [2m 20s]
+   > :rest-api-json-bulk:run
+   ```
+   </details>
+
+3. The dashboard itself is a node application which can be run via (it will be a blocking call):
+   ```
+   $ ./gradlew spa-dashboard-angular:npmRun
+   ```
+   <details>
+   <summary>You can expect output similar to this (unfold to see details)</summary>
+   ```
+
+      > Task :spa-dashboard-angular:npmRun
+
+      > angular.io-example@0.0.0 ng
+      > ng serve
+
+      - Generating browser application bundles (phase: setup)...
+      ✔ Browser application bundle generation complete.
+
+      Initial Chunk Files   | Names         |  Raw Size
+      vendor.js             | vendor        |   2.47 MB |
+      polyfills.js          | polyfills     | 318.03 kB |
+      styles.css, styles.js | styles        | 211.31 kB |
+      main.js               | main          |  86.71 kB |
+      runtime.js            | runtime       |   6.53 kB |
+
+      | Initial Total |   3.08 MB
+
+      Build at: 2022-12-07T09:18:02.345Z - Hash: 186b24edf20c1c4a - Time: 13776ms
+
+      ** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+      ✔ Compiled successfully.
+      ✔ Browser application bundle generation complete.
+
+      5 unchanged chunks
+
+      Build at: 2022-12-07T09:18:02.740Z - Hash: 186b24edf20c1c4a - Time: 324ms
+
+      ✔ Compiled successfully.
+      <============-> 95% EXECUTING [29s]
+      > :spa-dashboard-angular:npmRun
+      ```
+   </details>
+
+4. Explore the dashboard at `http://localhost:4200/`
+   Note:
+     * Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
+
 
 
 ### UC 2: Dashboard view and edit
