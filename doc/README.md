@@ -39,6 +39,10 @@ As it is conforming to the openAPI specification, the dashboard is able to obtai
 However, the dashboard is consequently limited by the chosen API implementation.
 
 
+### "Real-time" collaboration web app
+
+> ⚠  TBD
+
 
 ## Use cases
 

@@ -12,7 +12,7 @@ If your goal is to reuse MPS editors as is then modelix itself ships with a proj
 
 While all the examples use the same language defined in MPS they are not meant as one complete example
 but rather as individual parts. The purpose of the examples is to give inspiration of what is possible with modelix
-and make you think and envision your own use-cases.
+and make you think and envision your own use cases.
 
 ## Repository Structure
 
@@ -32,19 +32,15 @@ The repository is a single gradle project to make building everything at once ea
 Each sub-folder contains its own `README.md` with component specific documentation.
 
 
-## Use Cases
-
-> ⚠️ TBD
-
 ## Getting Started
 
-To get started with the project we need to set up the gradle project. 
+To get started with the project we need to set up the gradle project.
 At the moment most modelix artifacts are stored on the [itemis nexus](https://artifacts.itemis.cloud/#browse/browse:maven-mps:org%2Fmodelix) with no access restriction.
 Some are also stored on GitHub packages.
 
 <details>
 <summary>Unfold for details on how to set up GitHub packages authentication</summary>
-To access GitHub packaged you need to specify your credentials. 
+To access GitHub packaged you need to specify your credentials.
 First of all you will need to generate a [personal access token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-to-github-packages) with access to GitHub Packages. The project assumes that your username is available as the variable `gpr.user` and the token as `gpr.key`.
 The easiest way to configure the credentials is copy the example below, paste it into the [`gradle.properties`](gradle.properties) file in the repository and replace the values with your credentials:
 
@@ -68,58 +64,68 @@ To build all examples via gradle, simply call:
 gradlew.bat build # windows
 ```
 
-Once the initial build has completes feel free to inspect and edit the project with the code editor of your choice.
- - The top repository provides `IntelliJ` configurations, 
- - the [mps](mps) sub-project can be opened using `MPS 2020.3.6`, and 
+Once the initial build has completes feel free to inspect the [use cases](/doc/README.md#use-cases) and start components as described for each use case.
+Alternatively, you can inspect and edit the project with the code editor of your choice.
+ - The top repository provides `IntelliJ` configurations,
+ - the [mps](mps) sub-project can be opened using `MPS 2020.3.6`, and
  - the [dashboard](spa-dashboard-angular) is a `WebStorm` project.
+
 
 
 ## Components in this repository
 
 This project allows you to run different use cases.
 Depending on the chosen use case, different components are used.
-This section gives a detailed overview and links for each of these components.
+This section gives a short overview and links for each of these components.
 
-### 1. The MPS Language
+  1. **The MPS Language**
 
-The language and model used in all examples. 
+     The language (meta-model) and model used in all examples.
 
-[See the 'Language' section in the MPS README.md](mps/README.md#language)
+     [See the 'Language' section in the MPS README.md](mps/README.md#language)
 
 
-### 2. Generated API
+  2. **Generated model API (domain API)**
 
-An API generated with the [api-gen](https://github.com/modelix/api-gen) plugin from modelix.
+     An API based on the meta-model generated with the [api-gen](https://github.com/modelix/api-gen) plugin from modelix.
 
-[See the 'Generated API' section in the MPS README.md](mps/README.md#generated-api)
+     [See the 'Generated API' section in the MPS README.md](mps/README.md#generated-api)
 
-### 3. Domain-specific openAPI
+  3. **Domain-specific openAPI**
 
-A domain-specific [openAPI](https://www.openapis.org/) specification.
+     A domain-specific [openAPI](https://www.openapis.org/) specification abstracting the model to isolate language-engineering and web development.
 
-[See the 'Generated API' section in the MPS README.md](openapi/README.md)
+     [See the 'OpenAPI of the Courses domain' section in the MPS README.md](openapi/README.md)
 
-### 4. openAPI implementation
+  4. **openAPI implementation**
 
-This project provides two implementations of the [openAPI](openapi) domain abstraction.
-You need to start either of them to use the [SPA dashboard](spa-dashboard-angular).
+     This project provides two implementations of the [openAPI](openapi) domain abstraction.
 
-#### 4a. MPS as a source
+     - A. MPS as a source
 
-For a `MPS <-> API <-> dashboard` pipeline [follow the `rest-api-json-bulk` README.md](rest-api-json-bulk/README.md).
+         Provides access to model knowledge from MPS via the `json-bulk-model-access` plugin, see the [`rest-api-json-bulk` README.md](rest-api-json-bulk/README.md) for details.
 
-#### 4b. model-server as a source
+     - B. model-server as a source
 
-For a `model-server <-> API <-> dashboard` pipeline [follow the `rest-api-json-bulk` README.md](rest-api-json-bulk/README.md).
+         Provides access to model knowledge from the `model-server`, see the [`rest-api-json-bulk` README.md](rest-api-json-bulk/README.md) for details.
 
-### 5. SPA Dashboard
+  5. **Single-page application (SPA) Dashboard**
 
-[See the `spa-dashboard-angular` README.md](spa-dashboard-angular/README.md)
+     A simple web application with read-only access to the model, see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
+     Requires an openAPI implementation to obtain model knowledge from.
 
-### 6. 'Real-time' collaboration web application
+  6. **'Real-time' collaboration web application**
 
-> ⚠️ TBD
+     > ⚠️ TBD
 
-### 7. Deploying to Docker / Kubernetes
 
-> ⚠️ TBD
+
+  7. **Deploying to Docker / Kubernetes**
+
+     > ⚠️ TBD
+
+
+## System architecture and use cases
+
+Refer to the [README.md in the doc folder](/doc/README.md) to get insights on the system architecture and use cases implemented in the samples.
+
