@@ -82,7 +82,7 @@ Once done, you need to start all components involved, these are:
    $ ./gradlew rest-api-json-bulk:run
    ```
    <details>
-   <summary>You can expect output similar to this (unfold to see details)</summary>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
    > Task :rest-api-json-bulk:run
@@ -99,7 +99,7 @@ Once done, you need to start all components involved, these are:
    $ ./gradlew spa-dashboard-angular:npmRun
    ```
    <details>
-   <summary>You can expect output similar to this (unfold to see details)</summary>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
       > Task :spa-dashboard-angular:npmRun
@@ -137,7 +137,7 @@ Once done, you need to start all components involved, these are:
       ```
    </details>
 
-4. Explore the dashboard at `http://localhost:4200/`
+4. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
    Note:
      * Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
 
@@ -183,7 +183,7 @@ Once done, you need to start all components involved, these are:
    ```
 
    <details>
-   <summary>You can expect output similar to this (unfold to see details)</summary>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
    $ docker run  --rm -p 28101:28101 -d modelix/modelix-model:1.3.2 java -XX:MaxRAMPercentage=85 -Djdbc.url=$jdbc_url -cp "model-server/build/libs/*" org.modelix.model.server.Main -inmemory
@@ -204,7 +204,7 @@ Once done, you need to start all components involved, these are:
    ```
 
    <details>
-   <summary>You can expect output similar to this (unfold to see details)</summary>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
     $ ./gradlew rest-api-model-server:quarkusDev
@@ -232,7 +232,7 @@ Once done, you need to start all components involved, these are:
 
 3. **Collaborative web app**: ⚠  TODO: Not finished yet, still in development ⚠
    <details>
-   <summary>You can expect output similar to this (unfold to see details)</summary>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
 
    ```
    TODO
@@ -244,4 +244,8 @@ Once done, you need to start all components involved, these are:
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies` (for this use case `modelix-cloud-access` is required).
    MPS behaves just like the web client and obtains model knowledge from the `model-server`.
    MPS is thus not required but an optional client to try the collaborative 'real-time' feature.
+
+5. Explore the app at [http://localhost:????/](http://localhost:????/)
+   Note:
+     * Changes to the model from any client will automatically synchronize with all other clients, you will **not** have to manually reload the model.
 
