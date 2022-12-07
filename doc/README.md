@@ -81,6 +81,7 @@ Once done, you need to start all components involved, these are:
    ```
    <details>
    <summary>You can expect output similar to this (unfold to see details)</summary>
+   
    ```
    > Task :rest-api-json-bulk:run
    2022-12-07 10:12:38.874 [DefaultDispatcher-worker-11] INFO  ktor.application - Autoreload is disabled because the development mode is off.
@@ -88,7 +89,7 @@ Once done, you need to start all components involved, these are:
    2022-12-07 10:12:39.131 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:8090
    <===========--> 91% EXECUTING [2m 20s]
    > :rest-api-json-bulk:run
-   ```
+   ```   
    </details>
 
 3. The dashboard itself is a node application which can be run via (it will be a blocking call):
@@ -97,8 +98,8 @@ Once done, you need to start all components involved, these are:
    ```
    <details>
    <summary>You can expect output similar to this (unfold to see details)</summary>
+   
    ```
-
       > Task :spa-dashboard-angular:npmRun
 
       > angular.io-example@0.0.0 ng
