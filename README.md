@@ -78,7 +78,7 @@ This project allows you to run different use cases.
 Depending on the chosen use case, only a subset of the components in this repository are used.
 
 
-## Full System architecture
+## Full system architecture
 
 The full architecture includes components for multiple use cases.
 One does not need all components to realize individual use cases.
@@ -102,11 +102,11 @@ In the following a short overview is given on each component.
 
      [See the 'Generated API' section in the MPS README.md](mps/README.md#generated-api)
 
-  3. **Domain-specific openAPI**
+  3. **Domain-specific OpenAPI**
 
      In this example project, an extra domain-specific API layer is added which is defined in the [openAPI](https://www.openapis.org/) [specification](/openapi).
-     This layer is meant educational as there are no noteworthy abstractions happen in this definition.
-     It intends to show how one introduces a clearly defined domain-specific abstraction isolating the language engineering (meta-modeling) and the web development.
+     This layer is meant educational as no noteworthy abstractions from the language itself happen in this definition.
+     It intends to show how one introduces a clearly defined domain-specific abstraction decoupling the language engineering (meta-modeling) and the web development.
 
      We provide two implementations of the API layer: The [`rest-api-json-bulk`](/rest-api-json-bulk) and [`rest-api-model-server`](/rest-api-model-server) components.
 
@@ -114,9 +114,9 @@ In the following a short overview is given on each component.
 
 
 
-  4. **openAPI implementation**
+  4. **OpenAPI implementation**
 
-     This project provides two implementations of the [openAPI](openapi) domain abstraction.
+     This project provides two implementations of the [OpenAPI](openapi) domain abstraction.
 
      - A. MPS as a source (`rest-api-json-bulk` component)
 
@@ -142,7 +142,7 @@ In the following a short overview is given on each component.
   5. **Single-page application (SPA) Dashboard**
 
      The dashboard provides access to model knowledge through a browser.
-     As it is conforming to the openAPI specification, the dashboard is able to obtain the model content from both openAPI implementations.
+     As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backen implementations.
      However, the dashboard is consequently limited by the chosen API implementation.
 
      For more details, also see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
