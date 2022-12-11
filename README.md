@@ -22,10 +22,10 @@ The repository is a single gradle project to make building everything at once ea
 |--------------------------------------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------|
 | [1](mps/README.md#language)          | MPS + `cloud-plugin`                 | MPS language definition that is used by all examples. The MPS language structure is used to generate a Java API consumed by all examples.    | ✅      | [MPS](mps)                                                       |
 | [2](mps/README.md#generated-api)     | MPS, `api-gen`                       | Generated Java API from the MPS language.                                                                                                    | ✅      | [University.Schedule.api](mps/solutions/University.Schedule.api) |
-| [3](openapi/README.md)               | openAPI                              | A hand-crafted openAPI specification that defines domain-specific REST endpoints which expose the model contents.                            | ✅      | [openapi](openapi)                                               |
-| [4a](rest-api-json-bulk/README.md)   | MPS w/ `mps-json-bulk-access` + Ktor | An implementation of the openAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. | ✅      | [rest-api-json-bulk](rest-api-json-bulk)                         |
-| [4b](rest-api-model-server/README.md) | `model-server` + Quarkus             | An implementation of the openAPI that exposes the model contents REST. Obtains model data from a running `model-server`.                     | ✅      | [rest-api-model-server](rest-api-model-server)                   |
-| [5](spa-dashboard-angular/README.md) | Angular via REST                     | A single page app that realizes a read-only dashboard. Can connect to either of the openAPI implementations.                                 | ✅      | [spa-dashboard-angular](spa-dashboard-angular)                   |
+| [3](openapi/README.md)               | OpenAPI                              | A hand-crafted OpenAPI specification that defines domain-specific REST endpoints which expose the model contents.                            | ✅      | [Openapi](openapi)                                               |
+| [4a](rest-api-json-bulk/README.md)   | MPS w/ `mps-json-bulk-access` + Ktor | An implementation of the OpenAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. | ✅      | [rest-api-json-bulk](rest-api-json-bulk)                         |
+| [4b](rest-api-model-server/README.md) | `model-server` + Quarkus             | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`.                     | ✅      | [rest-api-model-server](rest-api-model-server)                   |
+| [5](spa-dashboard-angular/README.md) | Angular via REST                     | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations.                                 | ✅      | [spa-dashboard-angular](spa-dashboard-angular)                   |
 | `6`                                  | ❔ + websockets                       | A web application that allows editing of MPS models and realtime collaboration.                                                              | ❌      | collaboration-web-app                                            |
 | `7`                                  | docker / kubernetes                  |                                                                                                                                              | ❌      | deployment                                                       |
 
@@ -104,7 +104,7 @@ In the following a short overview is given on each component.
 
   3. **Domain-specific OpenAPI**
 
-     In this example project, an extra domain-specific API layer is added which is defined in the [openAPI](https://www.openapis.org/) [specification](/openapi).
+     In this example project, an extra domain-specific API layer is added which is defined in the [OpenAPI](https://www.openapis.org/) [specification](/openapi).
      This layer is meant educational as no noteworthy abstractions from the language itself happen in this definition.
      It intends to show how one introduces a clearly defined domain-specific abstraction decoupling the language engineering (meta-modeling) and the web development.
 
@@ -147,7 +147,7 @@ In the following a short overview is given on each component.
 
      For more details, also see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
 
-     Note: Requires an openAPI implementation to obtain model knowledge from.
+     Note: Requires an OpenAPI implementation to obtain model knowledge from.
 
   6. **'Real-time' collaboration web application**
 
@@ -170,7 +170,7 @@ This use case envisions a scenario where a system/service outside of MPS wants t
 
 The [dashboard](/spa-dashboard-angular), an angular app that serves the content of a model, implements such a simple application.
 In this simple case, a user does not need to edit these models from the browser.
-As a result, the simple openAPI implementation `rest-api-json-bulk` is used.
+As a result, the simple OpenAPI implementation `rest-api-json-bulk` is used.
 
 
 [<img src="/doc/images/uc-1-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1-read-only-dashboard.svg)

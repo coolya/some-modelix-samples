@@ -3,11 +3,11 @@
 [<img src="doc/spa-sample-1.png" width=45% >](doc/spa-sample-1.png)
 [<img src="doc/spa-sample-2.png" width=45% >](doc/spa-sample-2.png)
 
-This project provides a single page application which accesses an implementation of this projects [openapi](../openapi/openapi.yaml).
+This project provides a single page application which accesses an implementation of this projects [OpenAPI](../openapi/openapi.yaml).
 
 The idea here is to illustrate a read only use case where a system/service outside of MPS wants to consume the content of models defined in MPS.
 This dashboard is a single-page app showing content obtained from the intermediate REST APIs.
-A user cannot edit that models from the browser. 
+A user cannot edit that models from the browser.
 
 
 ## Building & Running
@@ -19,10 +19,10 @@ You can build this subproject individually from the parent folder via  all examp
 ./gradlew spa-dashboard-angular:build
 ```
 
-### 2. Start an openAPI implementation
+### 2. Start an OpenAPI implementation
 
 To run this application you will need a component which provides an API implementation conforming to the OpenAPI spec.
-Thus, you need to start one of the available openAPI implementations in this project:
+Thus, you need to start one of the available OpenAPI implementations in this project:
 
 - Either start the [rest-api-json-bulk](../rest-api-json-bulk) implementation,
 - or alternatively you can start the [rest-api-model-server](../rest-api-model-server) implementation.
