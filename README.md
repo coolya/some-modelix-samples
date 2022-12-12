@@ -131,7 +131,7 @@ In the following a short overview is given on each component.
      - B. model-server as a source (`rest-api-model-server` component)
 
           This API implementation provides access to the model by connecting to a running [`modelix model-server`](https://github.com/modelix/modelix.core/tree/main/model-server).
-          It is implemented using Quarkus and can provide **read an write access** to the underlying model.
+          It is implemented using Quarkus and can provide **read access** to the underlying model.
           This is realized using websockets exposed by the `model-server`.
 
           For more details, also see the [`rest-api-model-server` README.md](/rest-api-model-server/README.md) for details.
@@ -142,7 +142,7 @@ In the following a short overview is given on each component.
   5. **Single-page application (SPA) Dashboard**
 
      The dashboard provides access to model knowledge through a browser.
-     As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backen implementations.
+     As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backend implementations.
      However, the dashboard is consequently limited by the chosen API implementation.
 
      For more details, also see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
@@ -259,137 +259,5 @@ Once done, you need to start all components involved, these are:
 
    Note: Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
 
-
-
-## UC 2: Dashboard view and edit
-
-This use case envisions a room and lecture planner who needs to update and modify the schedule.
-Besides the obvious solution to simply use MPS to edit the model, an alternative requirement of this use case is the concurrent modification by different users via a browser and MPS alike.
-This use case thus covers a scenario where a system/service outside of MPS wants to consume and modify the content of models defined in MPS in "real-time" (similar to functionalities provided by shared pads or google docs).
-
-
-[<img src="/doc/images/uc-2-read-write-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-2-read-write-dashboard.svg)
-
-Note:
-  Unlike UC1, this use case **requires** the usage of a `model-server` and the `rest-api-model-server` because the alternative `rest-api-json-bulk` only provides read access to models.
-
-
-### How to start UC 2
-
-*Note: All gradle commands assume you are in the top level folder of this repository.*
-
-To start up the system as described in UC 2, you first have to have built the entire project :
-
-```
-./gradlew
-```
-
-Once done, you need to start all components involved, these are:
-
-1. **modelix model-server**: Model knowledge is supplied by the `model-sever` in this use case.
-   To avoid complicated setups, we simply start the model-server in memory and load the model content from the included dump file, all using gradle:
-
-   ```
-   ./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
-   ```
-
-   <details>
-   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
-
-   ```
-      ./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
-
-   > Task :model-server:run
-   18:33:16,185 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-   18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
-   18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml]
-   18:33:16,194 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@f4168b8 - URL [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml] is not of type file
-   18:33:16,269 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-   18:33:16,270 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [console]
-   18:33:16,272 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.modelix] to DEBUG
-   18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[org.modelix]
-   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
-   18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[ROOT]
-   18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
-   18:33:16,283 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@7ff95560 - Registering current configuration as safe fallback point
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
-   18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
-   18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
-   Values loaded from /home/nkoester/git/modelix/modelix-sample/model-server/courses.modelserver.dump (73)
-   18:33:16.364 [main] INFO  ktor.application - Autoreload is disabled because the development mode is off.
-   18:33:16.428 [main] INFO  ktor.application - Application started in 0.088 seconds.
-   18:33:16.518 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:28101
-   <===========--> 85% EXECUTING [7s]
-   > :model-server:run
-
-   ```
-
-   </details>
-
-2. **API layer**: The `rest-api-model-server` provides an abstraction of the model from the previously started `model-server`, simply run (it will be a blocking call):
-
-   ```
-   $ ./gradlew rest-api-model-server:quarkusDev
-   ```
-
-   <details>
-   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
-
-   ```
-    $ ./gradlew rest-api-model-server:quarkusDev
-
-   > Task :rest-api-model-server:quarkusDev
-   Listening for transport dt_socket at address: 5005
-   Press [h] for more options>NG [8s]
-   Tests paused
-   Press [r] to resume testing, [h] for more options>
-   Press [r] to resume testing, [o] Toggle test output, [h] for more options>
-   __  ____  __  _____   ___  __ ____  ______
-    --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
-    -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
-   --\___\_\____/_/ |_/_/|_/_/|_|\____/___/
-   2022-12-07 14:02:16,002 INFO  [io.und.websockets] (Quarkus Main Thread) UT026003: Adding annotated server endpoint class org.modelix.sample.restapimodelserver.UpdateSocket for path /updates
-        2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) rest-api-model-server unspecified on JVM (powered by Quarkus 2.14.0.Final) started in 2.922s. Listening on: http://localhost:8090
-   2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-   2022-12-07 14:02:16,465 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kotlin, resteasy-reactive, resteasy-reactive-jackson, smallrye-context-propagation, smallrye-openapi, swagger-ui, vertx, websockets, websockets-client]
-
-   <============-> 95% EXECUTING [16s]
-   > :rest-api-model-server:quarkusDev
-   ```
-
-   </details>
-
-3. **Collaborative web app**: ⚠  TODO: Not finished yet, still in development ⚠
-   <details>
-   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
-
-   ```
-   TODO
-   ```
-
-   </details>
-
-4. **MPS [optional]**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
-   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies` (for this use case `modelix-cloud-access` is required).
-   MPS behaves just like the web client and obtains model knowledge from the `model-server`.
-   MPS is thus not required but an optional client to try the collaborative 'real-time' feature.
-
-5. Explore the app at [http://localhost:????/](http://localhost:????/)
-
-   Note: Changes to the model from any client will automatically synchronize with all other clients, you will **not** have to manually reload the model.
 
 
