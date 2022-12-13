@@ -201,7 +201,7 @@ Once done, you need to start all components involved, these are:
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
    This includes the `json-bulk-model-access`, `api-gen`, and `modelix-cloud-access`.
 
-2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run (it will be a blocking call):
+2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
    ```
    $ ./gradlew rest-api-json-bulk:run
    ```
@@ -218,7 +218,7 @@ Once done, you need to start all components involved, these are:
    ```
    </details>
 
-3. **Dashboard**: The dashboard itself is a node application which can be run via (it will be a blocking call):
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
    ```
    $ ./gradlew spa-dashboard-angular:npmRun
    ```
@@ -332,7 +332,7 @@ Once done, you need to start all components involved, these are:
 
    </details>
 
-2. **API layer**: The `rest-api-model-server` provides an abstraction of the model from the previously started `model-server`, simply run (it will be a blocking call):
+2. **API layer**: The `rest-api-model-server` provides an abstraction of the model from the previously started `model-server`, simply run in a new terminal (it will be a blocking call):
 
    ```
    $ ./gradlew rest-api-model-server:quarkusDev
@@ -366,7 +366,7 @@ Once done, you need to start all components involved, these are:
    </details>
 
 
-3. **Dashboard**: The dashboard itself is a node application which can be run via (it will be a blocking call):
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
    ```
    $ ./gradlew spa-dashboard-angular:npmRun
    ```
@@ -409,7 +409,12 @@ Once done, you need to start all components involved, these are:
       ```
    </details>
 
-4. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
+4. **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
+   This includes the `cloud-access` plugin used.
+
+
+5. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
 
    Note: Changes to the model in MPS will automatically synchronize to the dashboard
 
