@@ -29,7 +29,7 @@ Thus, you need to start one of the available OpenAPI implementations in this pro
 
 Check the README of the corresponding project on how to start them.
 
-**Note**: Make sure you have the correct ports defined [in the API URLs](src/app/Container.ts). This app expects `8080` by default.
+**Note**: Make sure you have the correct ports defined [in the API URLs](src/app/Container.ts). This app expects `8090` by default.
 
 ### 3. Run the angular app
 

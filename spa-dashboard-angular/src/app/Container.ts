@@ -1,6 +1,6 @@
 export class URLLibrary {
-    public static API_URL_ROOMS = 'http://0.0.0.0:8080/rooms';
-    public static API_URL_LECTURES = 'http://localhost:8080/lectures';
+    public static API_URL_ROOMS = 'http://0.0.0.0:8090/rooms';
+    public static API_URL_LECTURES = 'http://localhost:8090/lectures';
 }
 
 export class Room {
