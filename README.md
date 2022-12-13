@@ -270,7 +270,7 @@ Once done, you need to start all components involved, these are:
 
 *Note: All gradle commands assume you are in the top level folder of this repository.*
 
-To start up the system as described in UC 1b, you first have to have built the entire project:
+To start up the system as described in UC 1b, you first have to have build the entire project:
 
 ```
 ./gradlew

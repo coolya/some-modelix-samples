@@ -52,7 +52,7 @@ $ curl -s -X GET "http://localhost:8090/rooms" -H  "accept: application/json" | 
 
 Alternatively you can now start the [dashboard](../spa-dashboard-angular) to consume this API.
 
-## Debug
+## Introspecting the websocket communication
 
 If you want to observe the updates sent on the web socket, you can use [`wscat`](https://github.com/websockets/wscat) to get some insights when updates are sent.
 
