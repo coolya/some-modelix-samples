@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, filter, map, tap} from 'rxjs/operators';
 
 import {Lecture, LectureList, URLLibrary} from '../Container';
 import {MessageService} from '../message.service';
+import { UpdateService } from '../update.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -13,7 +14,26 @@ export class LectureService {
 
     constructor(
         private http: HttpClient,
-        private messageService: MessageService) {
+        private messageService: MessageService,
+        private updateService: UpdateService) {
+    }
+
+    getLectureUpdates(): Observable<LectureList|Lecture> {
+        return this.updateService.updateSubject.pipe(
+            tap(console.log),
+            map(event => JSON.parse(event.data)),
+            map(data => {
+                if (data.whatChanged === "LECTURE_LIST") {
+                    return Object.assign(new LectureList(), data.change);
+                } else if (data.whatChanged === "LECTURE") {
+                    return Object.assign(new Lecture(), data.change);
+                } else {
+                    return null;
+                }
+            }),
+            filter(data => data !== null),
+            tap(console.log),
+        )
     }
 
     getLectureList(): Observable<LectureList> {

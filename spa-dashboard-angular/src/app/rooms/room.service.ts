@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {Observable, of, map} from 'rxjs';
+import {catchError, filter, tap} from 'rxjs/operators';
 
 import {Room, RoomList, URLLibrary} from '../Container';
 import {MessageService} from '../message.service';
+import { UpdateService } from '../update.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -13,7 +14,27 @@ export class RoomService {
 
     constructor(
         private http: HttpClient,
-        private messageService: MessageService) {
+        private messageService: MessageService,
+        private updateService: UpdateService) {
+    }
+
+
+    getRoomUpdates(): Observable<RoomList|Room> {
+        return this.updateService.updateSubject.pipe(
+            tap(console.log),
+            map(event => JSON.parse(event.data)),
+            map(data => {
+                if (data.whatChanged === "ROOM_LIST") {
+                    return Object.assign(new RoomList(), data.change);
+                } else if (data.whatChanged === "ROOM") {
+                    return Object.assign(new Room(), data.change);
+                } else {
+                    return null;
+                }
+            }),
+            filter(data => data !== null),
+            tap(console.log),
+        )
     }
 
     getRoomList(): Observable<RoomList> {
