@@ -5,7 +5,7 @@ plugins {
 val modelix_version: String by project
 
 dependencies {
-    implementation("org.modelix:model-server-fatjar:$modelix_version")
+    implementation("org.modelix:model-server:$modelix_version")
 }
 
 application {
