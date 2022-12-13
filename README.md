@@ -108,7 +108,7 @@ In the following a short overview is given on each component.
      This layer is meant educational as no noteworthy abstractions from the language itself happen in this definition.
      It intends to show how one introduces a clearly defined domain-specific abstraction decoupling the language engineering (meta-modeling) and the web development.
 
-     We provide two implementations of the API layer: The [`rest-api-json-bulk`](/rest-api-json-bulk) and [`rest-api-model-server`](/rest-api-model-server) components.
+     We provide two backends (i.e. implementations of the API layer): The [`rest-api-json-bulk`](/rest-api-json-bulk) and [`rest-api-model-server`](/rest-api-model-server) components.
 
      For more details, also see the ['OpenAPI of the Courses domain' section in the MPS README.md](openapi/README.md)
 
@@ -120,7 +120,7 @@ In the following a short overview is given on each component.
 
      - A. MPS as a source (`rest-api-json-bulk` component)
 
-          This API implementation provides access to the model by obtaining the model knowledge directly from a running MPS instance.
+          This backend provides access to the model by obtaining the model knowledge directly from a running MPS instance.
           It is implemented using ktor and connects to the [`json-bulk-model-access`](https://github.com/modelix/mps-rest-model-access) plugin running inside of MPS.
           This component can only provide **read only access** as the `json-bulk-model-access` is read only.
 
@@ -130,8 +130,9 @@ In the following a short overview is given on each component.
 
      - B. model-server as a source (`rest-api-model-server` component)
 
-          This API implementation provides access to the model by connecting to a running [`modelix model-server`](https://github.com/modelix/modelix.core/tree/main/model-server).
+          This backend provides access to the model by connecting to a running [`modelix model-server`](https://github.com/modelix/modelix.core/tree/main/model-server).
           It is implemented using Quarkus and can provide **read access** to the underlying model.
+          Additionally, a websocket for push notifications about ongoing model changes is provided.
           This is realized using websockets exposed by the `model-server`.
 
           For more details, also see the [`rest-api-model-server` README.md](/rest-api-model-server/README.md) for details.
@@ -143,7 +144,7 @@ In the following a short overview is given on each component.
 
      The dashboard provides access to model knowledge through a browser.
      As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backend implementations.
-     However, the dashboard is consequently limited by the chosen API implementation.
+     However, the dashboard is consequently limited by the chosen backend.
 
      For more details, also see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
 
