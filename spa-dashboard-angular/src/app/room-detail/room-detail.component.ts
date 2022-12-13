@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
 import {RoomService} from '../rooms/room.service';
-import {Room} from "../Container";
+import {Room, RoomList} from "../Container";
 
 @Component({
     selector: 'app-room-detail',
@@ -25,8 +25,23 @@ export class RoomDetailComponent implements OnInit {
 
     getRoom(): void {
         const roomRef: string = this.route.snapshot.paramMap.get('roomRef')!
-        this.roomService.getRoom(roomRef).subscribe(
-            room => this.room = room);
+        this.roomService.getRoom(roomRef).subscribe(room => this.room = room);
+        this.roomService.getRoomUpdates().subscribe(data => {
+            if (data instanceof RoomList) {
+                const roomFromList = data.rooms.find(item => item.roomRef === roomRef)
+                if (roomFromList === undefined) {
+                    // Room got deleted
+                    this.room = undefined;
+                } else {
+                    // Room (re-)appeared
+                    this.room = roomFromList;
+                }
+            } else if (data instanceof Room) {
+                if (data.roomRef === roomRef) {
+                    this.room = data;
+                }
+            }
+        });
     }
 
     goBack(): void {
