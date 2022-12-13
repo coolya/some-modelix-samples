@@ -175,10 +175,12 @@ In this simple case, a user does not need to edit these models from the browser.
 There are two variations of this use case:
 
 - a. No automatic update in the SPA using the simple `rest-api-json-bulk` backend and MPS
+
   [<img src="/doc/images/uc-1a-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1a-read-only-dashboard.svg)
 
 
 - b. With automatic updates in the SPA using the more complex `rest-api-model-server` backend and the `model-server`
+
   [<img src="/doc/images/uc-1b-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1b-read-only-dashboard.svg)
 
 
