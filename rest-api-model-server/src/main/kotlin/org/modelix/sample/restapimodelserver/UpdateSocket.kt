@@ -1,13 +1,6 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.structure.Courses
-import University.Schedule.structure.Lecture
-import University.Schedule.structure.Room
-import University.Schedule.structure.Rooms
-import University.Schedule.structure.concepts.CoursesConcept
-import University.Schedule.structure.concepts.LectureConcept
-import University.Schedule.structure.concepts.RoomConcept
-import University.Schedule.structure.concepts.RoomsConcept
+import University.Schedule.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.util.collections.*
 import org.modelix.model.api.IBranchListener
@@ -71,10 +64,10 @@ class UpdateSocket(private val repo: ReplicatedRepository, private val mapper: O
         val node = PNodeAdapter(nodeId, repo.branch)
         area.executeRead {
             when (node.concept) {
-                is RoomConcept -> broadcast(ChangeNotification(WhatChanged.ROOM, Room(node).toJson()))
-                is RoomsConcept -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, Rooms(node).toJson()))
-                is LectureConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE, Lecture(node).toJson()))
-                is CoursesConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, Courses(node).toJson()))
+                is C_Room -> broadcast(ChangeNotification(WhatChanged.ROOM, University.Schedule.L_University_Schedule.Room.wrap(node).toJson()))
+                is C_Rooms -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, University.Schedule.L_University_Schedule.Rooms.wrap(node).toJson()))
+                is C_Lecture -> broadcast(ChangeNotification(WhatChanged.LECTURE, L_University_Schedule.Lecture.wrap(node).toJson()))
+                is C_Courses -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, University.Schedule.L_University_Schedule.Courses.wrap(node).toJson()))
                 else -> logger.warn("Could not handle change")
             }
         }

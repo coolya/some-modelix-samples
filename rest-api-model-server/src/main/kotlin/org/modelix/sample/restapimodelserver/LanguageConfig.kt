@@ -1,14 +1,11 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.api.gen.University_Schedule
-import University.Schedule.api.gen.jetbrains_mps_lang_core
-import University.Schedule.api.gen.org_modelix_model_repositoryconcepts
+import University.Schedule.GeneratedLanguages
 import io.quarkus.runtime.ShutdownEvent
 import io.quarkus.runtime.StartupEvent
 import org.modelix.model.api.INodeReference
+import org.modelix.model.api.INodeReferenceSerializer
 import org.modelix.model.api.PNodeReference
-import org.modelix.model.lazy.INodeReferenceSerializer
-import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.modelix.mps.apigen.runtime.MPSNodeReferenceDeserializer
 import javax.enterprise.context.ApplicationScoped
 import javax.enterprise.event.Observes
@@ -21,14 +18,12 @@ import javax.enterprise.event.Observes
 class LanguageConfig {
 
     fun configure(@Observes event: StartupEvent) {
-        MPSLanguageRegistry.register(jetbrains_mps_lang_core.INSTANCE)
-        MPSLanguageRegistry.register(University_Schedule.INSTANCE)
-        MPSLanguageRegistry.register(org_modelix_model_repositoryconcepts.INSTANCE)
+        GeneratedLanguages.languages.forEach { it.register() }
 
         // Add our custom serializer for the REST representation of nodes
         INodeReferenceSerializer.register(serializer)
         // This serializer has to be registered to for being able to resolve node references inside a model
-        INodeReferenceSerializer.register(MPSNodeReferenceDeserializer.Companion)
+        //INodeReferenceSerializer.register(MPSNodeReferenceDeserializer.Companion)
     }
 
     /**

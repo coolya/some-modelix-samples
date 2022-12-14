@@ -24,9 +24,12 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("org.modelix:model-client:$modelix_version")
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
-    implementation(project(":mps:solutions:University.Schedule.api"))
+
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+
+    implementation(project(":mps:metamodel"))
+    implementation("org.modelix:metamodel-runtime:$modelix_version")
 }
 
 val basePackage = "org.modelix.sample.restapimodelserver"

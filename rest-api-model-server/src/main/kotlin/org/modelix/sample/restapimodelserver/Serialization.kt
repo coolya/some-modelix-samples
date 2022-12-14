@@ -1,35 +1,36 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.structure.Courses
-import University.Schedule.structure.Rooms
-import org.modelix.model.lazy.INodeReferenceSerializer
+import University.Schedule.*
+import org.modelix.model.api.INodeReferenceSerializer
+import org.modelix.model.api.serialize
+
 
 /**
  * A Kotlin extension function to convert a model lecture to its JSON representation enforced by the generated
  * data class [Lecture].
  */
-fun University.Schedule.structure.Lecture.toJson() = Lecture(
-    lectureRef = INodeReferenceSerializer.serialize(this.reference),
-    name = this.properties.name ?: "",
-    description = this.properties.description ?: "",
-    maxParticipants = this.properties.maxParticipants ?: 0,
-    room = INodeReferenceSerializer.serialize(this.references.room.reference),
+fun N_Lecture.toJson() = Lecture(
+        lectureRef = this.unwrap().reference.serialize(),
+        name = this.name.toString(),
+        description = this.description.toString(),
+        maxParticipants = this.maxParticipants!!.toInt(),
+        room = this.room!!.unwrap().reference.serialize(),
 )
 
 /**
  * A Kotlin extension function to convert a model room to its JSON representation enforced by the generated
  * data class [Room].
  */
-fun University.Schedule.structure.Room.toJson() = Room(
-    roomRef = INodeReferenceSerializer.serialize(this.reference),
-    name = this.properties.name ?: "",
-    maxPlaces = this.properties.maxPlaces ?: 0,
-    hasRemoteEquipment = this.properties.hasRemoteEquipment ?: false
+fun N_Room.toJson() = Room(
+    roomRef = this.unwrap().reference.serialize(),
+        name = this.name.toString(),
+    maxPlaces = this.maxPlaces!!.toInt(),
+    hasRemoteEquipment = this.hasRemoteEquipment.toBoolean()
 )
 
-fun Rooms.toJson() = RoomList(this.children.rooms.map { it.toJson() })
+fun N_Rooms.toJson() = RoomList(this.rooms.map { it.toJson() })
 
-fun Courses.toJson() = LectureList(this.children.lectures.map { it.toJson() })
+fun N_Courses.toJson() = LectureList(this.lectures.map { it.toJson() })
 
 enum class WhatChanged {
     ROOM,
