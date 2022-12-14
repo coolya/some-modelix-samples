@@ -2,6 +2,7 @@ import de.itemis.mps.gradle.BuildLanguages
 
 plugins {
     java
+    id("org.modelix.metamodel.gradle")
 }
 
 buildscript {
@@ -32,7 +33,6 @@ dependencies {
     buildDependencies("org.apache.ant:ant-junit:1.10.12")
     mps("com.jetbrains:mps:$mps_version")
     mpsDependencies("de.itemis.mps:extensions:$mpsExtensions_version")
-    mpsDependencies("org.modelix.mps.api-gen:mps-plugin:$api_gen_version")
     mpsDependencies("org.modelix.mps-json-bulk-model-access:mps-plugin:$json_bulk_access_version")
     mpsDependencies("org.modelix:mps-model-plugin:$mps_model_plugin_version")
 }
@@ -81,15 +81,19 @@ val buildLanguages by tasks.registering(BuildLanguages::class) {
     dependsOn(setup)
 }
 
-
-val genApi by tasks.registering(BuildLanguages::class) {
-    group = "build"
-    description = "Generate the API classes"
-    script = "$projectDir/build-gen-api.xml"
-    inputs.file(file("$projectDir/build-gen-api.xml"))
-    inputs.files(fileTree("$projectDir/solutions").include("**/*.mps", "**/*.msd")).withPropertyName("mps-solution")
-    outputs.dir("$projectDir/solutions/University.Schedule.api/source_gen")
-    dependsOn(buildLanguages)
-}
-
 tasks.getByName("build").dependsOn(buildLanguages)
+
+// Generate the API classes
+metamodel {
+    dependsOn(extractMps)
+    mpsHome = mpsDir
+
+    modulesFrom(projectDir.resolve("languages"))
+    modulesFrom(projectDir.resolve("solutions"))
+    includeNamespace("University.Schedule.sandbox")
+    includeLanguage("University.Schedule")
+
+    kotlinDir = project(":mps:metamodel").projectDir.resolve("src/main/kotlin")
+
+    registrationHelperName = "University.Schedule.GeneratedLanguages"
+}

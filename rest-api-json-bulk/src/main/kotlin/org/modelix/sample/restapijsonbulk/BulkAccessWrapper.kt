@@ -1,9 +1,6 @@
-import University.Schedule.api.gen.University_Schedule
-import University.Schedule.api.gen.jetbrains_mps_lang_core
+import University.Schedule.GeneratedLanguages
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
-import org.modelix.model.lazy.INodeReferenceSerializer
-import org.modelix.mps.apigen.runtime.MPSLanguageRegistry
 import org.modelix.mps.rest.model.access.api.ModelView
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,7 +13,8 @@ object BulkAccessWrapper {
     private lateinit var modelsToLoad: List<ModelView>
 
     suspend fun initialize(host: String, port: Int, models: List<String>) {
-        registerLanguages()
+
+        GeneratedLanguages.languages.forEach { it.register() }
 
         client = MPSRemoteClient(host, port)
         modelsToLoad = client.getViewModels().filter { models.contains(it.name) }
@@ -30,12 +28,6 @@ object BulkAccessWrapper {
             )
             return
         }
-        INodeReferenceSerializer.register(ReferenceSerializer.Companion)
-    }
-
-    private fun registerLanguages() {
-        MPSLanguageRegistry.register(jetbrains_mps_lang_core.INSTANCE)
-        MPSLanguageRegistry.register(University_Schedule.INSTANCE)
     }
 
     val loadRoots = suspend { modelsToLoad.map { it.modelId }.let { client.loadModelAreas(it) }.map { it.getRoot() } }
