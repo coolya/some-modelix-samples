@@ -3,8 +3,8 @@ plugins {
     `java-library`
 }
 
+val modelix_version: String by project
 val api_gen_version: String by project
-val model_api_version: String by project
 val json_bulk_access_version: String by project
 
 repositories {
@@ -24,7 +24,7 @@ dependencies {
     implementation("org.modelix:model-api:1.3.2")
     implementation("org.modelix.mps-json-bulk-model-access:model-client:$json_bulk_access_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-api:$json_bulk_access_version")
-    implementation("org.modelix:model-api-jvm:$model_api_version")
+    implementation("org.modelix:model-api-jvm:$modelix_version")
 }
 
 sourceSets {
