@@ -1,16 +1,16 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.C_Courses
-import University.Schedule.C_Lecture
-import University.Schedule.C_Room
-import University.Schedule.L_University_Schedule
+import University.Schedule.*
 import jetbrains.mps.lang.core.C_BaseConcept
+import jetbrains.mps.lang.core.N_BaseConcept
 import org.modelix.metamodel.ITypedConcept
+import org.modelix.metamodel.typed
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
 import org.modelix.model.api.INodeReferenceSerializer
 import org.modelix.model.area.PArea
 import org.modelix.model.client.ReplicatedRepository
+import org.modelix.model.repositoryconcepts.N_Repository
 import javax.ws.rs.BadRequestException
 import javax.ws.rs.NotFoundException
 
@@ -29,10 +29,8 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         }
     }
 
-    private fun allModelRoots(area: PArea): List<C_BaseConcept> {
-
-        return Repository(area.getRoot()).children.modules.flatMap { it.children.models }
-            .flatMap { it.children.rootNodes }
+    private fun allModelRoots(area: PArea): List<N_BaseConcept> {
+        return (area.getRoot().typed() as N_Repository).modules.flatMap { it.models }.flatMap { it.rootNodes }
     }
 
     /**
@@ -83,11 +81,11 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
-        University.Schedule.L_University_Schedule.Courses.wrap(allModelRoots(area).first { it is C_Courses }.iNode).toJson()
+        University.Schedule.L_University_Schedule.Courses.wrap(allModelRoots(area).first { it is C_Courses }.unwrap()).toJson()
     }
 
     override fun listRooms(): RoomList = executeRead { area ->
-        Rooms(allModelRoots(area).first { it is Rooms }.iNode).toJson()
+        University.Schedule.L_University_Schedule.Rooms.wrap(allModelRoots(area).first { it is N_Rooms }.unwrap()).toJson()
     }
 
 }

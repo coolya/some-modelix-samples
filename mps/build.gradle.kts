@@ -93,6 +93,9 @@ metamodel {
     includeNamespace("University.Schedule.sandbox")
     includeLanguage("University.Schedule")
 
+    modulesFrom(projectDir.resolve("build/dependencies"))
+    includeLanguage("org.modelix.model.repositoryconcepts")
+
     kotlinDir = project(":mps:metamodel").projectDir.resolve("src/main/kotlin")
 
     registrationHelperName = "University.Schedule.GeneratedLanguages"
