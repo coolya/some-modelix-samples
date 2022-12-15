@@ -6,6 +6,8 @@ pluginManagement {
 
     val modelix_version: String by settings
 
+    val modelix_metamodel_version: String by settings
+
     repositories {
         mavenCentral()
         gradlePluginPortal()
@@ -15,7 +17,7 @@ pluginManagement {
     plugins {
         id(quarkus_plugin_id) version quarkus_plugin_version
 
-        id("org.modelix.metamodel.gradle") version modelix_version
+        id("org.modelix.metamodel.gradle") version modelix_metamodel_version
     }
 }
 

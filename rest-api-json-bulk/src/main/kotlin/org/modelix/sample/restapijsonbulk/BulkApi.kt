@@ -49,7 +49,7 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
                     description = lectureInstance.description!!,
                     lectureRef = RouteHelper.urlEncode(lectureInstance.unwrap().reference.serialize()),
                     room = RouteHelper.urlEncode(lectureInstance.room!!.unwrap().reference.serialize()),
-                    maxParticipants = lectureInstance.maxParticipants!!.toInt())
+                    maxParticipants = lectureInstance.maxParticipants)
         })
         call.respond(roomList)
     }
@@ -58,10 +58,10 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
         try {
             val lectureRef = INodeReferenceSerializer.deserialize(call.parameters["lectureRef"]!!.decodeURLPart())
             val iNode = resolve(lectureRef)!!
-            val instance = iNode.typed() as N_Lecture
+            val instance = iNode.typed<N_Lecture>()
 
             val lecture = Lecture(name = instance.name!!,
-                    maxParticipants = instance.maxParticipants!!.toInt(),
+                    maxParticipants = instance.maxParticipants,
                     lectureRef = RouteHelper.urlEncode(instance.unwrap().reference.serialize()),
                     room = RouteHelper.urlEncode(instance.room!!.unwrap().reference.serialize()),
                     description = instance.description!!
@@ -80,9 +80,9 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
 
         val roomList = RoomList(rooms = allRooms.map { roomInstance ->
             Room(name = roomInstance.name!!,
-                    maxPlaces = roomInstance.maxPlaces!!.toInt(),
+                    maxPlaces = roomInstance.maxPlaces,
                     roomRef = RouteHelper.urlEncode(roomInstance.unwrap().reference.serialize()),
-                    hasRemoteEquipment = roomInstance.hasRemoteEquipment.toBoolean())
+                    hasRemoteEquipment = roomInstance.hasRemoteEquipment)
         })
         call.respond(roomList)
     }
@@ -92,11 +92,12 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
         try {
             val roomRef = INodeReferenceSerializer.deserialize(call.parameters["roomRef"]!!.decodeURLPart())
             val iNode = resolve(roomRef)!!
-            val instance = iNode.typed() as N_Room
+            val instance = iNode.typed<N_Room>()
+
             val room = Room(name = instance.name!!,
                     roomRef = RouteHelper.urlEncode(instance.unwrap().reference.serialize()),
-                    maxPlaces = instance.maxPlaces!!.toInt(),
-                    hasRemoteEquipment = instance.hasRemoteEquipment.toBoolean()
+                    maxPlaces = instance.maxPlaces,
+                    hasRemoteEquipment = instance.hasRemoteEquipment
             )
             call.respond(room)
         } catch (e: RuntimeException) {

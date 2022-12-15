@@ -2,8 +2,8 @@ plugins {
     kotlin("jvm")
 }
 
-val modelix_version: String by project
+val modelix_metamodel_version: String by project
 
 dependencies {
-    implementation("org.modelix:metamodel-runtime:$modelix_version")
+    implementation("org.modelix:metamodel-runtime:$modelix_metamodel_version")
 }

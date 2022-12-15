@@ -14,7 +14,7 @@ object BulkAccessWrapper {
 
     suspend fun initialize(host: String, port: Int, models: List<String>) {
 
-        GeneratedLanguages.languages.forEach { it.register() }
+        GeneratedLanguages.registerAll()
 
         client = MPSRemoteClient(host, port)
         modelsToLoad = client.getViewModels().filter { models.contains(it.name) }

@@ -1,7 +1,6 @@
 package org.modelix.sample.restapimodelserver
 
 import University.Schedule.*
-import jetbrains.mps.lang.core.C_BaseConcept
 import jetbrains.mps.lang.core.N_BaseConcept
 import org.modelix.metamodel.ITypedConcept
 import org.modelix.metamodel.typed
@@ -30,7 +29,7 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
     }
 
     private fun allModelRoots(area: PArea): List<N_BaseConcept> {
-        return (area.getRoot().typed() as N_Repository).modules.flatMap { it.models }.flatMap { it.rootNodes }
+        return (area.getRoot().typed<N_Repository>()).modules.flatMap { it.models }.flatMap { it.rootNodes }
     }
 
     /**
@@ -58,8 +57,8 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
      * node from the REST client's point of view.
      */
     private inline fun <reified ConceptType : ITypedConcept> ensureIsDesiredConcept(
-        node: INode,
-        refString: String
+            node: INode,
+            refString: String
     ) {
         if (node.concept !is ConceptType) {
             throw NotFoundException("No entity known with ref $refString")

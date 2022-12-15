@@ -7,12 +7,13 @@ plugins {
 val ktor_version : String by project
 val json_bulk_access_version: String by project
 val modelix_version: String by project
+val modelix_metamodel_version: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
 dependencies {
     implementation(project(":mps:metamodel"))
-    implementation("org.modelix:metamodel-runtime:$modelix_version")
+    implementation("org.modelix:metamodel-runtime:$modelix_metamodel_version")
 
     implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("io.ktor:ktor-server-default-headers:$ktor_version")
