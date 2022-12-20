@@ -30,9 +30,9 @@ fun N_Room.toJson() = Room(
         hasRemoteEquipment = this.hasRemoteEquipment
 )
 
-fun N_Rooms.toJson() = RoomList(this.rooms.map { it.toJson() })
+fun List<N_Room>.toJson() = RoomList(this.map { it.toJson() })
 
-fun N_Courses.toJson() = LectureList(this.lectures.map { it.toJson() })
+fun List<N_Lecture>.toJson() = LectureList(this.map { it.toJson() })
 
 enum class WhatChanged {
     ROOM,

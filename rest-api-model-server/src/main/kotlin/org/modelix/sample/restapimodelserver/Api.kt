@@ -9,7 +9,7 @@ import org.modelix.model.api.INodeReference
 import org.modelix.model.api.INodeReferenceSerializer
 import org.modelix.model.area.PArea
 import org.modelix.model.client.ReplicatedRepository
-import org.modelix.model.repositoryconcepts.N_Repository
+import org.modelix.model.repositoryconcepts.N_Module
 import javax.ws.rs.BadRequestException
 import javax.ws.rs.NotFoundException
 
@@ -28,8 +28,8 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         }
     }
 
-    private fun allModelRoots(area: PArea): List<N_BaseConcept> {
-        return (area.getRoot().typed<N_Repository>()).modules.flatMap { it.models }.flatMap { it.rootNodes }
+    private fun getAllRootNodes(area: PArea): List<N_BaseConcept> {
+        return area.getRoot().allChildren.map { it.typed() }.filterIsInstance<N_Module>().flatMap { it.models }.flatMap { it.rootNodes }
     }
 
     /**
@@ -68,8 +68,7 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
     override fun getLectureByRef(lectureRef: String): Lecture = executeRead { area ->
         val node = resolveRef(lectureRef, area)
         ensureIsDesiredConcept<C_Lecture>(node, lectureRef)
-
-        L_University_Schedule.Lecture.wrap(node).toJson()
+        node.typed<N_Lecture>().toJson()
     }
 
     override fun getRoomByRef(roomRef: String): Room = executeRead { area ->
@@ -80,11 +79,11 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
-        University.Schedule.L_University_Schedule.Courses.wrap(allModelRoots(area).first { it is C_Courses }.unwrap()).toJson()
+        getAllRootNodes(area).filterIsInstance<N_Courses>().flatMap { it.lectures }.toJson()
     }
 
     override fun listRooms(): RoomList = executeRead { area ->
-        University.Schedule.L_University_Schedule.Rooms.wrap(allModelRoots(area).first { it is N_Rooms }.unwrap()).toJson()
+        getAllRootNodes(area).filterIsInstance<N_Rooms>().flatMap { it.rooms }.toJson()
     }
 
 }
