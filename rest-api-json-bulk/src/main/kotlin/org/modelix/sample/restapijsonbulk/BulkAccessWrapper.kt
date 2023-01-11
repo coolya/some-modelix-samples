@@ -1,6 +1,7 @@
 import University.Schedule.GeneratedLanguages
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
+import org.modelix.model.api.INodeReferenceSerializer
 import org.modelix.mps.rest.model.access.api.ModelView
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,6 +16,7 @@ object BulkAccessWrapper {
     suspend fun initialize(host: String, port: Int, models: List<String>) {
 
         GeneratedLanguages.registerAll()
+        INodeReferenceSerializer.register(ReferenceSerializer.Companion)
 
         client = MPSRemoteClient(host, port)
         modelsToLoad = client.getViewModels().filter { models.contains(it.name) }
