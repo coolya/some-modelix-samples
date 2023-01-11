@@ -3,7 +3,9 @@ package org.modelix.sample.restapimodelserver
 import University.Schedule.N_Lecture
 import University.Schedule.N_Room
 import org.modelix.model.api.serialize
+import org.slf4j.LoggerFactory
 
+private val logger = LoggerFactory.getLogger("Serialization")
 
 /**
  * A Kotlin extension function to convert a model lecture to its JSON representation enforced by the generated
@@ -28,9 +30,23 @@ fun N_Room.toJson() = Room(
     hasRemoteEquipment = this.hasRemoteEquipment
 )
 
-fun List<N_Room>.toJson() = RoomList(this.map { it.toJson() })
+fun List<N_Room>.toJson() = RoomList(this.mapNotNull {
+    try {
+        it.toJson()
+    } catch (e: RuntimeException){
+        logger.warn("Ignoring Room with invalid content: ${e.message}")
+        return@mapNotNull null
+    }
+})
 
-fun List<N_Lecture>.toJson() = LectureList(this.map { it.toJson() })
+fun List<N_Lecture>.toJson() = LectureList(this.mapNotNull {
+    try {
+        it.toJson()
+    } catch (e: RuntimeException){
+        logger.warn("Ignoring Lecture with invalid content: ${e.message}")
+        return@mapNotNull null
+    }
+})
 
 enum class WhatChanged {
     ROOM,
