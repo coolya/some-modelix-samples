@@ -49,32 +49,16 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         return ref.resolveNode(area) ?: throw NotFoundException("No entity known with ref $refString")
     }
 
-    /**
-     * Ensures that the given [node] is of concept [ConceptType]. Otherwise, a [NotFoundException] is thrown.
-     *
-     * This method is used as a safety net in GET implementations for a specific reference of a certain type.
-     * If the provided reference resolved to a node of a different concept, this is similar to not finding any
-     * node from the REST client's point of view.
-     */
-    private inline fun <reified ConceptType> ensureIsDesiredConcept(
-        node: INode,
-        refString: String
-    ) {
-            if (node.concept !is ConceptType) {
-            throw NotFoundException("No entity known with ref $refString")
-        }
-    }
-
     override fun getLectureByRef(lectureRef: String): Lecture = executeRead { area ->
         val node = resolveRef(lectureRef, area)
-        ensureIsDesiredConcept<_C_Impl_Lecture>(node, lectureRef)
-        University.Schedule.L_University_Schedule.Lecture.wrap(node).toJson()
+        val lecture = node.typed<N_Lecture>()
+        lecture.toJson()
    }
 
     override fun getRoomByRef(roomRef: String): Room = executeRead { area ->
         val node = resolveRef(roomRef, area)
-        ensureIsDesiredConcept<_C_Impl_Room>(node, roomRef)
-        University.Schedule.L_University_Schedule.Room.wrap(node).toJson()
+        val room = node.typed<N_Room>()
+        room.toJson()
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
