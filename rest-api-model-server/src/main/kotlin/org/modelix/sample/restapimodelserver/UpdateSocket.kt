@@ -3,6 +3,7 @@ package org.modelix.sample.restapimodelserver
 import University.Schedule.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.util.collections.*
+import org.modelix.metamodel.typed
 import org.modelix.model.api.IBranchListener
 import org.modelix.model.api.ITree
 import org.modelix.model.api.ITreeChangeVisitor
@@ -63,11 +64,11 @@ class UpdateSocket(private val repo: ReplicatedRepository, private val mapper: O
         val area = PArea(repo.branch)
         val node = PNodeAdapter(nodeId, repo.branch)
         area.executeRead {
-            when (node.concept) {
-                is C_Room -> broadcast(ChangeNotification(WhatChanged.ROOM, University.Schedule.L_University_Schedule.Room.wrap(node).toJson()))
-                is C_Rooms -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, University.Schedule.L_University_Schedule.Rooms.wrap(node).rooms.toList().toJson()))
-                is C_Lecture -> broadcast(ChangeNotification(WhatChanged.LECTURE, L_University_Schedule.Lecture.wrap(node).toJson()))
-                is C_Courses -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, University.Schedule.L_University_Schedule.Courses.wrap(node).lectures.toList().toJson()))
+            when (node.typed()) {
+                is N_Room -> broadcast(ChangeNotification(WhatChanged.ROOM, node.typed<N_Room>().toJson()))
+                is N_Rooms -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, node.typed<N_Rooms>().rooms.toList().toJson()))
+                is N_Lecture -> broadcast(ChangeNotification(WhatChanged.LECTURE, node.typed<N_Lecture>().toJson()))
+                is N_Courses -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, node.typed<N_Courses>().lectures.toList().toJson()))
                 else -> logger.warn("Could not handle change")
             }
         }
