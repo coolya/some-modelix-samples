@@ -1,8 +1,5 @@
 package org.modelix.sample.restapijsonbulk.models.apis
 
-//import University.Schedule.structure.Courses
-//import University.Schedule.structure.Rooms
-//import jetbrains.mps.lang.core.structure.BaseConcept
 import University.Schedule.N_Courses
 import University.Schedule.N_Lecture
 import University.Schedule.N_Room

@@ -1,9 +1,7 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.N_Courses
 import University.Schedule.N_Lecture
 import University.Schedule.N_Room
-import University.Schedule.N_Rooms
 import org.modelix.model.api.serialize
 
 
@@ -12,11 +10,11 @@ import org.modelix.model.api.serialize
  * data class [Lecture].
  */
 fun N_Lecture.toJson() = Lecture(
-        lectureRef = this.unwrap().reference.serialize(),
-        name = this.name!!,
-        description = this.description!!,
-        maxParticipants = this.maxParticipants,
-        room = this.room!!.unwrap().reference.serialize(),
+    lectureRef = this.unwrap().reference.serialize(),
+    name = this.name,
+    description = this.description,
+    maxParticipants = this.maxParticipants,
+    room = this.room.unwrap().reference.serialize(),
 )
 
 /**
@@ -24,10 +22,10 @@ fun N_Lecture.toJson() = Lecture(
  * data class [Room].
  */
 fun N_Room.toJson() = Room(
-        roomRef = this.unwrap().reference.serialize(),
-        name = this.name!!,
-        maxPlaces = this.maxPlaces,
-        hasRemoteEquipment = this.hasRemoteEquipment
+    roomRef = this.unwrap().reference.serialize(),
+    name = this.name,
+    maxPlaces = this.maxPlaces,
+    hasRemoteEquipment = this.hasRemoteEquipment
 )
 
 fun List<N_Room>.toJson() = RoomList(this.map { it.toJson() })
@@ -42,6 +40,6 @@ enum class WhatChanged {
 }
 
 data class ChangeNotification(
-        val whatChanged: WhatChanged,
-        val change: Any
+    val whatChanged: WhatChanged,
+    val change: Any
 )

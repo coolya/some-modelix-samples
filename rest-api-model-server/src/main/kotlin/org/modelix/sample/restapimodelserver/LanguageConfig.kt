@@ -18,12 +18,12 @@ import javax.enterprise.event.Observes
 class LanguageConfig {
 
     fun configure(@Observes event: StartupEvent) {
-        GeneratedLanguages.languages.forEach { it.register() }
+        GeneratedLanguages.registerAll()
 
         // Add our custom serializer for the REST representation of nodes
         INodeReferenceSerializer.register(serializer)
         // This serializer has to be registered to for being able to resolve node references inside a model
-        //INodeReferenceSerializer.register(MPSNodeReferenceDeserializer.Companion)
+        INodeReferenceSerializer.register(MPSNodeReferenceDeserializer.Companion)
     }
 
     /**
