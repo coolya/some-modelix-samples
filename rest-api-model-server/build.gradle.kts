@@ -11,7 +11,6 @@ val quarkus_platform_version: String by project
 val ktor_version: String by project
 val api_gen_version: String by project
 val modelix_version: String by project
-val modelix_metamodel_version: String by project
 
 
 dependencies {
@@ -31,7 +30,6 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
     implementation(project(":mps:metamodel"))
-    implementation("org.modelix:metamodel-runtime:$modelix_metamodel_version")
 }
 
 val basePackage = "org.modelix.sample.restapimodelserver"
