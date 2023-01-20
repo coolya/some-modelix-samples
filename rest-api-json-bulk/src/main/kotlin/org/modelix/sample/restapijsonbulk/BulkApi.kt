@@ -41,14 +41,14 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             (it.allChildren.map { it.typed() })
         }.filterIsInstance<N_Courses>().flatMap { it.lectures }
 
-        val roomList = LectureList(lectures = allLectures.map { lecture ->
-            Lecture(name = lectureInstance.name,
-                    description = lectureInstance.description,
-                    lectureRef = RouteHelper.urlEncode(lectureInstance.unwrap().reference.serialize()),
-                    room = RouteHelper.urlEncode(lectureInstance.room.unwrap().reference.serialize()),
-                    maxParticipants = lectureInstance.maxParticipants)
+        val lectureList = LectureList(lectures = allLectures.map { lecture ->
+            Lecture(name = lecture.name,
+                    description = lecture.description,
+                    lectureRef = RouteHelper.urlEncode(lecture.unwrap().reference.serialize()),
+                    room = RouteHelper.urlEncode(lecture.room.unwrap().reference.serialize()),
+                    maxParticipants = lecture.maxParticipants)
         })
-        call.respond(roomList)
+        call.respond(lectureList)
     }
 
     get<Paths.getLecturesLectureRef> {
@@ -75,11 +75,11 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             (it.allChildren.map { it.typed() })
         }.filterIsInstance<N_Rooms>().flatMap { it.rooms }
 
-        val roomList = RoomList(rooms = allRooms.map { roomInstance ->
-            Room(name = roomInstance.name,
-                    maxPlaces = roomInstance.maxPlaces,
-                    roomRef = RouteHelper.urlEncode(roomInstance.unwrap().reference.serialize()),
-                    hasRemoteEquipment = roomInstance.hasRemoteEquipment)
+        val roomList = RoomList(rooms = allRooms.map { room ->
+            Room(name = room.name,
+                    maxPlaces = room.maxPlaces,
+                    roomRef = RouteHelper.urlEncode(room.unwrap().reference.serialize()),
+                    hasRemoteEquipment = room.hasRemoteEquipment)
         })
         call.respond(roomList)
     }
