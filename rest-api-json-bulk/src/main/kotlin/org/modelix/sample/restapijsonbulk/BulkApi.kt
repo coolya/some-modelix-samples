@@ -41,7 +41,7 @@ fun Route.BulkApi(loadRoots: suspend () -> List<INode>, resolve: suspend (INodeR
             (it.allChildren.map { it.typed() })
         }.filterIsInstance<N_Courses>().flatMap { it.lectures }
 
-        val roomList = LectureList(lectures = allLectures.map { lectureInstance ->
+        val roomList = LectureList(lectures = allLectures.map { lecture ->
             Lecture(name = lectureInstance.name,
                     description = lectureInstance.description,
                     lectureRef = RouteHelper.urlEncode(lectureInstance.unwrap().reference.serialize()),
