@@ -73,6 +73,7 @@ class UpdateSocket(private val repo: ReplicatedRepository, private val mapper: O
                     else -> logger.warn("Could not handle change")
                 }
             } catch (e: RuntimeException){
+                // see https://github.com/modelix/modelix.core/issues/31
                 logger.warn("Ignoring change due to invalid model: "+ e.message)
             }
         }
