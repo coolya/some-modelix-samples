@@ -1,6 +1,5 @@
 package org.modelix.sample.restapimodelql
 
-import ModelServerLightWrapper
 import com.typesafe.config.ConfigFactory
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
@@ -24,7 +23,7 @@ suspend fun main() {
     // mps-json-bulk-access plugin running in our MPS instance
     val mslw =  ModelServerLightWrapper(host, port, models.first())
 
-//    val mslw = ModelServerLightWrapper(models)
+//    val mslw = org.modelix.sample.restapimodelql.ModelServerLightWrapper(models)
     mslw.createConnection()
 
 

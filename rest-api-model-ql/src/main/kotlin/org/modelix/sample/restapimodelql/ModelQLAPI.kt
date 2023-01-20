@@ -1,6 +1,5 @@
 package org.modelix.sample.restapijsonbulk.models.apis
 
-import ModelServerLightWrapper
 import University.Schedule.*
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -8,11 +7,7 @@ import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.modelix.client.light.LightModelClient
-import org.modelix.metamodel.typed
-import org.modelix.model.api.INode
-import org.modelix.model.api.INodeReference
-import org.modelix.model.api.INodeReferenceSerializer
-import org.modelix.model.api.serialize
+import org.modelix.sample.restapimodelql.ModelServerLightWrapper
 import org.modelix.sample.restapimodelql.Paths
 import org.modelix.sample.restapimodelql.models.Lecture
 import org.modelix.sample.restapimodelql.models.LectureList
@@ -32,15 +27,12 @@ object RouteHelper {
     }
 }
 
-fun Route.ModelQLAPI(mslw : ModelServerLightWrapper) {
+fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getLectures> {
-
-        val allLectures : List<N_Lecture> = mslw.getAllLectures()
-
-        var roomList = LectureList()
-
+        val allLectures: List<N_Lecture> = mslw.getAllLectures()
+        var lectureList = LectureList()
         mslw.globalModelClient!!.runRead {
-            roomList = LectureList(lectures = allLectures.map { lectureInstance ->
+            lectureList = LectureList(lectures = allLectures.map { lectureInstance ->
                 Lecture(name = lectureInstance.name,
                         description = lectureInstance.description,
                         lectureRef = RouteHelper.urlEncode((lectureInstance.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
@@ -48,57 +40,57 @@ fun Route.ModelQLAPI(mslw : ModelServerLightWrapper) {
                         maxParticipants = lectureInstance.maxParticipants)
             })
         }
+        call.respond(lectureList)
+    }
+
+    get<Paths.getLecturesLectureRef> {
+        try {
+            val zheLecture: N_Lecture = mslw.resolve2(call.parameters["lectureRef"]!!.decodeURLPart()) as N_Lecture
+            var lecture: Lecture? = Lecture("", "", "", 0, "")
+
+            mslw.globalModelClient!!.runRead {
+                lecture = Lecture(name = zheLecture.name,
+                        maxParticipants = zheLecture.maxParticipants,
+                        lectureRef = RouteHelper.urlEncode((zheLecture.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        room = RouteHelper.urlEncode((zheLecture.room.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        description = zheLecture.description
+                )
+            }
+            call.respond(lecture!!)
+        } catch (e: RuntimeException) {
+            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
+        }
+    }
+
+    get<Paths.getRooms> {
+        val allRooms: List<N_Room> = mslw.getAllRooms()
+        var roomList = RoomList()
+        mslw.globalModelClient!!.runRead {
+            roomList = RoomList(rooms = allRooms.map { roomInstance ->
+                Room(name = roomInstance.name,
+                        maxPlaces = roomInstance.maxPlaces,
+                        roomRef = RouteHelper.urlEncode((roomInstance.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        hasRemoteEquipment = roomInstance.hasRemoteEquipment)
+            })
+        }
         call.respond(roomList)
     }
 
-//    get<Paths.getLecturesLectureRef> {
-//        try {
-//            val lectureRef = INodeReferenceSerializer.deserialize(call.parameters["lectureRef"]!!.decodeURLPart())
-//            val iNode = resolve(lectureRef)
-//            val instance = iNode!!.typed<N_Lecture>()
-//
-//            val lecture = Lecture(name = instance.name,
-//                    maxParticipants = instance.maxParticipants,
-//                    lectureRef = RouteHelper.urlEncode(instance.unwrap().reference.serialize()),
-//                    room = RouteHelper.urlEncode(instance.room.unwrap().reference.serialize()),
-//                    description = instance.description
-//            )
-//            call.respond(lecture)
-//        } catch (e: RuntimeException) {
-//            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
-//        }
-//    }
-//
-//    get<Paths.getRooms> {
-//        val roots = loadRoots()
-//        val allRooms = roots.flatMap {
-//            (it.allChildren.map { it.typed() })
-//        }.filterIsInstance<N_Rooms>().flatMap { it.rooms }
-//
-//        val roomList = RoomList(rooms = allRooms.map { roomInstance ->
-//            Room(name = roomInstance.name,
-//                    maxPlaces = roomInstance.maxPlaces,
-//                    roomRef = RouteHelper.urlEncode(roomInstance.unwrap().reference.serialize()),
-//                    hasRemoteEquipment = roomInstance.hasRemoteEquipment)
-//        })
-//        call.respond(roomList)
-//    }
-//
-//
-//    get<Paths.getRoomsRoomID> {
-//        try {
-//            val roomRef = INodeReferenceSerializer.deserialize(call.parameters["roomRef"]!!.decodeURLPart())
-//            val iNode = resolve(roomRef)
-//            val instance = iNode!!.typed<N_Room>()
-//
-//                val room = Room(name = instance.name,
-//                        roomRef = RouteHelper.urlEncode(instance.unwrap().reference.serialize()),
-//                        maxPlaces = instance.maxPlaces,
-//                        hasRemoteEquipment = instance.hasRemoteEquipment
-//                )
-//                call.respond(room)
-//        } catch (e: RuntimeException) {
-//            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
-//        }
-//    }
+    get<Paths.getRoomsRoomID> {
+        try {
+            val zheRoom: N_Room = mslw.resolve2(call.parameters["roomRef"]!!.decodeURLPart()) as N_Room
+            var room: Room? = Room("", "", 0, null)
+
+            mslw.globalModelClient!!.runRead {
+                room = Room(name = zheRoom.name,
+                        roomRef = RouteHelper.urlEncode((zheRoom.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        maxPlaces = zheRoom.maxPlaces,
+                        hasRemoteEquipment = zheRoom.hasRemoteEquipment
+                )
+            }
+            call.respond(room!!)
+        } catch (e: RuntimeException) {
+            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
+        }
+    }
 }
