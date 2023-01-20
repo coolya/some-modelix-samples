@@ -6,12 +6,12 @@ plugins {
 
 val ktor_version : String by project
 val json_bulk_access_version: String by project
-val api_gen_version: String by project
+val modelix_version: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
 dependencies {
-    implementation(project(":mps:solutions:University.Schedule.api"))
+    implementation(project(":mps:metamodel"))
 
     implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("io.ktor:ktor-server-default-headers:$ktor_version")
@@ -26,7 +26,6 @@ dependencies {
 
     implementation("org.modelix.mps-json-bulk-model-access:model-client:$json_bulk_access_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-api:$json_bulk_access_version")
-    implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
 }
 
 val basePackage = "org.modelix.sample.restapijsonbulk"

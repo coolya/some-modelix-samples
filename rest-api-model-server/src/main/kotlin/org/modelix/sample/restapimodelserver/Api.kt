@@ -1,17 +1,15 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.structure.Courses
-import University.Schedule.structure.Rooms
-import University.Schedule.structure.concepts.LectureConcept
-import University.Schedule.structure.concepts.RoomConcept
-import jetbrains.mps.lang.core.structure.BaseConcept
+import University.Schedule.*
+import jetbrains.mps.lang.core.N_BaseConcept
+import org.modelix.metamodel.ITypedConcept
+import org.modelix.metamodel.typed
 import org.modelix.model.api.INode
 import org.modelix.model.api.INodeReference
+import org.modelix.model.api.INodeReferenceSerializer
 import org.modelix.model.area.PArea
 import org.modelix.model.client.ReplicatedRepository
-import org.modelix.model.lazy.INodeReferenceSerializer
-import org.modelix.model.repositoryconcepts.structure.Repository
-import org.modelix.mps.apigen.runtime.AbstractConcept
+import org.modelix.model.repositoryconcepts.N_Module
 import javax.ws.rs.BadRequestException
 import javax.ws.rs.NotFoundException
 
@@ -30,9 +28,8 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         }
     }
 
-    private fun allModelRoots(area: PArea): List<BaseConcept> {
-        return Repository(area.getRoot()).children.modules.flatMap { it.children.models }
-            .flatMap { it.children.rootNodes }
+    private fun getAllRootNodes(area: PArea): List<N_BaseConcept> {
+        return area.getRoot().allChildren.map { it.typed() }.filterIsInstance<N_Module>().flatMap { it.models }.flatMap { it.rootNodes }
     }
 
     /**
@@ -52,42 +49,24 @@ class Api(private val repo: ReplicatedRepository) : DefaultApi {
         return ref.resolveNode(area) ?: throw NotFoundException("No entity known with ref $refString")
     }
 
-    /**
-     * Ensures that the given [node] is of concept [ConceptType]. Otherwise, a [NotFoundException] is thrown.
-     *
-     * This method is used as a safety net in GET implementations for a specific reference of a certain type.
-     * If the provided reference resolved to a node of a different concept, this is similar to not finding any
-     * node from the REST client's point of view.
-     */
-    private inline fun <reified ConceptType : AbstractConcept<*>> ensureIsDesiredConcept(
-        node: INode,
-        refString: String
-    ) {
-        if (node.concept !is ConceptType) {
-            throw NotFoundException("No entity known with ref $refString")
-        }
-    }
-
     override fun getLectureByRef(lectureRef: String): Lecture = executeRead { area ->
         val node = resolveRef(lectureRef, area)
-        ensureIsDesiredConcept<LectureConcept>(node, lectureRef)
-
-        University.Schedule.structure.Lecture(node).toJson()
-    }
+        val lecture = node.typed<N_Lecture>()
+        lecture.toJson()
+   }
 
     override fun getRoomByRef(roomRef: String): Room = executeRead { area ->
         val node = resolveRef(roomRef, area)
-        ensureIsDesiredConcept<RoomConcept>(node, roomRef)
-
-        University.Schedule.structure.Room(node).toJson()
+        val room = node.typed<N_Room>()
+        room.toJson()
     }
 
     override fun listLectures(): LectureList = executeRead { area ->
-        Courses(allModelRoots(area).first { it is Courses }.iNode).toJson()
+        getAllRootNodes(area).filterIsInstance<N_Courses>().flatMap { it.lectures }.toJson()
     }
 
     override fun listRooms(): RoomList = executeRead { area ->
-        Rooms(allModelRoots(area).first { it is Rooms }.iNode).toJson()
+        getAllRootNodes(area).filterIsInstance<N_Rooms>().flatMap { it.rooms }.toJson()
     }
 
 }

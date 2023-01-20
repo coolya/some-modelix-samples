@@ -1,15 +1,9 @@
 package org.modelix.sample.restapimodelserver
 
-import University.Schedule.structure.Courses
-import University.Schedule.structure.Lecture
-import University.Schedule.structure.Room
-import University.Schedule.structure.Rooms
-import University.Schedule.structure.concepts.CoursesConcept
-import University.Schedule.structure.concepts.LectureConcept
-import University.Schedule.structure.concepts.RoomConcept
-import University.Schedule.structure.concepts.RoomsConcept
+import University.Schedule.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.util.collections.*
+import org.modelix.metamodel.typed
 import org.modelix.model.api.IBranchListener
 import org.modelix.model.api.ITree
 import org.modelix.model.api.ITreeChangeVisitor
@@ -70,12 +64,17 @@ class UpdateSocket(private val repo: ReplicatedRepository, private val mapper: O
         val area = PArea(repo.branch)
         val node = PNodeAdapter(nodeId, repo.branch)
         area.executeRead {
-            when (node.concept) {
-                is RoomConcept -> broadcast(ChangeNotification(WhatChanged.ROOM, Room(node).toJson()))
-                is RoomsConcept -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, Rooms(node).toJson()))
-                is LectureConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE, Lecture(node).toJson()))
-                is CoursesConcept -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, Courses(node).toJson()))
-                else -> logger.warn("Could not handle change")
+            try {
+                when (node.typed()) {
+                    is N_Room -> broadcast(ChangeNotification(WhatChanged.ROOM, node.typed<N_Room>().toJson()))
+                    is N_Rooms -> broadcast(ChangeNotification(WhatChanged.ROOM_LIST, node.typed<N_Rooms>().rooms.toList().toJson()))
+                    is N_Lecture -> broadcast(ChangeNotification(WhatChanged.LECTURE, node.typed<N_Lecture>().toJson()))
+                    is N_Courses -> broadcast(ChangeNotification(WhatChanged.LECTURE_LIST, node.typed<N_Courses>().lectures.toList().toJson()))
+                    else -> logger.warn("Could not handle change")
+                }
+            } catch (e: RuntimeException){
+                // see https://github.com/modelix/modelix.core/issues/31
+                logger.warn("Ignoring change due to invalid model: "+ e.message)
             }
         }
     }

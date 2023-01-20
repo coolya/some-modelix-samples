@@ -32,9 +32,7 @@
       </concept>
       <concept id="5617550519002745364" name="jetbrains.mps.build.structure.BuildLayout" flags="ng" index="1l3spV" />
       <concept id="5617550519002745363" name="jetbrains.mps.build.structure.BuildProject" flags="ng" index="1l3spW">
-        <property id="4915877860348071612" name="fileName" index="turDy" />
         <property id="5204048710541015587" name="internalBaseDirectory" index="2DA0ip" />
-        <child id="4796668409958418110" name="scriptsDir" index="auvoZ" />
         <child id="6647099934206700656" name="plugins" index="10PD9s" />
         <child id="7389400916848080626" name="parts" index="3989C9" />
         <child id="5617550519002745381" name="dependencies" index="1l3spa" />
@@ -64,10 +62,6 @@
       <concept id="868032131020265945" name="jetbrains.mps.build.mps.structure.BuildMPSPlugin" flags="ng" index="3b7kt6" />
       <concept id="5253498789149381388" name="jetbrains.mps.build.mps.structure.BuildMps_Module" flags="ng" index="3bQrTs">
         <child id="5253498789149547825" name="sources" index="3bR31x" />
-        <child id="5253498789149547704" name="dependencies" index="3bR37C" />
-      </concept>
-      <concept id="5253498789149585690" name="jetbrains.mps.build.mps.structure.BuildMps_ModuleDependencyOnModule" flags="ng" index="3bR9La">
-        <reference id="5253498789149547705" name="module" index="3bR37D" />
       </concept>
       <concept id="763829979718664966" name="jetbrains.mps.build.mps.structure.BuildMps_ModuleResources" flags="ng" index="3rtmxn">
         <child id="763829979718664967" name="files" index="3rtmxm" />
@@ -79,7 +73,6 @@
         <property id="2889113830911481881" name="deployFolderName" index="3ZfqAx" />
         <child id="8137134783396676835" name="location" index="1HemKq" />
       </concept>
-      <concept id="3189788309731840247" name="jetbrains.mps.build.mps.structure.BuildMps_Solution" flags="ng" index="1E1JtA" />
       <concept id="3189788309731840248" name="jetbrains.mps.build.mps.structure.BuildMps_Language" flags="ng" index="1E1JtD">
         <child id="9200313594498201639" name="generator" index="1TViLv" />
       </concept>
@@ -87,9 +80,6 @@
         <property id="8369506495128725901" name="compact" index="BnDLt" />
         <property id="322010710375892619" name="uuid" index="3LESm3" />
         <child id="322010710375956261" name="path" index="3LF7KH" />
-      </concept>
-      <concept id="7259033139236285166" name="jetbrains.mps.build.mps.structure.BuildMps_ExtractedModuleDependency" flags="nn" index="1SiIV0">
-        <child id="7259033139236285167" name="dependency" index="1SiIV1" />
       </concept>
     </language>
   </registry>
@@ -214,96 +204,6 @@
     <node concept="1l3spV" id="7qrA4FyO$Ky" role="1l3spN">
       <node concept="L2wRC" id="7qrA4FyO$Lx" role="39821P">
         <ref role="L2wRA" node="7qrA4FyO$Kd" resolve="University.Schedule" />
-      </node>
-    </node>
-  </node>
-  <node concept="1l3spW" id="BfH2HBt4M5">
-    <property role="2DA0ip" value="../.." />
-    <property role="TrG5h" value="gen-api" />
-    <property role="turDy" value="build-gen-api.xml" />
-    <node concept="1E1JtA" id="7qrA4FyOY4$" role="3989C9">
-      <property role="BnDLt" value="true" />
-      <property role="TrG5h" value="University.Schedule.api" />
-      <property role="3LESm3" value="08d2eb60-9d5d-41c4-b815-4abbc32078c1" />
-      <node concept="398BVA" id="BfH2HBsW_r" role="3LF7KH">
-        <ref role="398BVh" node="BfH2HBt4Md" resolve="sample.home" />
-        <node concept="2Ry0Ak" id="BfH2HBsW_w" role="iGT6I">
-          <property role="2Ry0Am" value="solutions" />
-          <node concept="2Ry0Ak" id="BfH2HBsW_x" role="2Ry0An">
-            <property role="2Ry0Am" value="University.Schedule.api" />
-            <node concept="2Ry0Ak" id="BfH2HBsW_y" role="2Ry0An">
-              <property role="2Ry0Am" value="University.Schedule.api.msd" />
-            </node>
-          </node>
-        </node>
-      </node>
-      <node concept="1BupzO" id="7qrA4FyOY5v" role="3bR31x">
-        <property role="3ZfqAx" value="models" />
-        <property role="1Hdu6h" value="true" />
-        <property role="1HemKv" value="true" />
-        <node concept="3LXTmp" id="BfH2HBta5c" role="1HemKq">
-          <node concept="398BVA" id="BfH2HBta54" role="3LXTmr">
-            <ref role="398BVh" node="BfH2HBt4Md" resolve="sample.home" />
-            <node concept="2Ry0Ak" id="BfH2HBta55" role="iGT6I">
-              <property role="2Ry0Am" value="solutions" />
-              <node concept="2Ry0Ak" id="BfH2HBta56" role="2Ry0An">
-                <property role="2Ry0Am" value="University.Schedule.api" />
-                <node concept="2Ry0Ak" id="BfH2HBta57" role="2Ry0An">
-                  <property role="2Ry0Am" value="models" />
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="3qWCbU" id="BfH2HBta5d" role="3LXTna">
-            <property role="3qWCbO" value="**/*.mps, **/*.mpsr, **/.model" />
-          </node>
-        </node>
-      </node>
-      <node concept="1SiIV0" id="BfH2HBs_Hk" role="3bR37C">
-        <node concept="3bR9La" id="BfH2HBs_Hl" role="1SiIV1">
-          <ref role="3bR37D" node="7qrA4FyO$Kd" resolve="University.Schedule" />
-        </node>
-      </node>
-    </node>
-    <node concept="2sgV4H" id="BfH2HBt4Mq" role="1l3spa">
-      <ref role="1l3spb" to="ffeo:3IKDaVZmzS6" resolve="mps" />
-      <node concept="398BVA" id="BfH2HBt4Mr" role="2JcizS">
-        <ref role="398BVh" node="BfH2HBt4Mc" resolve="mps_home" />
-      </node>
-    </node>
-    <node concept="2sgV4H" id="BfH2HBt4Ms" role="1l3spa">
-      <ref role="1l3spb" to="tf2h:7Q4ofxJ_nlt" resolve="org.modelix.mps.api-gen" />
-      <node concept="398BVA" id="BfH2HBt4Mt" role="2JcizS">
-        <ref role="398BVh" node="BfH2HBt4Mf" resolve="dependencies.home" />
-      </node>
-    </node>
-    <node concept="2sgV4H" id="BfH2HBt4MC" role="1l3spa">
-      <ref role="1l3spb" node="7qrA4FyO$JZ" resolve="modelix-example" />
-    </node>
-    <node concept="398rNT" id="BfH2HBt4Mc" role="1l3spd">
-      <property role="TrG5h" value="mps_home" />
-    </node>
-    <node concept="398rNT" id="BfH2HBt4Md" role="1l3spd">
-      <property role="TrG5h" value="sample.home" />
-      <node concept="55IIr" id="BfH2HBt4Me" role="398pKh" />
-    </node>
-    <node concept="398rNT" id="BfH2HBt4Mf" role="1l3spd">
-      <property role="TrG5h" value="dependencies.home" />
-      <node concept="55IIr" id="BfH2HBt4Mg" role="398pKh">
-        <node concept="2Ry0Ak" id="BfH2HBt4Mh" role="iGT6I">
-          <property role="2Ry0Am" value="build" />
-          <node concept="2Ry0Ak" id="BfH2HBt4Mi" role="2Ry0An">
-            <property role="2Ry0Am" value="dependencies" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="10PD9b" id="BfH2HBt4M8" role="10PD9s" />
-    <node concept="3b7kt6" id="BfH2HBt4M9" role="10PD9s" />
-    <node concept="55IIr" id="BfH2HBt4M6" role="auvoZ" />
-    <node concept="1l3spV" id="BfH2HBt4M7" role="1l3spN">
-      <node concept="L2wRC" id="BfH2HBt4Np" role="39821P">
-        <ref role="L2wRA" node="7qrA4FyOY4$" resolve="University.Schedule.api" />
       </node>
     </node>
   </node>

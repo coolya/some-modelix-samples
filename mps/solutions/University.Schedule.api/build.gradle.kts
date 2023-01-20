@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
-    implementation("org.modelix:model-api:1.3.2")
+    implementation("org.modelix:model-api:$modelix_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-client:$json_bulk_access_version")
     implementation("org.modelix.mps-json-bulk-model-access:model-api:$json_bulk_access_version")
     implementation("org.modelix:model-api-jvm:$modelix_version")

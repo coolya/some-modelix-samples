@@ -12,6 +12,7 @@ val ktor_version: String by project
 val api_gen_version: String by project
 val modelix_version: String by project
 
+
 dependencies {
     implementation(enforcedPlatform("${quarkus_platform_group_id}:${quarkus_platform_artifact_id}:${quarkus_platform_version}"))
     implementation("io.quarkus:quarkus-resteasy-reactive")
@@ -24,9 +25,11 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("org.modelix:model-client:$modelix_version")
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
-    implementation(project(":mps:solutions:University.Schedule.api"))
+
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+
+    implementation(project(":mps:metamodel"))
 }
 
 val basePackage = "org.modelix.sample.restapimodelserver"
