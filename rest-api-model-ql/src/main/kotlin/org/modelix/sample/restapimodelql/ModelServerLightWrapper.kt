@@ -135,7 +135,11 @@ class ModelServerLightWrapper {
             }
         })
         return@Any globalModelClient.runRead {
-            globalModelClient.getNodeIfLoaded(ref)?.typed() as N_BaseConcept
+            if (globalModelClient.getNodeIfLoaded(ref)?.typed() != null) {
+                globalModelClient.getNodeIfLoaded(ref)?.typed() as N_BaseConcept
+            } else{
+                null
+            }
         }
     }
 }

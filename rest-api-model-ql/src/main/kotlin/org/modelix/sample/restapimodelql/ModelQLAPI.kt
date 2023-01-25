@@ -46,7 +46,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getLecturesLectureRef> {
         try {
-            val zheLecture: N_Lecture = mslw.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart()) as N_Lecture
+            val zheLecture: N_Lecture = mslw.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart())!! as N_Lecture
             var lecture: Lecture? = Lecture("", "", "", 0, "")
 
             mslw.globalModelClient.runRead {
@@ -59,7 +59,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
             }
             call.respond(lecture!!)
         } catch (e: RuntimeException) {
-            call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
+            call.respond(HttpStatusCode.NotFound, "Can not load Lecture: " + e.message)
         }
     }
 
@@ -79,7 +79,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getRoomsRoomID> {
         try {
-            val zheRoom: N_Room = mslw.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart()) as N_Room
+            val zheRoom: N_Room = mslw.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart())!! as N_Room
             var room: Room? = Room("", "", 0, null)
 
             mslw.globalModelClient.runRead {
