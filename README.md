@@ -18,16 +18,17 @@ and make you think and envision your own use cases.
 
 The repository is a single gradle project to make building everything at once easy. The examples are organized by the technology they use into the various sub-folders:
 
-| Id / Link                            | Components/Technologies              | Description                                                                                                                                  | Status | Folder                                                           |
-|--------------------------------------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------|
-| [1](mps/README.md#language)          | MPS + `cloud-plugin`                 | MPS language definition that is used by all examples. The MPS language structure is used to generate a Java API consumed by all examples.    | ✅      | [MPS](mps)                                                       |
-| [2](mps/README.md#generated-api)     | MPS, `api-gen`                       | Generated Java API from the MPS language.                                                                                                    | ✅      | [University.Schedule.api](mps/solutions/University.Schedule.api) |
-| [3](openapi/README.md)               | OpenAPI                              | A hand-crafted OpenAPI specification that defines domain-specific REST endpoints which expose the model contents.                            | ✅      | [Openapi](openapi)                                               |
-| [4a](rest-api-json-bulk/README.md)   | MPS w/ `mps-json-bulk-access` + Ktor | An implementation of the OpenAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. | ✅      | [rest-api-json-bulk](rest-api-json-bulk)                         |
-| [4b](rest-api-model-server/README.md) | `model-server` + Quarkus             | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`.                     | ✅      | [rest-api-model-server](rest-api-model-server)                   |
-| [5](spa-dashboard-angular/README.md) | Angular via REST                     | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations.                                 | ✅      | [spa-dashboard-angular](spa-dashboard-angular)                   |
-| `6`                                  | ❔ + websockets                       | A web application that allows editing of MPS models and realtime collaboration.                                                              | ❌      | collaboration-web-app                                            |
-| `7`                                  | docker / kubernetes                  |                                                                                                                                              | ❌      | deployment                                                       |
+| Id / Link                             | Components/Technologies              | Description                                                                                                                                     | Status | Folder                                                           |
+|---------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------|
+| [1](mps/README.md#language)           | MPS + `cloud-plugin`                 | MPS language definition that is used by all examples. The MPS language structure is used to generate a Java API consumed by all examples.       | ✅      | [MPS](mps)                                                       |
+| [2](mps/README.md#generated-api)      | MPS, `api-gen`                       | Generated Java API from the MPS language.                                                                                                       | ✅      | [University.Schedule.api](mps/solutions/University.Schedule.api) |
+| [3](openapi/README.md)                | OpenAPI                              | A hand-crafted OpenAPI specification that defines domain-specific REST endpoints which expose the model contents.                               | ✅      | [Openapi](openapi)                                               |
+| [4a](rest-api-json-bulk/README.md)    | MPS w/ `mps-json-bulk-access` + Ktor | An implementation of the OpenAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. | ✅      | [rest-api-json-bulk](rest-api-json-bulk)                         |
+| [4b](rest-api-model-server/README.md) | `model-server` + Quarkus             | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`.                        | ✅      | [rest-api-model-server](rest-api-model-server)                   |
+| [4c](rest-api-model-ql/README.md)     | `ligh-model-server`+ ModelQL + Ktor  | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `the light-model-server` MPS plugin.   | ✅      | [rest-api-model-ql](rest-api-model-ql)                           |
+| [5](spa-dashboard-angular/README.md)  | Angular via REST                     | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations.                                    | ✅      | [spa-dashboard-angular](spa-dashboard-angular)                   |
+| `6`                                   | ❔ + websockets                       | A web application that allows editing of MPS models and realtime collaboration.                                                                 | ❌      | collaboration-web-app                                            |
+| `7`                                   | docker / kubernetes                  |                                                                                                                                                 | ❌      | deployment                                                       |
 
 Each sub-folder contains its own `README.md` with component specific documentation.
 
@@ -67,7 +68,7 @@ gradlew.bat build # windows
 Once the initial build has completes feel free to inspect the [use cases](/README.md#use-cases) and start components as described for each use case.
 Alternatively, you can inspect and edit the project with the code editor of your choice.
  - The top repository provides `IntelliJ` configurations,
- - the [mps](mps) sub-project can be opened using `MPS 2020.3.6`, and
+ - the [mps](mps) sub-project can be opened using `MPS 2021.3.2`, and
  - the [dashboard](spa-dashboard-angular) is a `WebStorm` project.
 
 
@@ -83,7 +84,7 @@ Depending on the chosen use case, only a subset of the components in this reposi
 The full architecture includes components for multiple use cases.
 One does not need all components to realize individual use cases.
 
-[<img src="/doc/images/system-diagram-full.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
+[<img src="doc/images/system-diagram-full.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/system-diagram-full.svg)
 
 In the following a short overview is given on each component.
 
@@ -176,12 +177,17 @@ There are two variations of this use case:
 
 - a. No automatic update in the SPA using the simple `rest-api-json-bulk` backend and MPS
 
-  [<img src="/doc/images/uc-1a-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1a-read-only-dashboard.svg)
+  [<img src="doc/images/uc-1a-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1a-read-only-dashboard.svg)
 
 
 - b. With automatic updates in the SPA using the more complex `rest-api-model-server` backend and the `model-server`
 
-  [<img src="/doc/images/uc-1b-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1b-read-only-dashboard.svg)
+  [<img src="doc/images/uc-1b-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1b-read-only-dashboard.svg)
+
+
+- c. No automatic update in the SPA using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
+
+  [<img src="doc/images/uc-1c-read-only-dashboard.svg" width=80% >](https://app.diagrams.net/#Hmodelix/modelix-samples/main/doc/images/uc-1b-read-only-dashboard.svg)
 
 
 
@@ -197,7 +203,7 @@ To start up the system as described in UC 1a, you first have to have built the e
 
 Once done, you need to start all components involved, these are:
 
-1. **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+1. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
    This includes the `json-bulk-model-access`, `api-gen`, and `modelix-cloud-access`.
 
@@ -409,7 +415,7 @@ Once done, you need to start all components involved, these are:
       ```
    </details>
 
-4. **MPS**: Start `MPS 2020.3.6` without any global plugins and open the project in the [mps](../mps) folder.
+4. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
    The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
    This includes the `cloud-access` plugin used.
 
@@ -419,5 +425,86 @@ Once done, you need to start all components involved, these are:
    Note: Changes to the model in MPS will automatically synchronize to the dashboard
 
 
+### How to start UC 1c
+
+*Note: All gradle commands assume you are in the top level folder of this repository.*
+
+To start up the system as described in UC 1c, you first have to have built the entire project:
+
+```
+./gradlew
+```
+
+Once done, you need to start all components involved, these are:
+
+1. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
+   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
+   This includes the `light-model-server` plugin used in this example UC.
+
+2. **API layer**: The `light-model-server` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
+   ```
+   $ ./gradlew rest-api-model-ql:run
+   ```
+   <details>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
+
+   ```
+    > Task :rest-api-model-ql:run
+    2023-01-25 18:46:48.977 [main] INFO  o.m.s.r.ModelServerLightWrapper - Connecting to light model-server at ws://localhost:48302/ws
+    2023-01-25 18:46:49.044 [main] INFO  o.m.s.r.ModelServerLightWrapper - Connection successful
+    2023-01-25 18:46:49.070 [main] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+    2023-01-25 18:46:49.346 [main] INFO  ktor.application - Application started in 0.286 seconds.
+    2023-01-25 18:46:49.455 [DefaultDispatcher-worker-4] INFO  ktor.application - Responding at http://0.0.0.0:8090
+    2023-01-25 18:46:50.806 [eventLoopGroupProxy-4-1] INFO  o.m.s.r.ModelServerLightWrapper - Resolving node trash
+    <============-> 94% EXECUTING [26m 13s]
+    > :rest-api-model-ql:run```
+   </details>
+
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
+   ```
+   $ ./gradlew spa-dashboard-angular:npmRun
+   ```
+   <details>
+   <summary>🧾 You can expect output similar to this (unfold to see details)</summary>
+
+   ```
+      > Task :spa-dashboard-angular:npmRun
+
+      > angular.io-example@0.0.0 ng
+      > ng serve
+
+      - Generating browser application bundles (phase: setup)...
+      ✔ Browser application bundle generation complete.
+
+      Initial Chunk Files   | Names         |  Raw Size
+      vendor.js             | vendor        |   2.47 MB |
+      polyfills.js          | polyfills     | 318.03 kB |
+      styles.css, styles.js | styles        | 211.31 kB |
+      main.js               | main          |  86.71 kB |
+      runtime.js            | runtime       |   6.53 kB |
+
+      | Initial Total |   3.08 MB
+
+      Build at: 2022-12-07T09:18:02.345Z - Hash: 186b24edf20c1c4a - Time: 13776ms
+
+      ** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+      ✔ Compiled successfully.
+      ✔ Browser application bundle generation complete.
+
+      5 unchanged chunks
+
+      Build at: 2022-12-07T09:18:02.740Z - Hash: 186b24edf20c1c4a - Time: 324ms
+
+      ✔ Compiled successfully.
+      <============-> 95% EXECUTING [29s]
+      > :spa-dashboard-angular:npmRun
+      ```
+   </details>
+
+4. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
+
+   Note: Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
 
 
