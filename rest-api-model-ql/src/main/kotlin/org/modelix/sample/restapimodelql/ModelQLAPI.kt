@@ -1,6 +1,7 @@
 package org.modelix.sample.restapijsonbulk.models.apis
 
-import University.Schedule.*
+import University.Schedule.N_Lecture
+import University.Schedule.N_Room
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.locations.*
@@ -31,7 +32,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getLectures> {
         val allLectures: List<N_Lecture> = mslw.getAllLectures()
         var lectureList = LectureList()
-        mslw.globalModelClient!!.runRead {
+        mslw.globalModelClient.runRead {
             lectureList = LectureList(lectures = allLectures.map { lectureInstance ->
                 Lecture(name = lectureInstance.name,
                         description = lectureInstance.description,
@@ -45,10 +46,10 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getLecturesLectureRef> {
         try {
-            val zheLecture: N_Lecture = mslw.resolve2(call.parameters["lectureRef"]!!.decodeURLPart()) as N_Lecture
+            val zheLecture: N_Lecture = mslw.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart()) as N_Lecture
             var lecture: Lecture? = Lecture("", "", "", 0, "")
 
-            mslw.globalModelClient!!.runRead {
+            mslw.globalModelClient.runRead {
                 lecture = Lecture(name = zheLecture.name,
                         maxParticipants = zheLecture.maxParticipants,
                         lectureRef = RouteHelper.urlEncode((zheLecture.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
@@ -65,7 +66,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getRooms> {
         val allRooms: List<N_Room> = mslw.getAllRooms()
         var roomList = RoomList()
-        mslw.globalModelClient!!.runRead {
+        mslw.globalModelClient.runRead {
             roomList = RoomList(rooms = allRooms.map { roomInstance ->
                 Room(name = roomInstance.name,
                         maxPlaces = roomInstance.maxPlaces,
@@ -78,10 +79,10 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getRoomsRoomID> {
         try {
-            val zheRoom: N_Room = mslw.resolve2(call.parameters["roomRef"]!!.decodeURLPart()) as N_Room
+            val zheRoom: N_Room = mslw.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart()) as N_Room
             var room: Room? = Room("", "", 0, null)
 
-            mslw.globalModelClient!!.runRead {
+            mslw.globalModelClient.runRead {
                 room = Room(name = zheRoom.name,
                         roomRef = RouteHelper.urlEncode((zheRoom.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
                         maxPlaces = zheRoom.maxPlaces,
