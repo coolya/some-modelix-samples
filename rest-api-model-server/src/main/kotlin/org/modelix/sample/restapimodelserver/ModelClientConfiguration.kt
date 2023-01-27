@@ -12,7 +12,7 @@ import java.util.*
  */
 @ConfigMapping(prefix = "modelix.client")
 interface ModelClientConfiguration {
-    @WithDefault(value = "http://0.0.0.0:28101")
+    @WithDefault(value = "http://127.0.0.1:28101")
     fun serverUri(): URI
 
     @WithDefault(value = "courses")
