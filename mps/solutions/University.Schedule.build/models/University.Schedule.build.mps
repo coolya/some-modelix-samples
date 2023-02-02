@@ -7,7 +7,6 @@
   </languages>
   <imports>
     <import index="ffeo" ref="r:874d959d-e3b4-4d04-b931-ca849af130dd(jetbrains.mps.ide.build)" />
-    <import index="tf2h" ref="r:4aabb3c5-d03c-4c1f-94a0-b9560a7e1d05(org.modelix.mps.api-gen.build)" />
   </imports>
   <registry>
     <language id="798100da-4f0a-421a-b991-71f8c50ce5d2" name="jetbrains.mps.build">
@@ -193,12 +192,6 @@
       <ref role="1l3spb" to="ffeo:3IKDaVZmzS6" resolve="mps" />
       <node concept="398BVA" id="7qrA4FyO$K4" role="2JcizS">
         <ref role="398BVh" node="7qrA4FyO$K2" resolve="mps_home" />
-      </node>
-    </node>
-    <node concept="2sgV4H" id="7qrA4FyOY7u" role="1l3spa">
-      <ref role="1l3spb" to="tf2h:7Q4ofxJ_nlt" resolve="org.modelix.mps.api-gen" />
-      <node concept="398BVA" id="7qrA4FyOY7z" role="2JcizS">
-        <ref role="398BVh" node="7qrA4FyO$Un" resolve="dependencies.home" />
       </node>
     </node>
     <node concept="1l3spV" id="7qrA4FyO$Ky" role="1l3spN">
