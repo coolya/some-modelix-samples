@@ -19,12 +19,10 @@ suspend fun main() {
     val port = config.getInt("mps.model-ql.port")
     val models = config.getStringList("mps.model-ql.models")
 
-    // initialize the object which handles the connection to the
-    // mps-json-bulk-access plugin running in our MPS instance
-    val mslw =  ModelServerLightWrapper(host, port, models.first())
-
-//    val mslw = org.modelix.sample.restapimodelql.ModelServerLightWrapper(models)
-    mslw.createConnection()
+    // initialize the client which handles the connection to the
+    // lightModelServer plugin running in our MPS instance
+    val lightModelClientWrapper = LightModelClientWrapper(host, port, models.first())
+    lightModelClientWrapper.createConnection()
 
 
     // start the embedded server to serve the API
@@ -39,7 +37,7 @@ suspend fun main() {
         install(Locations)
         install(Routing) {
             // the BulkApi provides the routs defined in our openapi specification
-            ModelQLAPI(mslw)
+            ModelQLAPI(lightModelClientWrapper)
         }
     }.start(wait = true)
 }

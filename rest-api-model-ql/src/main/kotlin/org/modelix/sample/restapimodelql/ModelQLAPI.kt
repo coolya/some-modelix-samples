@@ -8,7 +8,7 @@ import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.modelix.client.light.LightModelClient
-import org.modelix.sample.restapimodelql.ModelServerLightWrapper
+import org.modelix.sample.restapimodelql.LightModelClientWrapper
 import org.modelix.sample.restapimodelql.Paths
 import org.modelix.sample.restapimodelql.models.Lecture
 import org.modelix.sample.restapimodelql.models.LectureList
@@ -28,11 +28,11 @@ object RouteHelper {
     }
 }
 
-fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
+fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
     get<Paths.getLectures> {
-        val allLectures: List<N_Lecture> = mslw.getAllLectures()
+        val allLectures: List<N_Lecture> = lightModelClientWrapper.getAllLectures()
         lateinit var lectureList: LectureList
-        mslw.globalModelClient.runRead {
+        lightModelClientWrapper.runRead {
             lectureList = LectureList(lectures = allLectures.map { lectureInstance ->
                 Lecture(name = lectureInstance.name,
                         description = lectureInstance.description,
@@ -46,14 +46,14 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getLecturesLectureRef> {
         try {
-            val zheLecture: N_Lecture = mslw.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart())!! as N_Lecture
+            val resolvedLecture: N_Lecture = lightModelClientWrapper.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart())!! as N_Lecture
             lateinit var lecture: Lecture
-            mslw.globalModelClient.runRead {
-                lecture = Lecture(name = zheLecture.name,
-                        maxParticipants = zheLecture.maxParticipants,
-                        lectureRef = RouteHelper.urlEncode((zheLecture.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
-                        room = RouteHelper.urlEncode((zheLecture.room.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
-                        description = zheLecture.description
+            lightModelClientWrapper.runRead {
+                lecture = Lecture(name = resolvedLecture.name,
+                        maxParticipants = resolvedLecture.maxParticipants,
+                        lectureRef = RouteHelper.urlEncode((resolvedLecture.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        room = RouteHelper.urlEncode((resolvedLecture.room.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        description = resolvedLecture.description
                 )
             }
             call.respond(lecture)
@@ -63,9 +63,9 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     }
 
     get<Paths.getRooms> {
-        val allRooms: List<N_Room> = mslw.getAllRooms()
+        val allRooms: List<N_Room> = lightModelClientWrapper.getAllRooms()
         lateinit var roomList: RoomList
-        mslw.globalModelClient.runRead {
+        lightModelClientWrapper.runRead {
             roomList = RoomList(rooms = allRooms.map { roomInstance ->
                 Room(name = roomInstance.name,
                         maxPlaces = roomInstance.maxPlaces,
@@ -78,15 +78,15 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getRoomsRoomID> {
         try {
-            val zheRoom: N_Room = mslw.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart())!! as N_Room
+            val resolvedRoom: N_Room = lightModelClientWrapper.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart())!! as N_Room
 
             lateinit var room: Room
 
-            mslw.globalModelClient.runRead {
-                room = Room(name = zheRoom.name,
-                        roomRef = RouteHelper.urlEncode((zheRoom.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
-                        maxPlaces = zheRoom.maxPlaces,
-                        hasRemoteEquipment = zheRoom.hasRemoteEquipment
+            lightModelClientWrapper.runRead {
+                room = Room(name = resolvedRoom.name,
+                        roomRef = RouteHelper.urlEncode((resolvedRoom.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
+                        maxPlaces = resolvedRoom.maxPlaces,
+                        hasRemoteEquipment = resolvedRoom.hasRemoteEquipment
                 )
             }
             call.respond(room)

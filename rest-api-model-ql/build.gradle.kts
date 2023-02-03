@@ -13,7 +13,6 @@ val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 dependencies {
     // api-gen v2
     implementation(project(":mps:metamodel"))
-//    implementation("org.modelix:metamodel-runtime:$modelix_metamodel_version")
 
     // kotlin
     implementation("ch.qos.logback:logback-classic:1.4.5")
@@ -30,7 +29,6 @@ dependencies {
     // model-server-light
     api("org.modelix:model-api:$modelix_version")
     implementation("org.modelix:light-model-client:$modelix_version")
-//    implementation("org.modelix:light-model-client-jvm:$modelix_version")
     implementation("org.modelix:model-server-api:$modelix_version")
     implementation("org.modelix:model-client:$modelix_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")

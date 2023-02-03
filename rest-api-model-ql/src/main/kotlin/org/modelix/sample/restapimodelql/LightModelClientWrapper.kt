@@ -21,11 +21,11 @@ import kotlin.time.Duration.Companion.seconds
 
 val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.ModelServerLightWrapper")
 
-class ModelServerLightWrapper {
+class LightModelClientWrapper {
 
     private var MPS_MODEL_NAME: String = ""
     private var WS_CONNECTION: String
-    lateinit var globalModelClient: LightModelClient
+    lateinit var lightModelClient: LightModelClient
 
     constructor(host: String = "localhost", port: Int = 48302, models: String) {
         GeneratedLanguages.registerAll()
@@ -37,16 +37,19 @@ class ModelServerLightWrapper {
 
         // we require a http client with WS support for the connection
         logger.info("Connecting to light model-server at $WS_CONNECTION")
-        val modelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, WS_CONNECTION))
-        globalModelClient = modelClient
-        logger.info("Connection successful")
+        val lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, WS_CONNECTION))
+        this.lightModelClient = lightModelClient
 
-        // the modelQL query to send
-        globalModelClient.changeQuery(buildModelQuery {
+        // the modelQL query
+        this.lightModelClient.changeQuery(buildModelQuery {
+            // we traverse from the root (a repository)
             root {
+                // to all modules
                 children("modules") {
+                    // selecting the ones that contain our desired model name
                     whereProperty("name").contains(MPS_MODEL_NAME)
                     children("models") {
+                        // and extract all root nodes, so Rooms and Courses, and their descendants
                         children("rootNodes") {
                             descendants { }
                         }
@@ -54,6 +57,7 @@ class ModelServerLightWrapper {
                 }
             }
         })
+        logger.info("Connection successful")
     }
 
     suspend fun getAllLectures(): List<N_Lecture> {
@@ -68,36 +72,13 @@ class ModelServerLightWrapper {
     }
 
     private suspend fun runAsyncRead(givenFunction: (node: N_Repository) -> List<N_BaseConcept>?): List<N_BaseConcept>? {
-        globalModelClient.changeQuery(buildModelQuery {globalModelClient.changeQuery(buildModelQuery {
-            root {
-                children("modules") {
-                    whereProperty("name").contains(MPS_MODEL_NAME)
-                    children("models") {
-                        children("rootNodes") {
-                            descendants { }
-                        }
-                    }
-                }
-            }
-        })
-            root {
-                children("modules") {
-                    whereProperty("name").contains(MPS_MODEL_NAME)
-                    children("models") {
-                        children("rootNodes") {
-                            descendants { }
-                        }
-                    }
-                }
-            }
-        })
         var result: List<N_BaseConcept>? = null
         kotlinx.coroutines.withTimeout(5.seconds) {
             while (true) {
-                globalModelClient.checkException()
-                val node = globalModelClient.runRead { globalModelClient.getRootNode() }
-                if (node != null && globalModelClient.runRead { node.isValid }) {
-                    globalModelClient.runRead {
+                lightModelClient.checkException()
+                val node = lightModelClient.runRead { lightModelClient.getRootNode() }
+                if (node != null && lightModelClient.runRead { node.isValid }) {
+                    lightModelClient.runRead {
                         logger.info("Reading repository")
                         result = givenFunction(node.typed<N_Repository>())
                     }
@@ -122,24 +103,18 @@ class ModelServerLightWrapper {
 
     val resolveNodeIdToConcept: suspend (String) -> N_BaseConcept? = Any@{ ref: String ->
         logger.info("Resolving node $ref")
-        globalModelClient.changeQuery(buildModelQuery {
-            root {
-                children("modules") {
-                    whereProperty("name").contains(MPS_MODEL_NAME)
-                    children("models") {
-                        children("rootNodes") {
-                            descendants { }
-                        }
-                    }
-                }
-            }
-        })
-        return@Any globalModelClient.runRead {
-            if (globalModelClient.getNodeIfLoaded(ref)?.typed() != null) {
-                globalModelClient.getNodeIfLoaded(ref)?.typed() as N_BaseConcept
-            } else{
+        return@Any lightModelClient.runRead {
+            if (lightModelClient.getNodeIfLoaded(ref)?.typed() != null) {
+                lightModelClient.getNodeIfLoaded(ref)?.typed() as N_BaseConcept
+            } else {
                 null
             }
+        }
+    }
+
+    fun <T> runRead(body: () -> T): T {
+        return lightModelClient.runRead {
+            body()
         }
     }
 }
