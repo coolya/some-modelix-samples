@@ -1,7 +1,7 @@
 # rest-api-model-ql
 
 This project provides a REST API that wraps the functionality of the `light-model-server` MPS plugin running inside an MPS instance.
-The provided REST api conforms to the API spec in the [openapi.yaml](../actual-rest-api/openapi.yaml).
+The provided REST API conforms to the API spec in the [openapi.yaml](../actual-rest-api/openapi.yaml).
 
 ## Building
 
