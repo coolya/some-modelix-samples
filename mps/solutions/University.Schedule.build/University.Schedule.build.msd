@@ -22,7 +22,6 @@
   <dependencyVersions>
     <module reference="93316590-e376-41f8-9015-8b7dd480ac37(University.Schedule.build)" version="0" />
     <module reference="422c2909-59d6-41a9-b318-40e6256b250f(jetbrains.mps.ide.build)" version="0" />
-    <module reference="f513f167-ce83-4aa0-8699-a10bd600790f(org.modelix.mps.api-gen.build)" version="0" />
   </dependencyVersions>
 </solution>
 
