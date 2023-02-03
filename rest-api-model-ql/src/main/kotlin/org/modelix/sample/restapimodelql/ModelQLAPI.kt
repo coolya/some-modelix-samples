@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory
 import java.net.URLEncoder
 import java.nio.charset.Charset
 
-val logger: Logger = LoggerFactory.getLogger("BulkApi")
+val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.ModelQLAPI")
 
 object RouteHelper {
     @JvmStatic
@@ -31,7 +31,7 @@ object RouteHelper {
 fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getLectures> {
         val allLectures: List<N_Lecture> = mslw.getAllLectures()
-        var lectureList = LectureList()
+        lateinit var lectureList: LectureList
         mslw.globalModelClient.runRead {
             lectureList = LectureList(lectures = allLectures.map { lectureInstance ->
                 Lecture(name = lectureInstance.name,
@@ -47,8 +47,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getLecturesLectureRef> {
         try {
             val zheLecture: N_Lecture = mslw.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart())!! as N_Lecture
-            var lecture: Lecture? = Lecture("", "", "", 0, "")
-
+            lateinit var lecture: Lecture
             mslw.globalModelClient.runRead {
                 lecture = Lecture(name = zheLecture.name,
                         maxParticipants = zheLecture.maxParticipants,
@@ -57,7 +56,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
                         description = zheLecture.description
                 )
             }
-            call.respond(lecture!!)
+            call.respond(lecture)
         } catch (e: RuntimeException) {
             call.respond(HttpStatusCode.NotFound, "Can not load Lecture: " + e.message)
         }
@@ -65,7 +64,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
 
     get<Paths.getRooms> {
         val allRooms: List<N_Room> = mslw.getAllRooms()
-        var roomList = RoomList()
+        lateinit var roomList: RoomList
         mslw.globalModelClient.runRead {
             roomList = RoomList(rooms = allRooms.map { roomInstance ->
                 Room(name = roomInstance.name,
@@ -80,7 +79,8 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
     get<Paths.getRoomsRoomID> {
         try {
             val zheRoom: N_Room = mslw.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart())!! as N_Room
-            var room: Room? = Room("", "", 0, null)
+
+            lateinit var room: Room
 
             mslw.globalModelClient.runRead {
                 room = Room(name = zheRoom.name,
@@ -89,7 +89,7 @@ fun Route.ModelQLAPI(mslw: ModelServerLightWrapper) {
                         hasRemoteEquipment = zheRoom.hasRemoteEquipment
                 )
             }
-            call.respond(room!!)
+            call.respond(room)
         } catch (e: RuntimeException) {
             call.respond(HttpStatusCode.NotFound, "Can not load Room: " + e.message)
         }
