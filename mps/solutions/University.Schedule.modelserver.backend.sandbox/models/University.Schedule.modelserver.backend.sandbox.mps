@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:ce161c54-ea76-40a6-a31d-9d7cd01febe2(University.Schedule.sandbox)">
+<model ref="r:ce161c54-ea76-40a6-a31d-9d7cd01febe2(University.Schedule.modelserver.backend.sandbox)">
   <persistence version="9" />
   <languages>
     <use id="96533389-8d4c-46f2-b150-8d89155f7fca" name="University.Schedule" version="0" />
@@ -42,7 +42,7 @@
   <node concept="1dfXjb" id="3_cs9tOt5VE">
     <node concept="1dfXj3" id="3_cs9tOt5VF" role="1dfXja">
       <property role="TrG5h" value="Einstein" />
-      <property role="1dfXj0" value="111111142" />
+      <property role="1dfXj0" value="13" />
       <property role="1dfXje" value="true" />
     </node>
     <node concept="1dfXj3" id="3_cs9tOt5VH" role="1dfXja">

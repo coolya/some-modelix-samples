@@ -4,7 +4,7 @@
     <projectModules>
       <modulePath path="$PROJECT_DIR$/../languages/University.Schedule/University.Schedule.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/../solutions/University.Schedule.modelserver.backend.build/University.Schedule.modelserver.backend.build.msd" folder="" />
-      <modulePath path="$PROJECT_DIR$/../solutions/University.Schedule.sandbox/University.Schedule.sandbox.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/../solutions/University.Schedule.modelserver.backend.sandbox/University.Schedule.modelserver.backend.sandbox.msd" folder="" />
     </projectModules>
   </component>
 </project>

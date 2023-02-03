@@ -9,6 +9,7 @@
     <option name="mappedModules">
       <set>
         <option value="http://localhost:28101/courses#University.Schedule.sandbox" />
+        <option value="http://localhost:28101/default#University.Schedule.modelserver.backend.sandbox" />
       </set>
     </option>
   </component>

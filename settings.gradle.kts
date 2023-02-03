@@ -21,8 +21,8 @@ pluginManagement {
     }
 }
 
-//include("mps")
 include("mps:project-modelserver-backend")
+include("mps:project-mps-backend")
 include("mps:metamodel")
 
 include("rest-api-json-bulk")
