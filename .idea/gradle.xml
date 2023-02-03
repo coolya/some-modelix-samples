@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/model-server" />
             <option value="$PROJECT_DIR$/mps" />
             <option value="$PROJECT_DIR$/mps/metamodel" />
+            <option value="$PROJECT_DIR$/mps/project-modelserver-backend" />
+            <option value="$PROJECT_DIR$/mps/project-mps-backend" />
             <option value="$PROJECT_DIR$/rest-api-json-bulk" />
             <option value="$PROJECT_DIR$/rest-api-model-ql" />
             <option value="$PROJECT_DIR$/rest-api-model-server" />
