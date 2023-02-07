@@ -31,9 +31,9 @@ object RouteHelper {
 fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
     get<Paths.getLectures> {
         val allLectures: List<N_Lecture> = lightModelClientWrapper.getAllLectures()
-        lateinit var lectureList: LectureList
-        lightModelClientWrapper.runRead {
-            lectureList = LectureList(lectures = allLectures.map { lectureInstance ->
+
+        val lectureList: LectureList = lightModelClientWrapper.runRead {
+            LectureList(lectures = allLectures.map { lectureInstance ->
                 Lecture(name = lectureInstance.name,
                         description = lectureInstance.description,
                         lectureRef = RouteHelper.urlEncode((lectureInstance.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
@@ -47,9 +47,9 @@ fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
     get<Paths.getLecturesLectureRef> {
         try {
             val resolvedLecture: N_Lecture = lightModelClientWrapper.resolveNodeIdToConcept(call.parameters["lectureRef"]!!.decodeURLPart())!! as N_Lecture
-            lateinit var lecture: Lecture
-            lightModelClientWrapper.runRead {
-                lecture = Lecture(name = resolvedLecture.name,
+
+            val lecture: Lecture = lightModelClientWrapper.runRead {
+                Lecture(name = resolvedLecture.name,
                         maxParticipants = resolvedLecture.maxParticipants,
                         lectureRef = RouteHelper.urlEncode((resolvedLecture.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
                         room = RouteHelper.urlEncode((resolvedLecture.room.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
@@ -64,9 +64,9 @@ fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
 
     get<Paths.getRooms> {
         val allRooms: List<N_Room> = lightModelClientWrapper.getAllRooms()
-        lateinit var roomList: RoomList
-        lightModelClientWrapper.runRead {
-            roomList = RoomList(rooms = allRooms.map { roomInstance ->
+
+        val roomList: RoomList = lightModelClientWrapper.runRead {
+            RoomList(rooms = allRooms.map { roomInstance ->
                 Room(name = roomInstance.name,
                         maxPlaces = roomInstance.maxPlaces,
                         roomRef = RouteHelper.urlEncode((roomInstance.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
@@ -80,10 +80,8 @@ fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
         try {
             val resolvedRoom: N_Room = lightModelClientWrapper.resolveNodeIdToConcept(call.parameters["roomRef"]!!.decodeURLPart())!! as N_Room
 
-            lateinit var room: Room
-
-            lightModelClientWrapper.runRead {
-                room = Room(name = resolvedRoom.name,
+            val room: Room = lightModelClientWrapper.runRead {
+                Room(name = resolvedRoom.name,
                         roomRef = RouteHelper.urlEncode((resolvedRoom.unwrap().reference as LightModelClient.NodeAdapter).nodeId),
                         maxPlaces = resolvedRoom.maxPlaces,
                         hasRemoteEquipment = resolvedRoom.hasRemoteEquipment

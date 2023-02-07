@@ -21,23 +21,22 @@ import kotlin.time.Duration.Companion.seconds
 
 val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.ModelServerLightWrapper")
 
-class LightModelClientWrapper {
+class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, models: String) {
 
-    private var mpsModelName: String = ""
+    private var mpsModelName: String = models
     private var wsConnection: String
-    lateinit var lightModelClient: LightModelClient
+    private lateinit var lightModelClient: LightModelClient
 
-    constructor(host: String = "localhost", port: Int = 48302, models: String) {
+    init {
         GeneratedLanguages.registerAll()
-        WS_CONNECTION = "ws://$host:$port/ws"
-        MPS_MODEL_NAME = models
+        wsConnection = "ws://$host:$port/ws"
     }
 
     suspend fun createConnection() {
 
         // we require a http client with WS support for the connection
-        logger.info("Connecting to light model-server at $WS_CONNECTION")
-        this.lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, WS_CONNECTION))
+        logger.info("Connecting to light model-server at $wsConnection")
+        this.lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, wsConnection))
 
         // the modelQL query
         this.lightModelClient.changeQuery(buildModelQuery {
@@ -46,7 +45,7 @@ class LightModelClientWrapper {
                 // to all modules
                 children("modules") {
                     // selecting the ones that contain our desired model name
-                    whereProperty("name").contains(MPS_MODEL_NAME)
+                    whereProperty("name").contains(mpsModelName)
                     children("models") {
                         // and extract all root nodes, so Rooms and Courses, and their descendants
                         children("rootNodes") {
@@ -103,7 +102,7 @@ class LightModelClientWrapper {
     val resolveNodeIdToConcept: suspend (String) -> N_BaseConcept? = Any@{ ref: String ->
         logger.info("Resolving node $ref")
         return@Any lightModelClient.runRead {
-            lightModelClient.getNodeIfLoaded(ref)?.typed()?.let { it  as N_BaseConcept }
+            lightModelClient.getNodeIfLoaded(ref)?.typed()?.let { it as N_BaseConcept }
         }
     }
 
@@ -112,4 +111,5 @@ class LightModelClientWrapper {
             body()
         }
     }
+
 }
