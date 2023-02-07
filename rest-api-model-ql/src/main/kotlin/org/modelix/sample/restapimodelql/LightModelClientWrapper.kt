@@ -69,6 +69,7 @@ class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, mod
         return runAsyncRead(loadRooms) as List<N_Room>
     }
 
+    // TODO: This or parts of this should move to the LightModelClient itself. Replace it here once this code was migrated, e.g. into `client.waitForRootNode()`
     private suspend fun runAsyncRead(givenFunction: (node: N_Repository) -> List<N_BaseConcept>?): List<N_BaseConcept>? {
         var result: List<N_BaseConcept>? = null
         kotlinx.coroutines.withTimeout(5.seconds) {
