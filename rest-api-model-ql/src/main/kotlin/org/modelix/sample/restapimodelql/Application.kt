@@ -36,7 +36,7 @@ suspend fun main() {
         install(AutoHeadResponse)
         install(Locations)
         install(Routing) {
-            // the BulkApi provides the routs defined in our openapi specification
+            // the BulkApi provides the routs defined in our OpenAPI specification
             ModelQLAPI(lightModelClientWrapper)
         }
     }.start(wait = true)

@@ -58,7 +58,7 @@ fun Route.ModelQLAPI(lightModelClientWrapper: LightModelClientWrapper) {
             }
             call.respond(lecture)
         } catch (e: RuntimeException) {
-            call.respond(HttpStatusCode.NotFound, "Can not load Lecture: " + e.message)
+            call.respond(HttpStatusCode.NotFound, "Cannot load Lecture: " + e.message)
         }
     }
 

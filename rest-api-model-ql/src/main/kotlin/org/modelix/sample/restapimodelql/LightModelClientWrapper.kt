@@ -23,8 +23,8 @@ val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.
 
 class LightModelClientWrapper {
 
-    private var MPS_MODEL_NAME: String = ""
-    private var WS_CONNECTION: String
+    private var mpsModelName: String = ""
+    private var wsConnection: String
     lateinit var lightModelClient: LightModelClient
 
     constructor(host: String = "localhost", port: Int = 48302, models: String) {
@@ -37,8 +37,7 @@ class LightModelClientWrapper {
 
         // we require a http client with WS support for the connection
         logger.info("Connecting to light model-server at $WS_CONNECTION")
-        val lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, WS_CONNECTION))
-        this.lightModelClient = lightModelClient
+        this.lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, WS_CONNECTION))
 
         // the modelQL query
         this.lightModelClient.changeQuery(buildModelQuery {
@@ -61,7 +60,7 @@ class LightModelClientWrapper {
     }
 
     suspend fun getAllLectures(): List<N_Lecture> {
-        //TODO: can we avoid this cast by using generics in runAsyncRead?
+        // TODO: can we avoid this cast by using generics in runAsyncRead?
         logger.info("Loading all lectures")
         return runAsyncRead(loadLectures) as List<N_Lecture>
     }
@@ -104,11 +103,7 @@ class LightModelClientWrapper {
     val resolveNodeIdToConcept: suspend (String) -> N_BaseConcept? = Any@{ ref: String ->
         logger.info("Resolving node $ref")
         return@Any lightModelClient.runRead {
-            if (lightModelClient.getNodeIfLoaded(ref)?.typed() != null) {
-                lightModelClient.getNodeIfLoaded(ref)?.typed() as N_BaseConcept
-            } else {
-                null
-            }
+            lightModelClient.getNodeIfLoaded(ref)?.typed()?.let { it  as N_BaseConcept }
         }
     }
 
