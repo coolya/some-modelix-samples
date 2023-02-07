@@ -26,6 +26,7 @@ include("mps:metamodel")
 
 include("rest-api-json-bulk")
 include("rest-api-model-server")
+include("rest-api-model-ql")
 
 include("spa-dashboard-angular")
 

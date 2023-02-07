@@ -16,7 +16,7 @@ fun N_Lecture.toJson() = Lecture(
     name = this.name,
     description = this.description,
     maxParticipants = this.maxParticipants,
-    room = this.room.unwrap().reference.serialize(),
+    room = this.raw_room?.reference?.serialize() ?: ""
 )
 
 /**
