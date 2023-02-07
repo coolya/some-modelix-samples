@@ -21,9 +21,9 @@ import kotlin.time.Duration.Companion.seconds
 
 val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.ModelServerLightWrapper")
 
-class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, models: String) {
+class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, modelNameSubstring: String) {
 
-    private var mpsModelName: String = models
+    private var modelNameSubstring: String = modelNameSubstring
     private var wsConnection: String
     private lateinit var lightModelClient: LightModelClient
 
@@ -45,7 +45,7 @@ class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, mod
                 // to all modules
                 children("modules") {
                     // selecting the ones that contain our desired model name
-                    whereProperty("name").contains(mpsModelName)
+                    whereProperty("name").contains(modelNameSubstring)
                     children("models") {
                         // and extract all root nodes, so Rooms and Courses, and their descendants
                         children("rootNodes") {
