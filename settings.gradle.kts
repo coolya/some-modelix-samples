@@ -21,14 +21,36 @@ pluginManagement {
     }
 }
 
-include("mps:project-modelserver-backend")
-include("mps:project-mps-backend")
+//
+// MPS related sub-projects
+//
+// extracts the meta-model from the mps languages into the metamodel sub-project
+include("mps")
+// provides the meta-model a sub-project for the APIs as an implementation dependency
 include("mps:metamodel")
+// MPS project which uses the model-server as a storage backend
+include("mps:project-modelserver-backend")
+// MPS project which uses classic MPS XMLs a storage backend
+include("mps:project-mps-backend")
 
-include("rest-api-json-bulk")
-include("rest-api-model-server")
-include("rest-api-model-ql")
-
-include("spa-dashboard-angular")
-
+//
+// modelix
+//
+// sub-project which provides an easy way to start a localized model-server
 include("model-server")
+
+//
+// APIs
+//
+// legacy API using ktor and the json-bulk access MPS plugin
+include("rest-api-json-bulk")
+//  API using ktor and a light model-server client (light)
+include("rest-api-model-ql")
+// API using quarkus and a direct model-server connection (advanced)
+include("rest-api-model-server")
+
+//
+// Web client
+//
+// a single page application which can use any of the APIs
+include("spa-dashboard-angular")

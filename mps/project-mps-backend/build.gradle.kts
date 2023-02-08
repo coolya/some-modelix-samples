@@ -2,7 +2,6 @@ import de.itemis.mps.gradle.BuildLanguages
 
 plugins {
     java
-    id("org.modelix.metamodel.gradle")
 }
 
 buildscript {
@@ -82,21 +81,3 @@ val buildLanguages by tasks.registering(BuildLanguages::class) {
 }
 
 tasks.getByName("build").dependsOn(buildLanguages)
-
-// Generate the API classes
-metamodel {
-    dependsOn(extractMps)
-    mpsHome = mpsDir
-
-    modulesFrom(projectDir.resolve("languages"))
-    modulesFrom(projectDir.resolve("solutions"))
-    includeNamespace("University.Schedule.sandbox")
-    includeLanguage("University.Schedule")
-
-    modulesFrom(projectDir.resolve("build/dependencies"))
-    includeLanguage("org.modelix.model.repositoryconcepts")
-
-    kotlinDir = project(":mps:metamodel").projectDir.resolve("src/main/kotlin")
-
-    registrationHelperName = "University.Schedule.GeneratedLanguages"
-}
