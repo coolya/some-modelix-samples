@@ -68,7 +68,7 @@ gradlew.bat build # windows
 Once the initial build has completes feel free to inspect the [use cases](/README.md#use-cases) and start components as described for each use case.
 Alternatively, you can inspect and edit the project with the code editor of your choice.
  - The top repository provides `IntelliJ` configurations,
- - the [mps](mps) sub-project can be opened using `MPS 2021.3.2`, and
+ - the [mps](mps) sub-project can be opened using `MPS 2021.2.6`, and
  - the [dashboard](spa-dashboard-angular) is a `WebStorm` project.
 
 
@@ -102,6 +102,7 @@ In the following a short overview is given on each component.
      An API based on the meta-model generated with the [api-gen](https://github.com/modelix/api-gen) plugin from modelix.
 
      [See the 'Generated API' section in the MPS README.md](mps/README.md#generated-api)
+
 
   3. **Domain-specific OpenAPI**
 
@@ -203,9 +204,10 @@ To start up the system as described in UC 1a, you first have to have built the e
 
 Once done, you need to start all components involved, these are:
 
-1. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
-   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
-   This includes the `json-bulk-model-access`, `api-gen`, and `modelix-cloud-access`.
+1. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the [mps/project-mps-backend](../mps/project-mps-backend) folder.
+   This MPS project stores the model content using MPS persistence.
+   The gradle build process will have downloaded all plugins needed to `mps/project-mps-backend/build/dependencies` and declare this folder as a global library.
+   This includes the `json-bulk-model-access` and the `light-model-client`.
 
 2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
    ```
@@ -415,10 +417,10 @@ Once done, you need to start all components involved, these are:
       ```
    </details>
 
-4. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
-   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
-   This includes the `cloud-access` plugin used.
-
+4. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the [mps/project-modelserver-backend](../mps/project-modelsever-backend) folder.
+   This MPS project does not store the model locally and instead obtains them from the `model-server` via the `cloud-access` plugin.
+   The gradle build process will have downloaded all plugins needed to `mps/project-modelserver-backend/build/dependencies` and declare this folder as a global library.
+   This includes the `cloud-access` plugin.
 
 5. Explore the dashboard at [http://localhost:4200/](http://localhost:4200/)
 
@@ -437,8 +439,9 @@ To start up the system as described in UC 1c, you first have to have built the e
 
 Once done, you need to start all components involved, these are:
 
-1. **MPS**: Start `MPS 2021.3.2` without any global plugins and open the project in the [mps](../mps) folder.
-   The gradle build process will have downloaded all plugins needed to `mps/build/dependencies`.
+1. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the [mps/project-mps-backend](../mps/project-mps-backend) folder.
+   This MPS project stores the model content using MPS persistence.
+   The gradle build process will have downloaded all plugins needed to `mps/project-mps-backend/build/dependencies` and declare this folder as a global library.
    This includes the `light-model-server` plugin used in this example UC.
 
 2. **API layer**: The `light-model-server` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
