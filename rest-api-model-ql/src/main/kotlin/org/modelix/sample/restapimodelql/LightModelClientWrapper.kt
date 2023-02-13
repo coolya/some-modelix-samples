@@ -9,6 +9,7 @@ import kotlinx.coroutines.delay
 import org.modelix.client.light.LightModelClient
 import org.modelix.client.light.WebsocketConnection
 import org.modelix.metamodel.typed
+import org.modelix.model.api.INode
 import org.modelix.model.repositoryconcepts.N_Module
 import org.modelix.model.repositoryconcepts.N_Repository
 import org.modelix.model.repositoryconcepts.models
@@ -69,17 +70,27 @@ class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, mod
         return runAsyncRead(loadRooms) as List<N_Room>
     }
 
-    // TODO: This or parts of this should move to the LightModelClient itself. Replace it here once this code was migrated, e.g. into `client.waitForRootNode()`
     private suspend fun runAsyncRead(givenFunction: (node: N_Repository) -> List<N_BaseConcept>?): List<N_BaseConcept>? {
         var result: List<N_BaseConcept>? = null
+        val root = lightModelClient.waitForRootNode()
+        if (root != null) {
+            lightModelClient.runRead {
+                result = givenFunction(root.typed<N_Repository>())
+            }
+        }
+        return result
+    }
+
+    //TODO remove this after the migration in modelix.core is complete
+    private suspend fun LightModelClient.waitForRootNode(): INode? {
+        var result : INode? = null
         kotlinx.coroutines.withTimeout(5.seconds) {
             while (true) {
                 lightModelClient.checkException()
-                val node = lightModelClient.runRead { lightModelClient.getRootNode() }
+                val node = runRead { lightModelClient.getRootNode() }
                 if (node != null && lightModelClient.runRead { node.isValid }) {
                     lightModelClient.runRead {
-                        logger.info("Reading repository")
-                        result = givenFunction(node.typed<N_Repository>())
+                        result = node
                     }
                     break
                 }
