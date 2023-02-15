@@ -19,7 +19,7 @@ object BulkAccessWrapper {
         INodeReferenceSerializer.register(ReferenceSerializer.Companion)
 
         client = MPSRemoteClient(host, port)
-        modelsToLoad = client.getViewModels().filter { models.contains(it.name) }
+        modelsToLoad = client.getViewModels().filter { model-> models.any { model.name.contains(it) } }
 
         if (models.size != modelsToLoad.size) {
             logger.error("Not all models available!")

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/../languages/University.Schedule/University.Schedule.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/../solutions/University.Schedule.modelserver.backend.build/University.Schedule.modelserver.backend.build.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/../solutions/University.Schedule.modelserver.backend.sandbox/University.Schedule.modelserver.backend.sandbox.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

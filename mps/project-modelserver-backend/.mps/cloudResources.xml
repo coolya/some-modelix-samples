@@ -3,12 +3,12 @@
   <component name="CloudResources">
     <option name="modelServers">
       <set>
-        <option value="http://localhost:28101/" />
+        <option value="http://127.0.0.1:28101/" />
       </set>
     </option>
     <option name="mappedModules">
       <set>
-        <option value="http://localhost:28101/courses#University.Schedule.sandbox" />
+        <option value="http://127.0.0.1:28101/courses#University.Schedule.modelserver.backend.sandbox" />
       </set>
     </option>
   </component>
