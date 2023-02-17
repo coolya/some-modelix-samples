@@ -1,0 +1,8 @@
+name: samples
+title: Modelix Samples
+version: 0.1
+prerelease: -beta.1
+nav:
+- modules/ROOT/partials/nav.adoc
+
+
