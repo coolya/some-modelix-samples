@@ -5,11 +5,8 @@ import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
 import jetbrains.mps.lang.core.N_BaseConcept
-import kotlinx.coroutines.delay
 import org.modelix.client.light.LightModelClient
-import org.modelix.client.light.WebsocketConnection
 import org.modelix.metamodel.typed
-import org.modelix.model.api.INode
 import org.modelix.model.repositoryconcepts.N_Module
 import org.modelix.model.repositoryconcepts.N_Repository
 import org.modelix.model.repositoryconcepts.models
@@ -17,27 +14,25 @@ import org.modelix.model.repositoryconcepts.rootNodes
 import org.modelix.model.server.api.buildModelQuery
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.seconds
 
 val logger: Logger = LoggerFactory.getLogger("org.modelix.sample.restapimodelql.ModelServerLightWrapper")
 
-class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, modelNameSubstring: String) {
+class LightModelClientWrapper(
+    private val host: String = "localhost",
+    private val port: Int = 48302,
+    private var modelNameSubstring: String) {
 
-    private var modelNameSubstring: String = modelNameSubstring
-    private var wsConnection: String
     private lateinit var lightModelClient: LightModelClient
 
     init {
         GeneratedLanguages.registerAll()
-        wsConnection = "ws://$host:$port/ws"
     }
 
     suspend fun createConnection() {
 
         // we require a http client with WS support for the connection
-        logger.info("Connecting to light model-server at $wsConnection")
-        this.lightModelClient = LightModelClient(WebsocketConnection(HttpClient(CIO) { install(WebSockets) }, wsConnection))
+        logger.info("Connecting to light model-server at ws://$host:$port/ws")
+        this.lightModelClient = LightModelClient(host, port)
 
         // the modelQL query
         this.lightModelClient.changeQuery(buildModelQuery {
@@ -76,25 +71,6 @@ class LightModelClientWrapper(host: String = "localhost", port: Int = 48302, mod
         if (root != null) {
             lightModelClient.runRead {
                 result = givenFunction(root.typed<N_Repository>())
-            }
-        }
-        return result
-    }
-
-    //TODO remove this after the migration in modelix.core is complete
-    private suspend fun LightModelClient.waitForRootNode(): INode? {
-        var result : INode? = null
-        kotlinx.coroutines.withTimeout(5.seconds) {
-            while (true) {
-                lightModelClient.checkException()
-                val node = runRead { lightModelClient.getRootNode() }
-                if (node != null && lightModelClient.runRead { node.isValid }) {
-                    lightModelClient.runRead {
-                        result = node
-                    }
-                    break
-                }
-                delay(10.milliseconds)
             }
         }
         return result
