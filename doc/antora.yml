@@ -1,8 +1,2 @@
-name: samples
-title: Modelix Samples
+name: component-documentation
 version: 0.1
-prerelease: -beta.1
-nav:
-- modules/ROOT/partials/nav.adoc
-
-

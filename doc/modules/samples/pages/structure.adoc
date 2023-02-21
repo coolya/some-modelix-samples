@@ -1,0 +1,20 @@
+= Repository Structure
+:navtitle: Repository Structure
+
+The repository is a single gradle project to make building everything at once easy. The examples are organized by the technology they use into the various sub-folders:
+
+| Id / Link                             | Components/Technologies              | Description                                                                                                                                     | Status | Folder                                                           |
+|---------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------|
+| [1](mps/README.md#language)           | MPS + `cloud-plugin`                 | MPS language definition that is used by all examples. The MPS language structure is used to generate a Java API consumed by all examples.       | ✅      | [MPS](mps)                                                       |
+| [2](mps/README.md#generated-api)      | MPS, `api-gen`                       | Generated Java API from the MPS language.                                                                                                       | ✅      | [University.Schedule.api](mps/solutions/University.Schedule.api) |
+| [3](openapi/README.md)                | OpenAPI                              | A hand-crafted OpenAPI specification that defines domain-specific REST endpoints which expose the model contents.                               | ✅      | [Openapi](openapi)                                               |
+| [4a](rest-api-json-bulk/README.md)    | MPS w/ `mps-json-bulk-access` + Ktor | An implementation of the OpenAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. | ✅      | [rest-api-json-bulk](rest-api-json-bulk)                         |
+| [4b](rest-api-model-server/README.md) | `model-server` + Quarkus             | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`.                        | ✅      | [rest-api-model-server](rest-api-model-server)                   |
+| [4c](rest-api-model-ql/README.md)     | `ligh-model-server`+ ModelQL + Ktor  | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `the light-model-server` MPS plugin.   | ✅      | [rest-api-model-ql](rest-api-model-ql)                           |
+| [5](spa-dashboard-angular/README.md)  | Angular via REST                     | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations.                                    | ✅      | [spa-dashboard-angular](spa-dashboard-angular)                   |
+| `6`                                   | ❔ + websockets                       | A web application that allows editing of MPS models and realtime collaboration.                                                                 | ❌      | collaboration-web-app                                            |
+| `7`                                   | docker / kubernetes                  |                                                                                                                                                 | ❌      | deployment                                                       |
+
+Each sub-folder contains its own `README.md` with component specific documentation.
+
+

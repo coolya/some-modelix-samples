@@ -1,0 +1,32 @@
+= Welcome to the modelix samples!
+:navtitle: Introduction
+
+  ⚠️ **The examples are currently work in progress** ⚠️
+
+== Introduction
+
+
+The modelix samples repository contains a couple of examples that show various aspects of the modelix platform.
+Not all features of modelix are shown here so this is not a complete demo of everything modelix can do.
+The primary focus of the examples is to show how you can use modelix to work with language and models defined in
+MPS outside of MPS using JVM (Java/Kotlin) or web frameworks/tools.
+
+None of the examples try to reuse editors defined in MPS.
+If your goal is to reuse MPS editors as is then modelix itself ships with a projector integration to achieve this.
+
+While all the examples use the same language defined in MPS they are not meant as one complete example
+but rather as individual parts. The purpose of the examples is to give inspiration of what is possible with modelix
+and make you think and envision your own use cases.
+
+
+== Getting Started
+
+include::ROOT:partial$how-to-build.adoc[leveloffset=+2]
+
+Once the initial build has completes feel free to inspect the xref:samples:usecase.adoc[] and start components as described for each use case.
+Alternatively, you can inspect and edit the project with the code editor of your choice.
+
+* The top repository provides `IntelliJ` configurations,
+* the [mps](mps) sub-project can be opened using `MPS 2021.2.6`, and
+* the [dashboard](spa-dashboard-angular) is a `WebStorm` project.
+

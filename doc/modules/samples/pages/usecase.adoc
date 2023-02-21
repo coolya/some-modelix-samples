@@ -1,0 +1,7 @@
+= Use cases
+:navtitle: Use Cases
+
+To illustrate different use cases, this section provides a short description of each use case alongside with the required system architecture.
+
+
+

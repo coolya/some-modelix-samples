@@ -1,4 +1,0 @@
-= Welcome to the modelix samples!
-:navtitle: Samples
-
-TODO

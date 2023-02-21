@@ -1,0 +1,6 @@
+= Intermediate OpenAPI
+:navtitle: Intermediate OpenAPI
+
+
+TODO
+
