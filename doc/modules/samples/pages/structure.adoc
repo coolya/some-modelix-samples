@@ -1,6 +1,8 @@
 = Repository Structure
 :navtitle: Repository Structure
 
+// TODO
+
 The repository is a single gradle project to make building everything at once easy. The examples are organized by the technology they use into the various sub-folders:
 
 | Id / Link                             | Components/Technologies              | Description                                                                                                                                     | Status | Folder                                                           |
