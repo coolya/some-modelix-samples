@@ -1,9 +1,6 @@
 package org.modelix.sample.restapimodelql
 
 import University.Schedule.*
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.websocket.*
 import jetbrains.mps.lang.core.N_BaseConcept
 import org.modelix.client.light.LightModelClient
 import org.modelix.metamodel.typed
@@ -28,7 +25,7 @@ class LightModelClientWrapper(
         GeneratedLanguages.registerAll()
     }
 
-    suspend fun createConnection() {
+    fun createConnection() {
 
         // we require a http client with WS support for the connection
         logger.info("Connecting to light model-server at ws://$host:$port/ws")
