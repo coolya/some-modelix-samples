@@ -2,7 +2,7 @@
 ** xref:samples:index.adoc[]
 ** xref:samples:structure.adoc[]
 ** xref:samples:architecture.adoc[]
-** Parts
+** Components
 *** xref:samples:mps.adoc[]
 *** xref:samples:model-server.adoc[]
 *** xref:samples:dashboard.adoc[]

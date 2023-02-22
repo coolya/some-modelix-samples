@@ -1,7 +1,6 @@
 = System architecture and components in this repository
 :navtitle: System Architecture
 
-
 This project allows you to run different use cases.
 Depending on the chosen use case, only a subset of the components in this repository are used.
 
@@ -15,62 +14,73 @@ image::system-diagram-full.svg[]
 
 In the following a short overview is given on each component.
 
-=== **The MPS Language**
+
+=== The MPS Language
 
 The language (meta-model) and model used in all examples.
-[See the 'Language' section in the MPS README.md](mps/README.md#language)
+See the xref:samples:mps.adoc#language[Language section in the MPS component documentation]
 
 
-=== **Generated model API (domain API)**
+=== Generated model API (domain API
 
-An API based on the meta-model generated with the [api-gen](https://github.com/modelix/api-gen) plugin from modelix.
-[See the 'Generated API' section in the MPS README.md](mps/README.md#generated-api)
+An API based on the meta-model generated with the xref:core:metamodel-generator.adoc[metamodel-generator] component from modelix.
+See the xref:samples:mps.adoc#generated-api['Generated API' section in the MPS component documentation]
 
 
+=== Domain-specific OpenAPI
 
-=== **Domain-specific OpenAPI**
-In this example project, an extra domain-specific API layer is added which is defined in the [OpenAPI](https://www.openapis.org/) [specification](/openapi).
+In this example project, an extra domain-specific API layer is added which is defined in the xref:samples:openapi.adoc[OpenAPI specification]footnote:[See https://www.openapis.org/ for details on how OpenAPI works.].
 This layer is meant educational as no noteworthy abstractions from the language itself happen in this definition.
 It intends to show how one introduces a clearly defined domain-specific abstraction decoupling the language engineering (meta-modeling) and the web development.
 
-We provide two backends (i.e. implementations of the API layer): The [`rest-api-json-bulk`](/rest-api-json-bulk) and [`rest-api-model-server`](/rest-api-model-server) components.
+We provide two backends (i.e. implementations of the API layer): The xref:samples:rest-api-json-bulk.adoc[] and xref:samples:rest-api-model-server.adoc[] components.
 
-For more details, also see the ['OpenAPI of the Courses domain' section in the MPS README.md](openapi/README.md)
+For more details, also see the xref:samples:openapi.adoc[OpenAPI of the Courses domain] section in the MPS component documentation.
+
+
+=== OpenAPI implementation
+
+This project provides two implementations of the xref:samples:openapi.adoc[openapi] domain abstraction.
+
+[ordered]
+MPS as a source::
++
+⚠️ Deprecated!
++
+This backend provides access to the model by obtaining the model knowledge directly from a running MPS instance.
+It is implemented using ktor and connects to the https://github.com/modelix/mps-rest-model-access[`json-bulk-model-access`] plugin running inside of MPS.
+This component can only provide **read only access** as the `json-bulk-model-access` is read only.
++
+For more details, also see the xref:samples:rest-api-json-bulk.adoc[] for details.
+
+model-server as a source::
++
+This backend provides access to the model by connecting to a running xref:core:modelserver.adoc[].
+It is implemented using Quarkus and can provide **read access** to the underlying model.
+Additionally, a websocket for push notifications about ongoing model changes is provided.
+This is realized using websockets exposed by the `model-server`.
++
+For more details, also see the xref:samples:rest-api-model-server.adoc[] component for details.
 
 
 
-=== **OpenAPI implementation**
-This project provides two implementations of the [OpenAPI](openapi) domain abstraction.
+=== Single-page application (SPA) Dashboard
 
-- A. MPS as a source (`rest-api-json-bulk` component)
-
-     This backend provides access to the model by obtaining the model knowledge directly from a running MPS instance.
-     It is implemented using ktor and connects to the [`json-bulk-model-access`](https://github.com/modelix/mps-rest-model-access) plugin running inside of MPS.
-     This component can only provide **read only access** as the `json-bulk-model-access` is read only.
-
-     For more details, also see the [`rest-api-json-bulk` README.md](rest-api-json-bulk/README.md) for details.
-
-- B. model-server as a source (`rest-api-model-server` component)
-
-     This backend provides access to the model by connecting to a running [`modelix model-server`](https://github.com/modelix/modelix.core/tree/main/model-server).
-     It is implemented using Quarkus and can provide **read access** to the underlying model.
-     Additionally, a websocket for push notifications about ongoing model changes is provided.
-     This is realized using websockets exposed by the `model-server`.
-
-     For more details, also see the [`rest-api-model-server` README.md](/rest-api-model-server/README.md) for details.
-
-=== **Single-page application (SPA) Dashboard**
 The dashboard provides access to model knowledge through a browser.
 As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backend implementations.
 However, the dashboard is consequently limited by the chosen backend.
 
-For more details, also see the [`spa-dashboard-angular` README.md](spa-dashboard-angular/README.md) for details.
+For more details, also see the xref:samples:dashboard.adoc[] for details.
 
-Note: Requires an OpenAPI implementation to obtain model knowledge from.
+NOTE: This components requires running any of the available OpenAPI implementations to obtain model knowledge from.
 
-=== **'Real-time' collaboration web application**
-> ⚠️ TBD
 
-=== **Deploying to Docker / Kubernetes**
-> ⚠️ TBD
+=== Real-time' collaboration web application
+
+⚠️ TBD
+
+
+=== Deploying to Docker / Kubernetes
+
+⚠️ TBD
 
