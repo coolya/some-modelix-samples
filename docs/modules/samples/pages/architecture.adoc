@@ -23,7 +23,7 @@ See the xref:samples:mps.adoc#language[Language section in the MPS component doc
 
 === Generated model API (domain API
 
-An API based on the meta-model generated with the xref:core:metamodel-generator.adoc[metamodel-generator] component from modelix.
+An API based on the meta-model generated with the xref:ROOT:todo.adoc[todo:metamodel-generator] component from modelix.
 See the xref:samples:mps.adoc#generated-api['Generated API' section in the MPS component documentation]
 
 
@@ -55,7 +55,7 @@ For more details, also see the xref:samples:rest-api-json-bulk.adoc[] for detail
 
 model-server as a source::
 +
-This backend provides access to the model by connecting to a running xref:core:modelserver.adoc[].
+This backend provides access to the model by connecting to a running xref:ROOT:todo.adoc[todo:model-server].
 It is implemented using Quarkus and can provide **read access** to the underlying model.
 Additionally, a websocket for push notifications about ongoing model changes is provided.
 This is realized using websockets exposed by the `model-server`.

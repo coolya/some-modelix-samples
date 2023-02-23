@@ -16,8 +16,8 @@ The examples are organized by the technology they use into the various sub-folde
 | xref:samples:rest-api-model-server.adoc[`model-server` + Quarkus] | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`. | ✅ | `rest-api-model-server`
 | xref:samples:rest-api-model-ql.adoc[`ligh-model-server`+ ModelQL + Ktor] | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `the light-model-server` MPS plugin. | ✅ | `rest-api-model-ql`
 | xref:samples:dashboard.adoc[Angular via REST] | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations. | ✅ | `spa-dashboard-angular`
-| xref:samples:todo.adoc[❔ + websockets] | A web application that allows editing of MPS models and realtime collaboration. | ❌ | `collaboration-web-app`
-| xref:samples:todo.adoc[docker / kubernetes]| | ❌ | `deployment`
+| xref:ROOT:todo.adoc[❔ + websockets] | A web application that allows editing of MPS models and realtime collaboration. | ❌ | `collaboration-web-app`
+| xref:ROOT:todo.adoc[docker / kubernetes]| | ❌ | `deployment`
 |===
 
 Each component documentation with component specific content.
