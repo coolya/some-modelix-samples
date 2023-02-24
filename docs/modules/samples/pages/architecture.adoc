@@ -17,14 +17,16 @@ In the following a short overview is given on each component.
 
 === The MPS Language
 
-The language (meta-model) and model used in all examples.
-See the xref:samples:mps.adoc#language[Language section in the MPS component documentation]
+The meta-model (language) of the courses domain and a model (soulution) with sample data in https://www.jetbrains.com/mps/[JetBrains MPS] on which everything in this sample is based.
+
+▶️  For more details, see the xref:samples:mps.adoc#language[Language section in the MPS component documentation]
 
 
 === Generated model API (domain API
 
 An API based on the meta-model generated with the xref:ROOT:todo.adoc[todo:metamodel-generator] component from modelix.
-See the xref:samples:mps.adoc#generated-api['Generated API' section in the MPS component documentation]
+
+▶️ For more details, see the xref:samples:mps.adoc#generated-api['Generated API' section in the MPS component documentation]
 
 
 === Domain-specific OpenAPI
@@ -35,7 +37,7 @@ It intends to show how one introduces a clearly defined domain-specific abstract
 
 We provide two backends (i.e. implementations of the API layer): The xref:samples:rest-api-json-bulk.adoc[] and xref:samples:rest-api-model-server.adoc[] components.
 
-For more details, also see the xref:samples:openapi.adoc[OpenAPI of the Courses domain] section in the MPS component documentation.
+▶️ For more details, see the xref:samples:openapi.adoc[OpenAPI component documentation].
 
 
 === OpenAPI implementation
@@ -51,7 +53,7 @@ This backend provides access to the model by obtaining the model knowledge direc
 It is implemented using ktor and connects to the https://github.com/modelix/mps-rest-model-access[`json-bulk-model-access`] plugin running inside of MPS.
 This component can only provide **read only access** as the `json-bulk-model-access` is read only.
 +
-For more details, also see the xref:samples:rest-api-json-bulk.adoc[] for details.
+▶️ For more details, see the xref:samples:rest-api-json-bulk.adoc[] for details.
 
 model-server as a source::
 +
@@ -60,7 +62,7 @@ It is implemented using Quarkus and can provide **read access** to the underlyin
 Additionally, a websocket for push notifications about ongoing model changes is provided.
 This is realized using websockets exposed by the `model-server`.
 +
-For more details, also see the xref:samples:rest-api-model-server.adoc[] component for details.
+▶️ For more details, also see the xref:samples:rest-api-model-server.adoc[] component for details.
 
 
 
@@ -70,9 +72,9 @@ The dashboard provides access to model knowledge through a browser.
 As it is conforming to the OpenAPI specification, the dashboard is able to obtain the model content from both backend implementations.
 However, the dashboard is consequently limited by the chosen backend.
 
-For more details, also see the xref:samples:dashboard.adoc[] for details.
-
 NOTE: This components requires running any of the available OpenAPI implementations to obtain model knowledge from.
+
+▶️ For more details, also see the xref:samples:dashboard.adoc[] for details.
 
 
 === Real-time' collaboration web application

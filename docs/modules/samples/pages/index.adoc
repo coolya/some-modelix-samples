@@ -27,6 +27,6 @@ Once the initial build has completes feel free to inspect the xref:samples:useca
 Alternatively, you can inspect and edit the project with the code editor of your choice.
 
 * The top repository provides `IntelliJ` configurations,
-* the [mps](mps) sub-project can be opened using `MPS 2021.2.6`, and
-* the [dashboard](spa-dashboard-angular) is a `WebStorm` project.
+* the xref:mps.adoc[] sub-project can be opened using `MPS 2021.2.6`, and
+* the xref:dashboard[] is a `WebStorm` project.
 
