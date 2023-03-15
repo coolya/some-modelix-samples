@@ -1,7 +1,7 @@
 = model-server start helper
 :navtitle: Local model-server
 
-This 'component' is not a real component but rather a start helper - the xref:ROOT:todo.adoc[`model-server`] is started using the gradle application plugin.
+This 'component' is not a real component but rather a start helper - the xref:modelix:ROOT:main/todo.adoc[`model-server`] is started using the gradle application plugin.
 
 To start the `model-server`, simply call the following in the repository root:
 

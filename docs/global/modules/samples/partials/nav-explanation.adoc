@@ -1,0 +1,6 @@
+* xref:samples:explanation/structure.adoc[]
+* xref:samples:explanation/usecase-1.adoc[]
+* xref:samples:explanation/usecase-1-a.adoc[]
+* xref:samples:explanation/usecase-1-b.adoc[]
+* xref:samples:explanation/usecase-2.adoc[]
+* xref:samples:explanation/usecase-3.adoc[]

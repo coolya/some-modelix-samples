@@ -12,4 +12,6 @@
 **** xref:samples:rest-api-model-ql.adoc[]
 ** xref:samples:usecase.adoc[]
 *** xref:samples:usecase-1.adoc[]
+**** xref:samples:usecase-1-a.adoc[]
+**** xref:samples:usecase-1-b.adoc[]
 *** xref:samples:usecase-2.adoc[]

@@ -1,0 +1,5 @@
+The modelix samples repository contains a couple of examples that show various aspects of the modelix platform.
+Not all features of modelix are shown here so this is not a complete demo of everything modelix can do.
+The primary focus of the examples is to show how you can work with language and models defined in MPS in combination with modelix.
+(Meta-)models are integrated outside of MPS using JVM (Java/Kotlin) and/or web frameworks/tools.
+Everythin is inteded for you to come up with tyou own use-cases and architectures based on what is provided here.

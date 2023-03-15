@@ -1,0 +1,23 @@
+* Samples
+** xref:samples:index.adoc[]
+** Tutorials
++
+--
+include::samples:partial$nav-tutorial.adoc[]
+--
+** How-To Guides
++
+--
+include::samples:partial$nav-howto.adoc[]
+--
+** Reference
++
+--
+include::samples:partial$nav-reference.adoc[]
+--
+** Explanation
++
+--
+include::samples:partial$nav-explanation.adoc[]
+--
+
