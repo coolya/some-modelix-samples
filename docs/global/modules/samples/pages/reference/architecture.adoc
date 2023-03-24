@@ -24,7 +24,7 @@ The meta-model (language) of the courses domain and a model (soulution) with sam
 
 === Generated model API (domain API
 
-An API based on the meta-model generated with the xref:modelix:ROOT:main/todo.adoc[todo:metamodel-generator] component from modelix.
+An API based on the meta-model generated with the xref:samples:reference/meta-model-model-api.adoc[metamodel-generator] component from modelix.
 
 ▶️ For more details, see the xref:samples:reference/meta-model-model-api.adoc['Generated API' section in the MPS component documentation]
 
@@ -57,7 +57,7 @@ This component can only provide **read only access** as the `json-bulk-model-acc
 
 model-server as a source::
 +
-This backend provides access to the model by connecting to a running xref:modelix:ROOT:main/todo.adoc[todo:model-server].
+This backend provides access to the model by connecting to a running xref:samples:reference/model-server.adoc[`model-server`].
 It is implemented using Quarkus and can provide **read access** to the underlying model.
 Additionally, a websocket for push notifications about ongoing model changes is provided.
 This is realized using websockets exposed by the `model-server`.

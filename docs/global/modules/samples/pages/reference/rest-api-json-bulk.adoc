@@ -134,5 +134,5 @@ $ curl -s -X GET "http://localhost:8090/lectures/trash" -H  "accept: application
 --
 ====
 
-Alternatively you can now start the xref:dashboard.adoc[] to consume this API endpoint.
+Alternatively you can now start the xref:samples:reference/dashboard.adoc[] to consume this API endpoint.
 
