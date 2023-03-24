@@ -1,0 +1,23 @@
+= Use Cases of the Sample project
+:navtitle: Use-cases Overview
+
+== Overview
+
+Given the courses domain and its meta-model explained xref:samples:explanation/courses-domain.adoc[here], the samples project covers two use-cases:
+
+. xref:samples:explanation/usecase-1.adoc[]
+. xref:samples:explanation/usecase-2.adoc[]
+
+== Use-Case Architecture Mapping
+
+To illustrate how the different use-cases and component architecture relate, this section provides a short tabular description.
+
+[frame=none,grid=rows,cols="1,1,3,3"]
+|===
+| Use Case                      | Variant | Backend `MPS` | Backend `model-server`
+.2+| Use Case 1: Dashboard view | 1a. | `light-model-server-client` + `rest-api-model-ql` | `light-model-server-client` + `rest-api-model-ql`
+                                | 1b. | `json-bulk-model-access`    + `rest-api-json-bulk`| ❌
+
+| Use Case 2: Real-time collaboration |  | 🏗️ | 🏗️
+|===
+

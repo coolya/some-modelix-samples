@@ -13,7 +13,7 @@ You can build this subproject individually from the parent folder via all gradle
 ./gradlew rest-api-model-ql:build
 --
 
-Before running the API provider you need to open the xref:mps.adoc[MPS project] in the `mps` folder.
+Before running the API provider you need to open the xref:samples:reference/mps.adoc[MPS project] in the `mps` folder.
 The initial gradle build will automatically have set up MPS with the https://github.com/modelix/modelix/tree/mps/2020.3/mps[`light-model-server` plugin] and expose the models via query language called ModelQL.
 This API is then accessed from this openAPI abstraction implementation to load the models.
 
@@ -131,5 +131,5 @@ $ curl -s -X GET "http://localhost:8090/lectures/trash" -H  "accept: application
 ====
 
 
-Alternatively you can now start the xref:dashboard.adoc] to consume this API endpoint.
+Alternatively you can now start the xref:samples:reference/dashboard.adoc[] to consume this API endpoint.
 

@@ -1,1 +1,4 @@
-// * xref:samples:tutorial/openapi.adoc[]
+* Samples
+** xref:samples:tutorial/startup-usecases.adoc[]
+** xref:samples:tutorial/start-secase-1-a.adoc[]
+** xref:samples:tutorial/start-secase-1-b.adoc[]

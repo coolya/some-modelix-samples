@@ -1,14 +1,14 @@
 = System architecture and components in this repository
 :navtitle: System Architecture
 
-This project allows you to run different use cases.
-Depending on the chosen use case, only a subset of the components in this repository are used.
+This samples implementations allow to run different use-cases in different setups - thus showing the flexibility of the modelix platform.
+Depending on the chosen use-case, only a subset of the components in this repository are used.
 
 
 == Full system architecture
 
-The full architecture includes components for multiple use cases.
-One does not need all components to realize individual use cases.
+The full architecture includes components used for multiple use-cases.
+One does not need all components to realize individual use-cases.
 
 image::system-diagram-full.svg[]
 
@@ -19,30 +19,30 @@ In the following a short overview is given on each component.
 
 The meta-model (language) of the courses domain and a model (soulution) with sample data in https://www.jetbrains.com/mps/[JetBrains MPS] on which everything in this sample is based.
 
-▶️  For more details, see the xref:samples:mps.adoc#language[Language section in the MPS component documentation]
+▶️  For more details, see the xref:samples:reference/meta-model-model-api.adoc[Language section in the MPS component documentation]
 
 
 === Generated model API (domain API
 
 An API based on the meta-model generated with the xref:modelix:ROOT:main/todo.adoc[todo:metamodel-generator] component from modelix.
 
-▶️ For more details, see the xref:samples:mps.adoc#generated-api['Generated API' section in the MPS component documentation]
+▶️ For more details, see the xref:samples:reference/meta-model-model-api.adoc['Generated API' section in the MPS component documentation]
 
 
 === Domain-specific OpenAPI
 
-In this example project, an extra domain-specific API layer is added which is defined in the xref:samples:openapi.adoc[OpenAPI specification]footnote:[See https://www.openapis.org/ for details on how OpenAPI works.].
+In this example project, an extra domain-specific API layer is added which is defined in the xref:samples:reference/openapi.adoc[OpenAPI specification]footnote:[See https://www.openapis.org/ for details on how OpenAPI works.].
 This layer is meant educational as no noteworthy abstractions from the language itself happen in this definition.
 It intends to show how one introduces a clearly defined domain-specific abstraction decoupling the language engineering (meta-modeling) and the web development.
 
-We provide two backends (i.e. implementations of the API layer): The xref:samples:rest-api-json-bulk.adoc[] and xref:samples:rest-api-model-server.adoc[] components.
+We provide two backends (i.e. implementations of the API layer): The xref:samples:reference/rest-api-json-bulk.adoc[] and xref:samples:reference/rest-api-model-server.adoc[] components.
 
-▶️ For more details, see the xref:samples:openapi.adoc[OpenAPI component documentation].
+▶️ For more details, see the xref:samples:reference/openapi.adoc[OpenAPI component documentation].
 
 
 === OpenAPI implementation
 
-This project provides two implementations of the xref:samples:openapi.adoc[openapi] domain abstraction.
+This project provides two implementations of the xref:samples:reference/openapi.adoc[openapi] domain abstraction.
 
 [ordered]
 MPS as a source::
@@ -53,7 +53,7 @@ This backend provides access to the model by obtaining the model knowledge direc
 It is implemented using ktor and connects to the https://github.com/modelix/mps-rest-model-access[`json-bulk-model-access`] plugin running inside of MPS.
 This component can only provide **read only access** as the `json-bulk-model-access` is read only.
 +
-▶️ For more details, see the xref:samples:rest-api-json-bulk.adoc[] for details.
+▶️ For more details, see the xref:samples:reference/rest-api-json-bulk.adoc[] for details.
 
 model-server as a source::
 +
@@ -62,7 +62,7 @@ It is implemented using Quarkus and can provide **read access** to the underlyin
 Additionally, a websocket for push notifications about ongoing model changes is provided.
 This is realized using websockets exposed by the `model-server`.
 +
-▶️ For more details, also see the xref:samples:rest-api-model-server.adoc[] component for details.
+▶️ For more details, also see the xref:samples:reference/rest-api-model-server.adoc[] component for details.
 
 
 
@@ -74,7 +74,7 @@ However, the dashboard is consequently limited by the chosen backend.
 
 NOTE: This components requires running any of the available OpenAPI implementations to obtain model knowledge from.
 
-▶️ For more details, also see the xref:samples:dashboard.adoc[] for details.
+▶️ For more details, also see the xref:samples:reference/dashboard.adoc[] for details.
 
 
 === Real-time' collaboration web application

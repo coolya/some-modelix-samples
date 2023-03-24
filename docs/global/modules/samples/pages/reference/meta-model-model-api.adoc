@@ -1,11 +1,11 @@
-= MPS Courses Domain Language & model
-:navtitle: MPS
+= Meta-model and the Generated Domain-Specific Model API
+:navtitle: Meta-model & Generated Model API
 
 == Language
 
-The language used in all examples is the same. The language itself is fairly small. It describes a very simplified lecture
-schedule. The language intentionally doesn't use expressions, creating editors for expressions by hand is very cumbersome and
-at the time where these samples were created modelix has no support for generating these editors for you.
+The language used in all examples is the same.
+The language itself is fairly small: It describes a very simplified lecture schedule.
+The language intentionally does not use expressions, creating editors for expressions by hand is very cumbersome and at the time where these samples were created modelix has no support for generating these editors for you.
 The main concepts of the language are:
 
 - http://127.0.0.1:63320/node?ref=r%3Adfa26643-4653-44bc-9dfe-5a6581bcd381%28University.Schedule.structure%29%2F4128798754188010580[Room]:
@@ -236,6 +236,4 @@ are checked into the repository.  **This limitation is specific this example** a
 to load the right languages during the build. Other projects are successfully using the `api-gen` code generator within
 their CI/gradle build.  The limitation will get fixed in the future but for now the generated Java
 code is checked into the repository.
-
-
 

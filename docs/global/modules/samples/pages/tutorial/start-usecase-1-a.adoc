@@ -1,30 +1,28 @@
-== UC 1a implementaitons
+= Run Use-Case 1 Implementation
+:navtitle: Run Use-Case 1 Implementation
 
-The samples provide a total of three variation of this use case
-The system architecture changes correspondingly:
+NOTE: This Tutorial shows how to start up a system that implements xref:samples:explanation/usecase-1.adoc[]
 
+The samples provide a total of three architectural variation of this use case:
+
+. Using the more complex `rest-api-model-server` backend and the `model-server`.
++
 image::uc-1a-read-only-dashboard.svg[]
 
+. Using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
++
 image::uc-1c-read-only-dashboard.svg[]
 
-
- using the more complex `rest-api-model-server` backend and the `model-server`.
-using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
-
-`rest-api-model-server` (legacy) + `model-server`
+. `rest-api-model-server` (legacy) + `model-server`
 
 
 == How to start UC 1a
 
-
-
-
-
-NOTE: All gradle commands assume you are in the top level folder of this repository.
+NOTE: All gradle commands assume you are in the top level folder of the samples repository.
 
 To start up the system as described in UC 1a, you first have to have built the entire project:
 
-[,sh]
+[source,sh]
 ----
 ./gradlew
 ----
@@ -38,7 +36,7 @@ Once done, you need to start all components involved, these are:
 
 2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
 +
-[sh]
+[source,sh]
 ----
 $ ./gradlew rest-api-json-bulk:run
 ----
