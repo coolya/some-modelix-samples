@@ -1,0 +1,53 @@
+= Single page application: An Angular based dashboard
+:navtitle: Dashboard
+:reftext: Dashboard
+
+.The SPA Dashboard
+image::spa-sample-1.png[]
+
+.View on a single Lecture in the Dashboard
+image::spa-sample-2.png[]
+
+
+This component provides a single page application which accesses an implementation of the sample xref:samples:reference/openapi.adoc[OpenAPI] specification.
+
+The idea here is to illustrate a read only xref:samples:explanation/usecase-1.adoc[use-case] where a system/service outside of MPS wants to consume the content of models previously defined in MPS.
+This dashboard is a single-page app showing content obtained from the intermediate REST APIs.
+A user cannot edit these models from the browser.
+
+NOTE: It does not matter whether MPS is used to store the model information (e.g. by running an MPS instance in the cloud), or alternatively the modelix `model-server` is used.
+
+
+== Building & Running
+
+=== 1. Build `spa-dashboard-angular`
+
+You can build this subproject individually from the parent folder via via Gradle:
+```
+./gradlew spa-dashboard-angular:build
+```
+
+
+=== 2. Start an OpenAPI implementation
+
+To run this application you will need a component which provides an API implementation conforming to the OpenAPI spec.
+Thus, you need to start one of the available OpenAPI implementations in this project:
+
+* Either start the xref:samples:reference/rest-api-json-bulk.adoc[rest-api-json-bulk] implementation,
+* or alternatively you can start the xref:samples:reference/rest-api-model-server[rest-api-model-server] implementation.
+
+Check the documentation of the corresponding project parts on how to start them.
+
+NOTE: Make sure you have the correct ports defined in the API URLs.
+This app expects `8090` by default.
+
+=== 3. Run the angular app
+
+Next run this single page application via:
+
+```
+./gradlew spa-dashboard-angular:npmRun
+```
+
+You can then go to http://localhost:4200 to see a dashboard with the courses model content.
+

@@ -1,0 +1,265 @@
+= Run Use-Case 2a Implementation
+:navtitle: Run Use-Case 1a Implementation
+== UC 1b implementaitons
+
+TODO
+using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
++
+image::uc-1b-read-only-dashboard.svg[]
+
+
+== How to start UC 1b
+
+NOTE: All gradle commands assume you are in the top level folder of this repository.
+
+To start up the system as described in UC 1b, you first have to have build the entire project:
+
+[,sh]
+----
+./gradlew
+----
+
+
+Once done, you need to start all components involved, these are:
+
+1. **modelix model-server**: Model knowledge is supplied by the `model-sever` in this use case.
+   To avoid complicated setups, we simply start the model-server in memory and load the model content from the included dump file, all using gradle:
++
+[,sh]
+----
+./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+./gradlew model-server:run --args="-inmemory -dumpin courses.modelserver.dump"
+
+> Task :model-server:run
+18:33:16,185 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+18:33:16,186 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml]
+18:33:16,194 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@f4168b8 - URL [jar:file:/home/nkoester/.gradle/caches/modules-2/files-2.1/org.modelix/model-server-fatjar/1.3.2/1e6502c0e8282b1fe2c06824ad43f4d7270f20d7/model-server-fatjar-1.3.2.jar!/logback.xml] is not of type file
+18:33:16,269 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:33:16,270 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [console]
+18:33:16,272 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.modelix] to DEBUG
+18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[org.modelix]
+18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+18:33:16,282 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[ROOT]
+18:33:16,282 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:33:16,283 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@7ff95560 - Registering current configuration as safe fallback point
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - Max memory (bytes): 32178700288
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - Server process started
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
+18:33:16.295 [main] INFO  org.modelix.model.server.Main - In memory: true
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to secret file: /secrets/modelsecret/modelsecret.txt
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Path to JDBC configuration file: null
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Schema initialization: false
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Set values: []
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
+18:33:16.296 [main] INFO  org.modelix.model.server.Main - Port: 28101
+Values loaded from /home/nkoester/git/modelix/modelix-sample/model-server/courses.modelserver.dump (73)
+18:33:16.364 [main] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+18:33:16.428 [main] INFO  ktor.application - Application started in 0.088 seconds.
+18:33:16.518 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:28101
+<===========--> 85% EXECUTING [7s]
+> :model-server:run
+----
+====
+
+
+2. **API layer**: The `rest-api-model-server` provides an abstraction of the model from the previously started `model-server`, simply run in a new terminal (it will be a blocking call):
++
+[,sh]
+----
+$ ./gradlew rest-api-model-server:quarkusDev
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+$ ./gradlew rest-api-model-server:quarkusDev
+
+> Task :rest-api-model-server:quarkusDev
+Listening for transport dt_socket at address: 5005
+Press [h] for more options>NG [8s]
+Tests paused
+Press [r] to resume testing, [h] for more options>
+Press [r] to resume testing, [o] Toggle test output, [h] for more options>
+__  ____  __  _____   ___  __ ____  ______
+--/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+-/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+2022-12-07 14:02:16,002 INFO  [io.und.websockets] (Quarkus Main Thread) UT026003: Adding annotated server endpoint class org.modelix.sample.restapimodelserver.UpdateSocket for path /updates
+    2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) rest-api-model-server unspecified on JVM (powered by Quarkus 2.14.0.Final) started in 2.922s. Listening on: http://localhost:8090
+2022-12-07 14:02:16,464 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+2022-12-07 14:02:16,465 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, kotlin, resteasy-reactive, resteasy-reactive-jackson, smallrye-context-propagation, smallrye-openapi, swagger-ui, vertx, websockets, websockets-client]
+
+<============-> 95% EXECUTING [16s]
+> :rest-api-model-server:quarkusDev
+----
+====
+
+
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
++
+[,sh]
+----
+   $ ./gradlew spa-dashboard-angular:npmRun
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+> Task :spa-dashboard-angular:npmRun
+
+> angular.io-example@0.0.0 ng
+> ng serve
+
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size
+vendor.js             | vendor        |   2.47 MB |
+polyfills.js          | polyfills     | 318.03 kB |
+styles.css, styles.js | styles        | 211.31 kB |
+main.js               | main          |  86.71 kB |
+runtime.js            | runtime       |   6.53 kB |
+
+| Initial Total |   3.08 MB
+
+Build at: 2022-12-07T09:18:02.345Z - Hash: 186b24edf20c1c4a - Time: 13776ms
+
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+5 unchanged chunks
+
+Build at: 2022-12-07T09:18:02.740Z - Hash: 186b24edf20c1c4a - Time: 324ms
+
+✔ Compiled successfully.
+<============-> 95% EXECUTING [29s]
+> :spa-dashboard-angular:npmRun
+----
+====
+
+
+
+4. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the `mps/project-modelserver-backend` folder.
+This MPS project does not store the model locally and instead obtains them from the `model-server` via the `cloud-access` plugin.
+The gradle build process will have downloaded all plugins needed to `mps/project-modelserver-backend/build/dependencies` and declare this folder as a global library.
+This includes the `cloud-access` plugin.
+
+
+5. Explore the dashboard at http://localhost:4200/
++
+NOTE: Changes to the model in MPS will automatically synchronize to the dashboard
+
+
+== How to start UC 1c
+
+NOTE: All gradle commands assume you are in the top level folder of this repository.
+
+To start up the system as described in UC 1c, you first have to have built the entire project:
+
+[,sh]
+----
+./gradlew
+----
+
+Once done, you need to start all components involved, these are:
+
+1. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the `mps/project-mps-backend` folder.
+   This MPS project stores the model content using MPS persistence.
+   The gradle build process will have downloaded all plugins needed to `mps/project-mps-backend/build/dependencies` and declare this folder as a global library.
+   This includes the `light-model-server` plugin used in this example UC.
+
+2. **API layer**: The `light-model-server` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
++
+[,sh]
+----
+$ ./gradlew rest-api-model-ql:run
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+> Task :rest-api-model-ql:run
+2023-01-25 18:46:48.977 [main] INFO  o.m.s.r.ModelServerLightWrapper - Connecting to light model-server at ws://localhost:48302/ws
+2023-01-25 18:46:49.044 [main] INFO  o.m.s.r.ModelServerLightWrapper - Connection successful
+2023-01-25 18:46:49.070 [main] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+2023-01-25 18:46:49.346 [main] INFO  ktor.application - Application started in 0.286 seconds.
+2023-01-25 18:46:49.455 [DefaultDispatcher-worker-4] INFO  ktor.application - Responding at http://0.0.0.0:8090
+2023-01-25 18:46:50.806 [eventLoopGroupProxy-4-1] INFO  o.m.s.r.ModelServerLightWrapper - Resolving node trash
+<============-> 94% EXECUTING [26m 13s]
+> :rest-api-model-ql:run
+----
+====
+
+
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
+   `$ ./gradlew spa-dashboard-angular:npmRun `
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+> Task :spa-dashboard-angular:npmRun
+
+> angular.io-example@0.0.0 ng
+> ng serve
+
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size
+vendor.js             | vendor        |   2.47 MB |
+polyfills.js          | polyfills     | 318.03 kB |
+styles.css, styles.js | styles        | 211.31 kB |
+main.js               | main          |  86.71 kB |
+runtime.js            | runtime       |   6.53 kB |
+
+| Initial Total |   3.08 MB
+
+Build at: 2022-12-07T09:18:02.345Z - Hash: 186b24edf20c1c4a - Time: 13776ms
+
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+5 unchanged chunks
+
+Build at: 2022-12-07T09:18:02.740Z - Hash: 186b24edf20c1c4a - Time: 324ms
+
+✔ Compiled successfully.
+<============-> 95% EXECUTING [29s]
+> :spa-dashboard-angular:npmRun
+----
+====
+
+4. Explore the dashboard at http://localhost:4200/
++
+NOTE: Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
+
+

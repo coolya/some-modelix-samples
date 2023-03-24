@@ -1,45 +1,52 @@
-# rest-api-model-ql
+= API via modelQL
+:navtitle: modelQL API
 
 This project provides a REST API that wraps the functionality of the `light-model-server` MPS plugin running inside an MPS instance.
-The provided REST API conforms to the API spec in the [openapi.yaml](../actual-rest-api/openapi.yaml).
+The provided REST API conforms to the API spec in the `openapi.yaml`.
 
-## Building
+== Building
 
 You can build this subproject individually from the parent folder via all gradle:
-```
-./gradlew rest-api-model-ql:build
-```
 
-Before running the API provider you need to open the MPS project in the [mps](../mps) folder. 
-The initial gradle build will automatically have set up MPS with the [`light-model-server` plugin](https://github.com/modelix/modelix/tree/mps/2020.3/mps) and expose the models via query language called ModelQL.
+[source,sh]
+--
+./gradlew rest-api-model-ql:build
+--
+
+Before running the API provider you need to open the xref:samples:reference/meta-model-model-api.adoc[MPS project] in the `mps` folder.
+The initial gradle build will automatically have set up MPS with the https://github.com/modelix/modelix/tree/mps/2020.3/mps[`light-model-server` plugin] and expose the models via query language called ModelQL.
 This API is then accessed from this openAPI abstraction implementation to load the models.
 
 Once your MPS project is opened you can run:
 
-```
+[source,sh]
+--
 ./gradlew rest-api-model-ql:run
-```
+--
 
 Once you see a log message like:
-```
+
+[source,sh]
+--
 [DefaultDispatcher-worker-8] INFO  ktor.application - Responding at http://0.0.0.0:8090
-```
+--
 
 Your openAPI implementation is ready.
 
 
 
-Settings such as ports and hosts are defined in the [application.conf](src/main/resources/application.conf).
+Settings such as ports and hosts are defined in the `application.conf` file.
 
 
-## Usage
+== Usage
 
 For simple testing you can `curl` the data provided by the API for example:
-<details>
-<summary>
-Unfold for examples
-</summary>
 
+.🧾 Unfold for examples
+[%collapsible]
+====
+[source,sh]
+--
 ```console
 $ curl -s -X GET "http://localhost:8090/rooms" -H  "accept: application/json" | jq
 {
@@ -120,8 +127,9 @@ $ curl -s -X GET "http://localhost:8090/lectures/mps-node%3Ar%3Ace161c54-ea76-40
 $ curl -s -X GET "http://localhost:8090/lectures/trash" -H  "accept: application/json" | jq
 "Can not load Lecture: null"
 
-```
-</details>
+--
+====
 
 
-Alternatively you can now start the [dashboard](../spa-dashboard-angular) to consume this API endpoint.
+Alternatively you can now start the xref:samples:reference/dashboard.adoc[] to consume this API endpoint.
+

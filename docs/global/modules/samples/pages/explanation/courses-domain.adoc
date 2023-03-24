@@ -1,0 +1,7 @@
+= Courses Domain: MPS Language and Model
+:navtitle: Courses Domain
+
+// ==
+//TODO add domain rationale
+
+

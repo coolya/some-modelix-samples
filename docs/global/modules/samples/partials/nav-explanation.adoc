@@ -1,0 +1,7 @@
+* Samples
+** xref:samples:index.adoc[Samples Introduction]
+** xref:samples:explanation/structure.adoc[]
+** Use-Cases
+*** xref:samples:explanation/usecases.adoc[]
+*** xref:samples:explanation/usecase-1.adoc[]
+*** xref:samples:explanation/usecase-2.adoc[]

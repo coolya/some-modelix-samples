@@ -1,0 +1,33 @@
+= Welcome to the modelix samples!
+:navtitle: Welcome
+
+IMPORTANT: The examples are currently work in progress and are develop alongside the modelix platform development.
+
+== Introduction
+
+include::samples:partial$short-description.adoc[]
+
+None of the examples try to reuse editors defined in MPS.
+If your goal is to reuse MPS editors as is then modelix itself ships with a projector integration to achieve this.
+
+While all the examples use the same language defined in MPS they are not meant as one complete example but rather as individual parts.
+The purpose of the examples is to give inspiration of what is possible with modelix and make you think and envision your own use-cases.
+
+
+== Getting Started
+
+include::modelix:ROOT:tutorial/build-component.adoc[leveloffset=+2]
+
+=== Entry Points
+
+Once the initial build has completes you can dive in with the following:
+
+a. Read explanations in the xref:samples:explanation/courses-domain.adoc[]
+b. Read the use-cases these samples cover in the xref:samples:explanation/usecases.adoc[]
+c. Understand the repository in the xref:samples:explanation/structure.adoc[]
+d. Inspect and edit the project with the code editor of your choice.
+* The top folder in the repository provides `IntelliJ` configurations,
+* the `mps` folder is a sub-project can be opened using `MPS 2021.2.6`, and
+* the `spa-dashboard-angular` folder is a `WebStorm` project.
+e. Start sample components which realize use case xref:samples:tutorial/startup-usecases.adoc[]
+

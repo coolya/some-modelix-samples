@@ -1,0 +1,24 @@
+= Sample Repository Structure
+:navtitle: Sample Structure
+
+The repository of the modelix samples is a single gradle project to make building everything at once easy.
+The examples are organized by the technology they use into the various sub-folders:
+
+[frame=none,grid=rows,cols="2,6,1,1"]
+|===
+|Components/Tech |Description |Status |Folder
+
+
+| xref:samples:reference/meta-model-model-api.adoc[MPS + `cloud-plugin`] | MPS language definition that is used by all examples. The MPS language structure is used to generate a Java API consumed by all examples. | ✅ | `mps`
+| xref:samples:reference/meta-model-model-api.adoc[MPS, `metamodel-generator`] | Generated Kotlin API from the MPS language. | ✅ | `mps/metamodel`
+| xref:samples:reference/openapi.adoc[OpenAPI] | A hand-crafted OpenAPI specification that defines domain-specific REST endpoints which expose the model contents. | ✅ | `openapi`
+| xref:samples:reference/rest-api-json-bulk.adoc[MPS w/ `mps-json-bulk-access` + Ktor] | An implementation of the OpenAPI that exposes the model contents via REST. Obtains model data from MPS using the `mps-json-bulk-access` plugin. (⚠️ deprecated!) | ✅ | `rest-api-json-bulk`
+| xref:samples:reference/rest-api-model-server.adoc[`model-server` + Quarkus] | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `model-server`. | ✅ | `rest-api-model-server`
+| xref:samples:reference/rest-api-model-ql.adoc[`ligh-model-server`+ ModelQL + Ktor] | An implementation of the OpenAPI that exposes the model contents REST. Obtains model data from a running `the light-model-server` MPS plugin. | ✅ | `rest-api-model-ql`
+| xref:samples:reference/dashboard.adoc[Angular via REST] | A single page app that realizes a read-only dashboard. Can connect to either of the OpenAPI implementations. | ✅ | `spa-dashboard-angular`
+//| xref:modelix:ROOT:main/todo.adoc[❔ + websockets] | A web application that allows editing of MPS models and realtime collaboration. | 🏗️ | `collaboration-web-app`
+//| xref:modelix:ROOT:main/todo.adoc[docker / kubernetes]| | ❌ | `deployment`
+|===
+
+Each component documentation with component specific content.
+

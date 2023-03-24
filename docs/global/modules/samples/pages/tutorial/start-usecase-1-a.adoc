@@ -1,0 +1,110 @@
+= Run Use-Case 1 Implementation
+:navtitle: Run Use-Case 1 Implementation
+
+NOTE: This Tutorial shows how to start up a system that implements xref:samples:explanation/usecase-1.adoc[]
+
+The samples provide a total of three architectural variation of this use case:
+
+. Using the more complex `rest-api-model-server` backend and the `model-server`.
++
+image::uc-1a-read-only-dashboard.svg[]
+
+. Using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
++
+image::uc-1c-read-only-dashboard.svg[]
+
+. `rest-api-model-server` (legacy) + `model-server`
+
+
+== How to start UC 1a
+
+NOTE: All gradle commands assume you are in the top level folder of the samples repository.
+
+To start up the system as described in UC 1a, you first have to have built the entire project:
+
+[source,sh]
+----
+./gradlew
+----
+
+Once done, you need to start all components involved, these are:
+
+1. **MPS**: Start `MPS 2021.2.6` without any global plugins and open the project in the `mps/project-mps-backend` folder.
+   This MPS project stores the model content using MPS persistence.
+   The gradle build process will have downloaded all plugins needed to `mps/project-mps-backend/build/dependencies` and declare this folder as a global library.
+   This includes the `json-bulk-model-access` and the `light-model-client`.
+
+2. **API layer**: The `rest-api-json-bulk` provides the models from the running MPS instance, simply run in a new terminal (it will be a blocking call):
++
+[source,sh]
+----
+$ ./gradlew rest-api-json-bulk:run
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+> Task :rest-api-json-bulk:run
+2022-12-07 10:12:38.874 [DefaultDispatcher-worker-11] INFO  ktor.application - Autoreload is disabled because the development mode is off.
+2022-12-07 10:12:39.009 [DefaultDispatcher-worker-11] INFO  ktor.application - Application started in 0.14 seconds.
+2022-12-07 10:12:39.131 [DefaultDispatcher-worker-1] INFO  ktor.application - Responding at http://0.0.0.0:8090
+<===========--> 91% EXECUTING [2m 20s]
+> :rest-api-json-bulk:run
+----
+====
+
+
+3. **Dashboard**: The dashboard itself is a node application which can be run via in a new terminal (it will be a blocking call):
++
+[sh]
+----
+$ ./gradlew spa-dashboard-angular:npmRun
+----
++
+.🧾 You can expect output similar to this (unfold to see details)
+[%collapsible]
+====
+[,sh]
+----
+> Task :spa-dashboard-angular:npmRun
+
+> angular.io-example@0.0.0 ng
+> ng serve
+
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size
+vendor.js             | vendor        |   2.47 MB |
+polyfills.js          | polyfills     | 318.03 kB |
+styles.css, styles.js | styles        | 211.31 kB |
+main.js               | main          |  86.71 kB |
+runtime.js            | runtime       |   6.53 kB |
+
+| Initial Total |   3.08 MB
+
+Build at: 2022-12-07T09:18:02.345Z - Hash: 186b24edf20c1c4a - Time: 13776ms
+
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+5 unchanged chunks
+
+Build at: 2022-12-07T09:18:02.740Z - Hash: 186b24edf20c1c4a - Time: 324ms
+
+✔ Compiled successfully.
+<============-> 95% EXECUTING [29s]
+> :spa-dashboard-angular:npmRun
+----
+====
+
+4. Explore the dashboard at http://localhost:4200/
++
+NOTE: Changes to the model in MPS will not automatically synchronize to the dashboard, you will have to manually reload the model.
+
+

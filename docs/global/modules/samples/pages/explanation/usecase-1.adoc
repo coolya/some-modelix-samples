@@ -1,0 +1,26 @@
+= Use-Case 1: Dashboard
+:navtitle: Use-Case 1: Dashboard
+
+The imaginary domain use-case represents a dashboard like view on model content.
+This use-case envisions a scenario where an independent client (outside of MPS) wants to consume the content of models defined in MPS, thus requiring read only access.
+
+
+There are two different variations of this use-case:
+
+. Use Case 1a: Dashboard view next to Room
++
+In this variation, we envision a display next to each room that shows the upcoming lectures in that room.
+A low power display such as an low power e-ink with showing a simple website via wifi would be sufficient for this scenario.
+
+. Use Case 1b: Dashboard View in the Main Hall
++
+In this variation, we envision a display in the main hall shows the full schedule of all the lectures of the current day.
+A large display would be used for this scenario, showing a website via wifi which contains the complete schedule.
+
+
+In both variations, the clients do not need to edit these models and are not capable to run a full MPS instance to show the model content.
+While the e-ink display does not require automatic updates (the display simply refreshes periodically every 15 minutes), the display in the main hall will require automatic updates (having more power and being a central display it would want to show the newest information at all times).
+
+
+NOTE: The xref:samples:reference/dashboard.adoc[dashboard component], an angular app that serves the content of a model, implements such a simple single page application (SPA) for this use-case.
+

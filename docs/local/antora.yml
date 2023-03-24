@@ -1,0 +1,7 @@
+name: samples
+title: modelix.samples
+version: true
+start_page: samples:index.adoc
+nav:
+  - modules/samples/partials/nav-local.adoc
+
