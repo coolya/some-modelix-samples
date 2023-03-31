@@ -15,7 +15,7 @@ dependencies {
     implementation(project(":mps:metamodel"))
 
     // kotlin
-    implementation("ch.qos.logback:logback-classic:1.4.5")
+    implementation("ch.qos.logback:logback-classic:1.4.6")
     implementation("io.ktor:ktor-server-default-headers:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-auto-head-response:$ktor_version")
