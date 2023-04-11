@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.modelix.metamodel.gradle")
+    id("org.modelix.model-api-gen")
 }
 
 val mps: Configuration by configurations.creating

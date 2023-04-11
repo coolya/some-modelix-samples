@@ -17,7 +17,7 @@ pluginManagement {
     plugins {
         id(quarkus_plugin_id) version quarkus_plugin_version
 
-        id("org.modelix.metamodel.gradle") version modelix_metamodel_version
+        id("org.modelix.model-api-gen") version modelix_metamodel_version
     }
 }
 

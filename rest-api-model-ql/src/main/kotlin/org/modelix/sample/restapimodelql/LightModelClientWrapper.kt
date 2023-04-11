@@ -29,7 +29,7 @@ class LightModelClientWrapper(
 
         // we require a http client with WS support for the connection
         logger.info("Connecting to light model-server at ws://$host:$port/ws")
-        this.lightModelClient = LightModelClient(host, port)
+        this.lightModelClient = LightModelClient.builder().host(host).port(port).build()
 
         // the modelQL query
         this.lightModelClient.changeQuery(buildModelQuery {
