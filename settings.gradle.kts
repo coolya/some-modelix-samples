@@ -4,9 +4,7 @@ pluginManagement {
     val quarkus_plugin_version: String by settings
     val quarkus_plugin_id: String by settings
 
-    val modelix_version: String by settings
-
-    val modelix_metamodel_version: String by settings
+    val modelix_core_version: String by settings
 
     repositories {
         mavenCentral()
@@ -17,7 +15,7 @@ pluginManagement {
     plugins {
         id(quarkus_plugin_id) version quarkus_plugin_version
 
-        id("org.modelix.model-api-gen") version modelix_metamodel_version
+        id("org.modelix.model-api-gen") version modelix_core_version
     }
 }
 

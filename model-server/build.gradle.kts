@@ -2,10 +2,10 @@ plugins {
     application
 }
 
-val modelix_version: String by project
+val modelix_core_version: String by project
 
 dependencies {
-    implementation("org.modelix:model-server:$modelix_version")
+    implementation("org.modelix:model-server:$modelix_core_version")
 }
 
 application {

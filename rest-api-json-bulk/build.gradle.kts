@@ -6,7 +6,7 @@ plugins {
 
 val ktor_version : String by project
 val json_bulk_access_version: String by project
-val modelix_version: String by project
+val modelix_core_version: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
