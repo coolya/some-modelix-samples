@@ -4,7 +4,7 @@
 
 TODO
 using the `rest-api-model-ql` backend and the `light-model-server` MPS plugin
-+
+
 image::uc-1b-read-only-dashboard.svg[]
 
 
