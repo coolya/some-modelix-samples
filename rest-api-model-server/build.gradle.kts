@@ -10,7 +10,6 @@ val quarkus_platform_artifact_id: String by project
 val quarkus_platform_version: String by project
 val ktor_version: String by project
 val api_gen_version: String by project
-val modelix_core_version: String by project
 
 
 dependencies {
@@ -23,7 +22,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
-    implementation("org.modelix:model-client:$modelix_core_version")
+    implementation("org.modelix:model-client")
     implementation("org.modelix.mps.api-gen:runtime:$api_gen_version")
 
     testImplementation("io.quarkus:quarkus-junit5")

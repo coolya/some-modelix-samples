@@ -4,18 +4,18 @@ pluginManagement {
     val quarkus_plugin_version: String by settings
     val quarkus_plugin_id: String by settings
 
-    val modelix_core_version: String by settings
-
     repositories {
         mavenCentral()
         gradlePluginPortal()
         maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
         mavenLocal()
     }
+
     plugins {
         id(quarkus_plugin_id) version quarkus_plugin_version
 
-        id("org.modelix.model-api-gen") version modelix_core_version
+        // TODO: this should be obtained from the modelix platform somehow?
+        id("org.modelix.model-api-gen") version 2.1.1
     }
 }
 
@@ -52,3 +52,4 @@ include("rest-api-model-server")
 //
 // a single page application which can use any of the APIs
 include("spa-dashboard-angular")
+

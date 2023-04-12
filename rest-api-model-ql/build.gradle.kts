@@ -5,11 +5,14 @@ plugins {
 }
 
 val ktor_version : String by project
-val modelix_core_version: String by project
+val modelix_platform_version: String by project
 
 val openApiFile = layout.projectDirectory.file("../openapi/openapi.yaml")
 
+
 dependencies {
+    implementation(enforcedPlatform("org.modelix:platform:$modelix_platform_version"))
+
     // api-gen v2
     implementation(project(":mps:metamodel"))
 
@@ -26,10 +29,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // model-server-light
-    api("org.modelix:model-api:$modelix_core_version")
-    implementation("org.modelix:light-model-client:$modelix_core_version")
-    implementation("org.modelix:model-server-api:$modelix_core_version")
-    implementation("org.modelix:model-client:$modelix_core_version")
+    api("org.modelix:model-api")
+    implementation("org.modelix:light-model-client")
+    implementation("org.modelix:model-server-api")
+    implementation("org.modelix:model-client")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
 }
 

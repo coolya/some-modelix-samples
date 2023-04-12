@@ -2,8 +2,9 @@ plugins {
     kotlin("jvm")
 }
 
-val modelix_core_version: String by project
+val modelix_platform_version: String by project
 
 dependencies {
-    api("org.modelix:model-api-gen-runtime:$modelix_core_version")
+    api(enforcedPlatform("org.modelix:platform:$modelix_platform_version"))
+    api("org.modelix:model-api-gen-runtime")
 }
