@@ -31,7 +31,7 @@ subprojects {
                 password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
             }
         }
-        maven(url = "https://projects.itemis.de/nexus/content/repositories/mbeddr")
+        maven(url = "https://artifacts.itemis.cloud/repository/maven-mps/")
 
     }
 }
