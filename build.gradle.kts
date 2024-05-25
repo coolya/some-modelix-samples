@@ -8,7 +8,7 @@
 
 plugins {
     kotlin("jvm") version "1.7.10" apply false
-    kotlin("kapt") version "1.7.10" apply false
+    kotlin("kapt") version "1.8.10" apply false
     id("com.specificlanguages.mps") version "1.5.0" apply false
     id ("com.github.node-gradle.node") version "3.2.1" apply false
 }
@@ -31,7 +31,7 @@ subprojects {
                 password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
             }
         }
-        maven(url = "https://projects.itemis.de/nexus/content/repositories/mbeddr")
+        maven(url = "https://artifacts.itemis.cloud/repository/maven-mps/")
 
     }
 }
