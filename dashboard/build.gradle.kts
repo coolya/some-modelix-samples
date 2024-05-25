@@ -11,7 +11,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-html-builder:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:1.4.6")
+    implementation("ch.qos.logback:logback-classic:1.5.6")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation("org.modelix.mps-rest-model-access:model-client:1.3")
     implementation("org.modelix.mps-rest-model-access:model-api:1.0")
