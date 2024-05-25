@@ -2,12 +2,12 @@ import de.itemis.mps.gradle.BuildLanguages
 
 buildscript {
     repositories {
-        maven { url = uri("https://projects.itemis.de/nexus/content/repositories/mbeddr") }
+        maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
         mavenCentral()
     }
 
     dependencies {
-        classpath("de.itemis.mps:mps-gradle-plugin:1.5.269.964f94a")
+        classpath("de.itemis.mps:mps-gradle-plugin:1.7+")
     }
 }
 repositories {
