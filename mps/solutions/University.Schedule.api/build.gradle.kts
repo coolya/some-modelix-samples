@@ -15,7 +15,7 @@ repositories {
             password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
         }
     }
-    maven { url = uri("https://projects.itemis.de/nexus/content/repositories/mbeddr") }
+    maven { url = uri("https://artifacts.itemis.cloud/repository/maven-mps/") }
     mavenCentral()
 }
 
